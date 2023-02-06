@@ -10,8 +10,8 @@ CC = gcc
 SRCS =	src/main.c\
 		src/utils.c\
 		src/lexer.c\
-		src/builtins.c\
 		src/init_enviroment.c\
+		src/error_handler\
 
 OBJS = $(SRCS:.c=.o)
 
@@ -33,5 +33,9 @@ fclean: clean
 	@$(RM) $(NAME)
 	@make fclean -C $(LIB_F)
 	@echo "executable removed successfuly"
+
+leaks:
+	make
+	leaks --atExit -- ./minishell
 
 re: fclean all
