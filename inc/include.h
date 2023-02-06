@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   include.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
+/*   Updated: 2023/02/06 15:51:13 by nrenz            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#define WORD 1 // "Hello World"
-#define PIPE 2 // "|"
-#define SPACE 3 // ' '
-#define GREATER_THAN 4 // <
-#define LESS_THAN 5 // >
-#define QUOTES 6 // " "
-#define HEREDOC 7 // <<
-#define EXPANSION 8 //$
-#define MINI_FILE 9
+# define WORD 1		   // "Hello World"
+# define PIPE 2		   // "|"
+# define SPACE 3		   // ' '
+# define GREATER_THAN 4 // <
+# define LESS_THAN 5	   // >
+# define QUOTES 6	   // " "
+# define HEREDOC 7	   // <<
+# define EXPANSION 8	   //$
+# define MINI_FILE 9
 
 // "" must be closed
 
@@ -26,20 +38,54 @@
 # include <sys/types.h>
 # include <unistd.h>
 
-typedef struct s_token
+typedef struct	s_token
 {
-    int type;
-    char *info;
-    int len;
-    struct s_token *next;
-}   t_token;
+	int				type;
+	char			*info;
+	int				len;
+	struct s_token	*next;
+}	t_token;
 
-char	**ft_split_minishell(char *str);
-int		count_words(char *str);
-void	fill_words(char **array, char *str);
+typedef struct	s_minishell
+{
+	int					argc;
+	char				**argv;
+	char				**envp;
+	int					error;
+	char				**builtin_cmd;
+	char				*cmd_path;
+	char				*key;
+	char				*value;
+	struct s_minishell	*next;
+	char				**input;
+}	t_minishell;
+
+/* LEXER */
+void	init_list(t_token **head, char *split, char **splited);
+void	put_type_tok(t_token **head);
+
+/* BUILTINS */
+// int	check_builtins(t_minishell *cmd_group);
+// int	builtin_handler(t_minishell cmd_group, );
+
+/* ENVIROMENT */
+t_minishell	*new_envp(char *key, char *value);
+t_minishell	*add_back_envp(t_minishell **head, t_minishell *new);
+void	init_envp(t_minishell **input, char **envp);
+void	print_envp(t_minishell *head);
+
+/* PARSER */
+
+/* EXECUTION */
+
+/* ERROR HANDLING */
+void	error_handler(char *error_msg);
+
+/* UTILS */
+int		ft_wordlen(char *str);
 char	*word_dupe(char *str);
-int     ft_wordlen(char *str);
-void    init_list(t_token **head, char *split, char **splited);
-void    put_type_tok(t_token **head);
+void	fill_words(char **array, char *str);
+int		count_words(char *str);
+char	**ft_split_minishell(char *str);
 
-# endif
+#endif

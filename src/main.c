@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
+/*   Updated: 2023/02/06 15:49:33 by nrenz            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/include.h"
 
 // void sig_handler(int signal)
@@ -46,23 +58,33 @@
 // 	}
 // }
 
-
-
-int main(void)
+int	main(int argc, char **argv, char **envp)
 {
-    char *readed;
-    t_token *head = NULL;
+	t_minishell	*ms_data;
+	char	*readed;
+	t_token	*head;
+	char	**splited;
 
-    char **splited;
-    while(1)
-    {
-        readed = readline("<qwert   ");
-        splited = ft_split_minishell(readed);
-        init_list(&head, readed, splited);
-        put_type_tok(&head);
-        printf("%s    %i\n", head->next->next->info, head->next->next->type);
-
-    }
-    return(0);
+	if (argc != 1)
+		error_args();
+	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+	if (!ms_data)
+		return (1);
+	ms_data->argc = argc;
+	ms_data->argv = argv;
+	ms_data->envp = envp;
+	if (!envp)
+		return (1);
+	ms_data->error = 0;
+	while (1)
+	{
+		readed = readline("<qwert   ");
+		splited = ft_split_minishell(readed);
+		init_list(&head, readed, splited);
+		put_type_tok(&head);
+		printf("%s	%i\n", head->info, head->type);
+		init_envp(&head, envp);
+		print_envp(head);
+	}
+	return (0);
 }
-

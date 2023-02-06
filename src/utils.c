@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
+/*   Updated: 2023/02/06 10:52:00 by nrenz            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/include.h"
 
 int	ft_wordlen(char *str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 		++i;
 	return (i);
@@ -11,10 +24,13 @@ int	ft_wordlen(char *str)
 
 char	*word_dupe(char *str)
 {
-	int i = 0;
-	int len = ft_wordlen(str);
-	char *word = malloc(sizeof(char) * (len + 1));
-	
+	int		i;
+	int		len;
+	char	*word;
+
+	i = 0;
+	len = ft_wordlen(str);
+	word = malloc(sizeof(char) * (len + 1));
 	word[len] = '\0';
 	while (i < len)
 	{
@@ -26,8 +42,9 @@ char	*word_dupe(char *str)
 
 void	fill_words(char **array, char *str)
 {
-	int word_index = 0;
-	
+	int	word_index;
+
+	word_index = 0;
 	while (*str == ' ' || *str == '\t' || *str == '\n')
 		++str;
 	while (*str != '\0')
@@ -44,10 +61,11 @@ void	fill_words(char **array, char *str)
 	}
 }
 
-int		count_words(char *str)
+int	count_words(char *str)
 {
-	int num_words = 0;
-	
+	int	num_words;
+
+	num_words = 0;
 	while (*str == ' ' || *str == '\t' || *str == '\n')
 		++str;
 	while (*str != '\0')
@@ -67,7 +85,7 @@ char	**ft_split_minishell(char *str)
 {
 	int		num_words;
 	char	**array;
-	
+
 	num_words = count_words(str);
 	array = malloc(sizeof(char *) * (num_words + 1));
 	array[num_words] = 0;

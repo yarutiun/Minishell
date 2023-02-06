@@ -7,7 +7,12 @@ INC = inc
 CFLAGS = -Wall -Wextra -Werror -g -I$(INC)
 RM = rm -rf
 CC = gcc
-SRCS = src/main.c src/utils.c src/lexer.c
+SRCS =	src/main.c\
+		src/utils.c\
+		src/lexer.c\
+		src/builtins.c\
+		src/init_enviroment.c\
+
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
