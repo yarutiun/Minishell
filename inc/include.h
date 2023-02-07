@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 12:03:38 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/07 13:51:02 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	put_type_tok(t_token **head);
 /* ENVIROMENT */
 t_minishell	*new_envp(t_minishell *ms_data);
 // t_minishell	*add_back_envp(t_minishell *ms_data);
-void	init_envp_list(t_minishell *ms_data);
+void	init_envp_new_list(t_minishell *ms_data);
 void	print_envp_new_list(t_minishell *ms_data);
 
 /* PARSER */
@@ -78,7 +78,7 @@ void	print_envp_new_list(t_minishell *ms_data);
 /* EXECUTION */
 
 /* ERROR HANDLING */
-void	error_handler(char *error_msg);
+void	error_args(void);
 
 /* UTILS */
 int		ft_wordlen(char *str);

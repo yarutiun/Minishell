@@ -6,11 +6,11 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:16:26 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 11:29:49 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/07 13:54:52 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+// #include "../libft/libft.h"
 #include "../inc/include.h"
 
 t_minishell	*new_envp(t_minishell *ms_data)
@@ -44,7 +44,7 @@ t_minishell	*new_envp(t_minishell *ms_data)
 // 	return (new);
 // }
 
-void	init_envp_list(t_minishell *ms_data)
+void	init_envp_new_list(t_minishell *ms_data)
 {
 	int			i;
 	t_minishell	*new;
@@ -69,15 +69,15 @@ void	print_envp_new_list(t_minishell *ms_data)
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_minishell	*ms_data;
-	(void)argc;
-	(void)argv;
-	(void)envp;
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_minishell	*ms_data;
+// 	(void)argc;
+// 	(void)argv;
+// 	(void)envp;
 
-	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-	init_envp_list(ms_data);
-	print_envp_new_list(ms_data);
-	return (0);
-}
+// 	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+// 	init_envp_list(ms_data);
+// 	print_envp_new_list(ms_data);
+// 	return (0);
+// }

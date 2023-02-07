@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/06 18:41:44 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/07 13:46:34 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	main(int argc, char **argv, char **envp)
 		init_list(&head, readed, splited);
 		put_type_tok(&head);
 		printf("%s	%i\n", head->info, head->type);
-		init_envp(ms_data);
-		print_envp(ms_data);
+		init_envp_new_list(ms_data);
+		print_envp_new_list(ms_data);
 	}
 	return (0);
 }
