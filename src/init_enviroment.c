@@ -6,10 +6,11 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:16:26 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/06 18:28:47 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/07 11:29:49 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft/libft.h"
 #include "../inc/include.h"
 
 t_minishell	*new_envp(t_minishell *ms_data)
@@ -25,25 +26,28 @@ t_minishell	*new_envp(t_minishell *ms_data)
 	return (new);
 }
 
-t_minishell	*add_back_envp(t_minishell *ms_data)
-{
-	t_minishell	*temp;
+// t_minishell	*envp_new_list(t_minishell *ms_data)
+// {
+// 	t_minishell	*temp;
+// 	t_minishell	*new;
 
-	if (!ms_data->head || !ms_data->new)
-		return (NULL);
-	else
-	{
-		temp = ms_data->head;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = ms_data->new;
-	}
-	return (ms_data->head);
-}
+// 	temp = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+// 	if (!temp || !new)
+// 		return (NULL);
+// 	else
+// 	{
+// 		temp = ms_data;
+// 		while (temp->next)
+// 			temp = temp->next;
+// 		temp->next = new;
+// 	}
+// 	return (new);
+// }
 
-void	init_envp(t_minishell *ms_data)
+void	init_envp_list(t_minishell *ms_data)
 {
-	int	i;
+	int			i;
+	t_minishell	*new;
 
 	i = 0;
 	while (ms_data->envp[i])
@@ -51,18 +55,29 @@ void	init_envp(t_minishell *ms_data)
 		ms_data->key = ft_substr(ms_data->envp[i], 0, \
 						ft_strchr(ms_data->envp[i], '=') - ms_data->envp[i]);
 		ms_data->value = ft_strdup(ft_strchr(ms_data->envp[i], '=') + 1);
-		ms_data->new = new_envp(ms_data->key, ms_data->value);
-		add_back_envp(ms_data->head, ms_data->new);
+		new = new_envp(ms_data);
 		i++;
 	}
 }
 
-int	print_envp(t_minishell *ms_data)
+void	print_envp_new_list(t_minishell *ms_data)
 {
-	while (ms_data->head)
+	while (ms_data->next)
 	{
-		printf("%s=%s\n", ms_da->head->key, ms_data->head->value);
-		head = ms_data->head->next;
+		printf("%s=%s\n", ms_data->key, ms_data->value);
+		ms_data = ms_data->next;
 	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_minishell	*ms_data;
+	(void)argc;
+	(void)argv;
+	(void)envp;
+
+	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+	init_envp_list(ms_data);
+	print_envp_new_list(ms_data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/06 18:16:29 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/07 12:03:38 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ typedef struct	s_minishell
 	char				*key;
 	char				*value;
 	struct s_minishell	*next;
-	char				**head;
-	char				**new;
 }	t_minishell;
 
 /* LEXER */
@@ -71,9 +69,9 @@ void	put_type_tok(t_token **head);
 
 /* ENVIROMENT */
 t_minishell	*new_envp(t_minishell *ms_data);
-t_minishell	*add_back_envp(t_minishell *ms_data);
-void	init_envp(t_minishell *ms_data);
-void	print_envp(t_minishell *ms_data);
+// t_minishell	*add_back_envp(t_minishell *ms_data);
+void	init_envp_list(t_minishell *ms_data);
+void	print_envp_new_list(t_minishell *ms_data);
 
 /* PARSER */
 
