@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 13:51:02 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/08 16:34:40 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ t_minishell	*new_envp(t_minishell *ms_data);
 // t_minishell	*add_back_envp(t_minishell *ms_data);
 void	init_envp_new_list(t_minishell *ms_data);
 void	print_envp_new_list(t_minishell *ms_data);
+void	fill_builtin_cmd(t_token **head, t_minishell *cmds);
+int		if_builtin(char *word);
 
 /* PARSER */
 

@@ -12,6 +12,7 @@ SRCS =	src/main.c\
 		src/lexer.c\
 		src/init_enviroment.c\
 		src/error_handler\
+		src/builtins\
 
 OBJS = $(SRCS:.c=.o)
 
