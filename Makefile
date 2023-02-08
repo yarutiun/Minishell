@@ -5,6 +5,7 @@ SRC = src
 OBJ = obj
 INC = inc
 CFLAGS = -Wall -Wextra -Werror -g -I $(INC)
+DEBUG_SEG_FAULTS = -fsanitize=address
 RM = rm -rf
 CC = gcc
 SRCS = src/main.c src/utils.c src/lexer.c  src/errors.c src/builtins.c src/signals.c src/pwd.c

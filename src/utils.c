@@ -6,12 +6,13 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 14:49:57 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:13:50 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
+//basically strlen but whitespaces also counts as a breakpoint
 int	ft_wordlen(char *str)
 {
 	int	i;
@@ -22,6 +23,7 @@ int	ft_wordlen(char *str)
 	return (i);
 }
 
+//duplicates words
 char	*word_dupe(char *str)
 {
 	int		i;
@@ -61,6 +63,7 @@ void	fill_words(char **array, char *str)
 	}
 }
 
+//counts amount of words
 int	count_words(char *str)
 {
 	int	num_words;
@@ -81,6 +84,7 @@ int	count_words(char *str)
 	return (num_words);
 }
 
+//split BUT it splits for lexer including the whitespaces as tokens
 char	**ft_split_minishell(char *str)
 {
 	int		num_words;
@@ -94,6 +98,7 @@ char	**ft_split_minishell(char *str)
     // rl_on_new_line()
 }
 
+//shows the list size
 int	ft_lstsize_mod(t_token *lst)
 {
 	int		counter;

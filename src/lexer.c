@@ -6,11 +6,14 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 18:09:12 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:14:47 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
+
+//initializes a list for tokens and fills info with actual simbols and words
+//allocates memory for nodes
 
 void	init_list(t_token **head, char *split, char **splited)
 {
@@ -37,6 +40,7 @@ void	init_list(t_token **head, char *split, char **splited)
 	}
 }
 
+//sets token types
 void	put_type_tok(t_token **head)
 {
 	t_token	*temp;
