@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/08 17:14:47 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:46:32 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,35 @@ void	put_type_tok(t_token **head)
 			temp->type = SPACE;
 		temp = temp->next;
 	}
+}
+
+//returns 0 if all brackets are closed, 1 if not;
+int check_for_closed_brackets(char **splited)
+{
+	int words;
+	int chars;
+
+	words = 0;
+	while(splited[words])
+	{
+		chars = 0;
+		while(splited[words][chars])
+		{
+			if(splited[words][chars] == '"')
+			{
+				chars += 1;
+				while(splited[words][chars] != '\0')
+				{
+					if(splited[words][chars] == '"')
+						break;
+					chars ++;
+					if(splited[words][chars] == '\0')
+						return(1);
+				}
+			}
+			chars++;
+		}
+		words++;
+	}
+	return(0);
 }

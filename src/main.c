@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/08 17:05:49 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:45:18 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,35 +60,38 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	// (void) argc;
-	// (void) argv;
-	// (void)  envp;
-	t_minishell	*ms_data;
+	(void) argc;
+	(void) argv;
+	(void)  envp;
+	int qwer;
+	// t_minishell	*ms_data;
 	char	*readed;
-	t_token	*head = NULL;
+	// t_token	*head = NULL;
 	char	**splited;
 
 	// rl_replace_line("", 0);
-	if (argc != 1)
-		error_handler("Unexpected input");
-	ms_data = (t_minishell *)malloc(sizeof(t_minishell));
-	if (!ms_data)
-		return (1);
-	ms_data->argc = argc;
-	ms_data->argv = argv;
-	ms_data->envp = envp;
-	if (!envp)
-		return (1);
-	ms_data->error = 0;
+	// if (argc != 1)
+		// error_handler("Unexpected input");
+	// ms_data = (t_minishell *)malloc(sizeof(t_minishell));
+	// if (!ms_data)
+		// return (1);
+	// ms_data->argc = argc;
+	// ms_data->argv = argv;
+	// ms_data->envp = envp;
+	// if (!envp)
+		// return (1);
+	// ms_data->error = 0;
 	while (1)
 	{
 		readed = readline("<qwert   ");
 		splited = ft_split_minishell(readed);
-		add_history(readed);
-		init_list(&head, readed, splited);
-		put_type_tok(&head);
-		fill_builtin_cmd(&head, ms_data);
-		get_pwd();
+		qwer = check_for_closed_brackets(splited);
+		printf("%i\n", qwer);
+		// add_history(readed);
+		// init_list(&head, readed, splited);
+		// put_type_tok(&head);
+		// fill_builtin_cmd(&head, ms_data);
+		// get_pwd();
 	}
 	return (0);
 }

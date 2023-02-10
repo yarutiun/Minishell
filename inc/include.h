@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/08 17:05:05 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:47:16 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-// # include <readline/keymaps.h>
-// # include <readline/rlconf.h>
 # include <signal.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -71,6 +69,7 @@ void	error_handler(char *error_msg);
 char	**ft_split_minishell(char *str);
 void	init_list(t_token **head, char *split, char **splited);
 void	put_type_tok(t_token **head);
+int		check_for_closed_brackets(char **splited);
 
 /* UTILS */
 int		count_words(char *str);
