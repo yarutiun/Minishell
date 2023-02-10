@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/10 14:46:32 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:52:58 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	init_list(t_token **head, char *split, char **splited)
 	int		counter;
 	t_token	*temp;
 
+	if(check_for_closed_brackets == 1)
+	{
+		exit(EXIT_FAILURE);
+	}
 	counter = 0;
 	in_splited = count_words(split);
 	words = count_words(split);
@@ -67,7 +71,9 @@ void	put_type_tok(t_token **head)
 	}
 }
 
-//returns 0 if all brackets are closed, 1 if not;
+//returns 0 if all brackets are closed 
+//returns 1 if not and printf an error message
+//this function will be called in "init_list" function
 int check_for_closed_brackets(char **splited)
 {
 	int words;
@@ -88,7 +94,10 @@ int check_for_closed_brackets(char **splited)
 						break;
 					chars ++;
 					if(splited[words][chars] == '\0')
+					{
+						printf("Error: Brackets not closed");
 						return(1);
+					}
 				}
 			}
 			chars++;

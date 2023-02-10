@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:58:05 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/02/08 17:10:26 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:50:13 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 char *get_pwd(void)
 {
     char *buf;
+
     buf = malloc(sizeof(char) * 100);
     getcwd(buf, 100);
     printf("%s", buf);

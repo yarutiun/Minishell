@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/08 17:13:50 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:50:05 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char	**ft_split_minishell(char *str)
 	array[num_words] = 0;
 	fill_words(array, str);
 	return (array);
-    // rl_on_new_line()
 }
 
 //shows the list size
