@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:37:29 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/13 19:24:25 by hboichuk         ###   ########.fr       */
+/*   Created: 2023/02/16 21:39:01 by hboichuk          #+#    #+#             */
+/*   Updated: 2023/02/16 21:41:37 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-int	builtin_pwd(t_minishell *ms_data)
+int	start_parser(t_minishell *global_data)
 {
-	char	cwd[256];
-
-	getcwd(cwd, sizeof(cwd));
-	ft_putstr_fd(cwd, 1);
-	ft_putstr_fd("\n", 1);
-	return (0);
+	
 }
-
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_minishell	*ms_data;
-
-// 	ms_data = malloc(sizeof(t_minishell));
-// 	builtin_pwd(ms_data);
-// 	return (0);
-// }

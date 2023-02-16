@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_enviroment.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:16:26 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 13:54:52 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/16 21:18:29 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "../libft/libft.h"
+//for init envp? why new envp it's a struct?
 #include "../inc/include.h"
 
 t_minishell	*new_envp(t_minishell *ms_data)
@@ -20,8 +21,8 @@ t_minishell	*new_envp(t_minishell *ms_data)
 	new = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
 	if (!new)
 		return (NULL);
-	new->key = ft_strdup(ms_data->key);
-	new->value = ft_strdup(ms_data->value);
+	// new->key = ft_strdup(ms_data->key);
+	// new->value = ft_strdup(ms_data->value);
 	new->next = NULL;
 	return (new);
 }
@@ -81,3 +82,36 @@ void	print_envp_new_list(t_minishell *ms_data)
 // 	print_envp_new_list(ms_data);
 // 	return (0);
 // }
+
+//my init
+char	**init_envp(char **envp)
+{
+	char	**new_envp;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (envp[i] != NULL)
+		i++;
+	new_envp = ft_calloc(sizeof(char *), i++);
+	if(!new_envp)
+		return (NULL);
+	i = 0;
+	while (envp[i])
+	{
+		new_envp[i] = ft_strdup(envp[i]);
+		if (new_envp[i] == NULL)
+		{
+			while (new_envp[j])
+			{
+				free(new_envp[j]);
+				j++;
+			}
+			free(new_envp);
+			return (new_envp);
+		}
+		i++;
+	}
+	return (new_envp);	
+}

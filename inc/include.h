@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/08 16:34:40 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/16 21:54:51 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+//better enum?
 # define WORD 1		   // "Hello World"
 # define PIPE 2		   // "|"
 # define SPACE 3		   // ' '
@@ -38,25 +39,33 @@
 # include <sys/types.h>
 # include <unistd.h>
 
+//token
 typedef struct	s_token
 {
 	int				type;
 	char			*info;
-	int				len;
+	// int				len;
+	// int				index; maybe we need it?
 	struct s_token	*next;
 }	t_token;
 
+//global init struct
 typedef struct	s_minishell
 {
-	int					argc;
-	char				**argv;
+	// int					argc;don't need it?
+	char				*argv;//one pointer?
 	char				**envp;
-	int					error;
-	char				**builtin_cmd;
-	char				*cmd_path;
-	char				*key;
-	char				*value;
-	struct s_minishell	*next;
+	// char				**paths;for inner cmd 
+	int					error;//do we need it?
+	char				**builtin_cmd;//struct?
+	char				*cmd_path;// for pwd, do we need old pwd?
+	// char				*key;//??
+	// char				*value;//??
+	bool				heredoc;//do it later
+	int					*pid;//forks
+	int					pipes;//count of pipes
+	// struct s_minishell	*next;//do we need it?
+	bool				reset;//flag for reset or maybe do it another way?
 }	t_minishell;
 
 /* LEXER */
@@ -68,14 +77,19 @@ void	put_type_tok(t_token **head);
 // int	builtin_handler(t_minishell cmd_group, );
 
 /* ENVIROMENT */
-t_minishell	*new_envp(t_minishell *ms_data);
+// t_minishell	*new_envp(t_minishell *ms_data);
 // t_minishell	*add_back_envp(t_minishell *ms_data);
+char	**init_envp(char **envp);//the same, but with 2d-arr
 void	init_envp_new_list(t_minishell *ms_data);
 void	print_envp_new_list(t_minishell *ms_data);
 void	fill_builtin_cmd(t_token **head, t_minishell *cmds);
 int		if_builtin(char *word);
 
+/* INIT */
+int	init_global_data(t_minishell *global_struct, char **envp);
+int	run_minishell(t_minishell *global_data);
 /* PARSER */
+int	start_parser(t_minishell *global_data);
 
 /* EXECUTION */
 

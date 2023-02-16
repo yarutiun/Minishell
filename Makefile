@@ -10,6 +10,7 @@ CC = gcc
 SRCS =	src/main.c\
 		src/utils.c\
 		src/lexer.c\
+		src/parser.c\
 		src/init_enviroment.c\
 		src/error_handler\
 		src/builtins\

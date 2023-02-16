@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 13:57:16 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/13 16:37:01 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/13 19:24:19 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ int	builtin_cd(t_minishell *ms_data)
 	return (0);
 }
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_minishell	*ms_data;
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_minishell	*ms_data;
 
-	ms_data = malloc(sizeof(t_minishell));
-	ms_data->argv = malloc(sizeof(char *));
-	ms_data->argv[1] = malloc(sizeof(char) * 100);
-	ft_strcpy(ms_data->argv[1], "/Users/nrenz/42/minishell");
-	printf("here\n");
-	builtin_cd(ms_data);
-	printf("line 52\n");
-	return (0);
-}
+// 	ms_data = malloc(sizeof(t_minishell));
+// 	ms_data->argv = malloc(sizeof(char *));
+// 	ms_data->argv[1] = malloc(sizeof(char) * 100);
+// 	ft_strcpy(ms_data->argv[1], "/Users/nrenz/42/minishell");
+// 	printf("here\n");
+// 	builtin_cd(ms_data);
+// 	printf("line 52\n");
+// 	return (0);
+// }
 
 // #Programm echo
 
