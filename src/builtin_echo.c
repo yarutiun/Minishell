@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 16:37:29 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/13 16:40:26 by nrenz            ###   ########.fr       */
+/*   Created: 2023/02/14 14:37:38 by nrenz             #+#    #+#             */
+/*   Updated: 2023/02/16 18:53:02 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-int	builtin_pwd(t_minishell *ms_data)
+/* create echo function without arguments */
+int	builtin_echo_with_no_args(char **args)
 {
-	char	cwd[256];
-
-	getcwd(cwd, sizeof(cwd));
-	ft_putstr_fd(cwd, 1);
-	ft_putstr_fd("\n", 1);
+	if (args[1] == NULL)
+		printf("\n");
 	return (0);
 }
 
-int	main(int argc, char **argv, char **envp)
+/* create echo function with -n argument */
+int	builtin_echo_with_flag_n(t_minishell *ms_data)
 {
-	t_minishell	*ms_data;
+	int	i;
+	int	n_flag;
 
-	ms_data = malloc(sizeof(t_minishell));
-	builtin_pwd(ms_data);
+	i = 1;
+	n_flag = 0;
+	if (ms_data->args[1][0] == '-')
+	{
+		i++;
+		if (ms_data->args[1][1] == 'n')
+			n_flag = 1;
+	}
+	printf("n_flag: %d\n", n_flag);
 	return (0);
 }

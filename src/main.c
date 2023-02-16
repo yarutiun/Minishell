@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 13:46:34 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:39:46 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ int	main(int argc, char **argv, char **envp)
 	ms_data->error = 0;
 	while (1)
 	{
-		readed = readline("<qwert   ");
+		readed = readline("welcome to minishel: ");
 		splited = ft_split_minishell(readed);
 		init_list(&head, readed, splited);
 		put_type_tok(&head);
-		printf("%s	%i\n", head->info, head->type);
+		// printf("%s	%i\n", head->info, head->type);
 		init_envp_new_list(ms_data);
 		print_envp_new_list(ms_data);
 	}

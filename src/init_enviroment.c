@@ -6,7 +6,7 @@
 /*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:16:26 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 13:54:52 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:35:59 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,6 @@ t_minishell	*new_envp(t_minishell *ms_data)
 	new->next = NULL;
 	return (new);
 }
-
-// t_minishell	*envp_new_list(t_minishell *ms_data)
-// {
-// 	t_minishell	*temp;
-// 	t_minishell	*new;
-
-// 	temp = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	if (!temp || !new)
-// 		return (NULL);
-// 	else
-// 	{
-// 		temp = ms_data;
-// 		while (temp->next)
-// 			temp = temp->next;
-// 		temp->next = new;
-// 	}
-// 	return (new);
-// }
 
 void	init_envp_new_list(t_minishell *ms_data)
 {
@@ -77,7 +59,7 @@ void	print_envp_new_list(t_minishell *ms_data)
 // 	(void)envp;
 
 // 	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-// 	init_envp_list(ms_data);
+// 	init_envp_new_list(ms_data);
 // 	print_envp_new_list(ms_data);
 // 	return (0);
 // }

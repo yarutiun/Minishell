@@ -13,6 +13,8 @@ SRCS =	src/main.c\
 		src/init_enviroment.c\
 		src/error_handler\
 		src/builtins\
+		src/builtin_echo.c\
+		src/builtin_handler.c\
 
 OBJS = $(SRCS:.c=.o)
 
