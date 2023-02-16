@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddzuba <ddzuba@student.wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: ddzuba <ddzuba@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/16 16:12:14 by ddzuba           ###   ########.fr       */
+/*   Updated: 2023/02/16 17:52:56 by ddzuba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,38 @@ typedef struct	s_minishell
 	char				**builtin_cmd;
 	char				*cmd_path;
 	char				*key;
+	pid_t				pid;
 	char				*value;
 	struct s_minishell	*next;
 }	t_minishell;
+
+enum	e_mini_errors
+{
+	QUOTE = 10,
+	NDIR = 11,
+	NPERM = 12,
+	NCMD = 13,
+	DUPERR = 14,
+	FORKERR = 15,
+	PIPERR = 16,
+	PIPENDERR = 17,
+	MEM = 18,
+	IS_DIR = 19,
+	NOT_DIR = 20
+};
+/*
+** 10 = Quote error, if cant match quotes
+** 11 = File or Directory error
+** 12 = No permission error
+** 13 = Command error, wrong command
+** 14 = Duplication error, dup2
+** 15 = Fork error, cant create or else
+** 16 = Pipe error, cant create or else
+** 17 = Syntax error, wrong usage of "|"
+** 18 = Memory error, no space of else
+** 19 = If its directory (z.B when u try delete folder without flags)
+** 20 = Not a directory
+*/
 
 /* LEXER */
 void	init_list(t_token **head, char *split, char **splited);
@@ -81,6 +110,7 @@ int		if_builtin(char *word);
 
 /* ERROR HANDLING */
 void	error_args(void);
+void	*das_error(int err_type, char *param, int fd);
 
 /* UTILS */
 int		ft_wordlen(char *str);
@@ -88,5 +118,6 @@ char	*word_dupe(char *str);
 void	fill_words(char **array, char *str);
 int		count_words(char *str);
 char	**ft_split_minishell(char *str);
+void	sig_handle(int sig);
 
 #endif
