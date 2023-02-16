@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/10 14:52:58 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:16:19 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void	init_list(t_token **head, char *split, char **splited)
 	int		counter;
 	t_token	*temp;
 
-	if(check_for_closed_brackets == 1)
-	{
+	if(check_for_closed_brackets(splited) == 1) //if one of brackets not closed just exit programm
 		exit(EXIT_FAILURE);
-	}
 	counter = 0;
 	in_splited = count_words(split);
 	words = count_words(split);

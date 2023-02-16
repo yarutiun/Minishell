@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:02:36 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 15:02:20 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:02:46 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 // int	builtin_handler(t_minishell cmd_group, )
 
 
-// this command fills t_minihell variable 'cmds' with commands from our minishell input
+// this command fills t_minihell variable 'cmds' with commands from our minishell input in order
 void fill_builtin_cmd(t_token **head, t_minishell *cmds)
 {
 	int len;
@@ -72,6 +72,8 @@ void fill_builtin_cmd(t_token **head, t_minishell *cmds)
 }
 
 //checks if an input is a bash builtin
+//if it is, than return 1
+//if it's not, than return 0
 int if_builtin(char *word)
 {
 	int	len_builtin;
