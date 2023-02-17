@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/10 14:47:16 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:42:14 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ typedef struct s_token
 
 typedef struct s_minishell
 {
-	int		argc;
-	char	**argv;
 	char	**envp;
 	int		error;
 	char	**builtin_cmd;

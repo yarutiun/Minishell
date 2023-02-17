@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/02/17 10:30:48 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:21:01 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,34 @@ int assign_env(char **envp, t_minishell *shell_h)
         len = 0;
     }
     shell_h->envp = temp;
+    printf("%s\n", shell_h->envp[3]);
     return(1);
 }
 
 
 
-// void expand_and_print(char *env_key)
+// char *expand_and_print(char *env_key)
 // {
 //     char *sos = getenv(env_key);
-//     printf("%s", sos);
+//     if (sos == -1)
+//         return(NULL); //add error
+    
+//     return(sos);
+    
 // }
 
 
 
 
-// int main(int argc, char **argv, char **envp)
-// {
-//     (void) argc;
-//     (void) argv;
-//     t_minishell *shell_h = NULL;
-//     assign_env(envp, shell_h);
-//     // expand_and_print();
-//     return(0);
-// }
+int main(int argc, char **argv, char **envp)
+{
+    (void) argc;
+    (void) argv;
+    t_minishell *shell_h = NULL;
+    assign_env(envp, shell_h);
+    // printf("%s\n", shell_h->envp[0]);
+    // expand_and_print();
+    return(0);
+}
 
 //setenv returns -1 if variable does not exist
