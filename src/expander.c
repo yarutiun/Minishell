@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/02/16 14:40:15 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/17 10:30:48 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //this function assigns shell_h->envp 
 //sets value of our envp to structure
-void assign_env(char **envp, t_minishell *shell_h)
+int assign_env(char **envp, t_minishell *shell_h)
 {
     int counter;
     int len;
@@ -23,18 +23,25 @@ void assign_env(char **envp, t_minishell *shell_h)
     counter = 0;
     int i = 0;
     shell_h = malloc(sizeof(t_minishell));
+    if(!shell_h)
+        return(0);
     while(envp[counter])
         counter++;
     temp = malloc(sizeof(char *) * counter);
+    if(!temp)
+        return(0);
     while(i != counter)
     {
         len = ft_strlen(envp[i]);
         temp[i] = malloc(sizeof(char *) * len);
+        if(!temp[i])
+            return(0);
         temp[i] = envp[i];
         i++;
         len = 0;
     }
     shell_h->envp = temp;
+    return(1);
 }
 
 
