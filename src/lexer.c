@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/18 17:19:27 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:46:40 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,8 @@ int init_all(t_token **token, t_minishell *globals, char *split, char **splited,
 	if(assign_env(envp, globals) == 0)
 		return(0);
 	fill_builtin_cmd(token, globals);
+	globals->pid = 0;
+	globals->error = 0;
+	globals->cmd_path = NULL;
 	return(1);
 }
