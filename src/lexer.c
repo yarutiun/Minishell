@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/06 15:11:29 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/17 13:11:36 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,40 @@ void	put_type_tok(t_token **head)
 			temp->type = SPACE;
 		temp = temp->next;
 	}
+}
+
+//returns 0 if all brackets are closed 
+//returns 1 if not and printf an error message
+//this function will be called in "init_list" function
+int check_for_closed_brackets(char **splited)
+{
+	int words;
+	int chars;
+
+	words = 0;
+	while(splited[words])
+	{
+		chars = 0;
+		while(splited[words][chars])
+		{
+			if(splited[words][chars] == '"')
+			{
+				chars += 1;
+				while(splited[words][chars] != '\0')
+				{
+					if(splited[words][chars] == '"')
+						break;
+					chars ++;
+					if(splited[words][chars] == '\0')
+					{
+						printf("Error: Brackets not closed");
+						return(1);
+					}
+				}
+			}
+			chars++;
+		}
+		words++;
+	}
+	return(0);
 }

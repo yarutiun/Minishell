@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/16 18:39:46 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/17 12:53:31 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ int	main(int argc, char **argv, char **envp)
 	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
 	if (!ms_data)
 		return (1);
-	ms_data->argc = argc;
-	ms_data->argv = argv;
-	ms_data->envp = envp;
-	if (!envp)
-		return (1);
-	ms_data->error = 0;
+	// ms_data->argc = argc;
+	// ms_data->argv = argv;
+	// ms_data->envp = envp;
+	// if (!envp)
+	// 	return (1);
+	// ms_data->error = 0;
 	while (1)
 	{
 		readed = readline("welcome to minishel: ");
@@ -83,8 +83,8 @@ int	main(int argc, char **argv, char **envp)
 		init_list(&head, readed, splited);
 		put_type_tok(&head);
 		// printf("%s	%i\n", head->info, head->type);
-		init_envp_new_list(ms_data);
-		print_envp_new_list(ms_data);
+		// init_envp_new_list(ms_data);
+		// print_envp_new_list(ms_data);
 	}
 	return (0);
 }
