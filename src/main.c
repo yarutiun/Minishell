@@ -6,11 +6,45 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/17 12:53:31 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:15:10 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_minishell	*ms_data;
+	char	*readed;
+	t_token	*head;
+	char	**splited;
+
+	// if (argc != 1)
+	(void) argc;
+	(void) argv;
+	// 	error_args();
+	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
+	if (!ms_data)
+		return (1);
+	// ms_data->argc = argc;
+	// ms_data->argv = argv;
+	// ms_data->envp = envp;
+	// if (!envp)
+	// 	return (1);
+	// ms_data->error = 0;
+	while (1)
+	{
+		readed = readline("welcome to minishel: ");
+		splited = ft_split_minishell(readed);
+		// init_list(&head, readed, splited);
+		// put_type_tok(&head);
+		init_all(&head, ms_data, readed, splited, envp);
+		// printf("%s	%i\n", head->info, head->type);
+		// init_envp_new_list(ms_data);
+		// print_envp_new_list(ms_data);
+	}
+	return (0);
+}
 
 // void sig_handler(int signal)
 // {
@@ -57,34 +91,3 @@
 // 		prompt();
 // 	}
 // }
-
-int	main(int argc, char **argv, char **envp)
-{
-	t_minishell	*ms_data;
-	char	*readed;
-	t_token	*head;
-	char	**splited;
-
-	// if (argc != 1)
-	// 	error_args();
-	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-	if (!ms_data)
-		return (1);
-	// ms_data->argc = argc;
-	// ms_data->argv = argv;
-	// ms_data->envp = envp;
-	// if (!envp)
-	// 	return (1);
-	// ms_data->error = 0;
-	while (1)
-	{
-		readed = readline("welcome to minishel: ");
-		splited = ft_split_minishell(readed);
-		init_list(&head, readed, splited);
-		put_type_tok(&head);
-		// printf("%s	%i\n", head->info, head->type);
-		// init_envp_new_list(ms_data);
-		// print_envp_new_list(ms_data);
-	}
-	return (0);
-}

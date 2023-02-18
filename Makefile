@@ -4,16 +4,16 @@ LIB = libft.a
 SRC = src
 OBJ = obj
 INC = inc
-CFLAGS = -Wall -Wextra -Werror -g -I$(INC) #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -I$(INC)
 RM = rm -rf
 CC = gcc
-SRCS =	src/main.c\
-		src/utils.c\
+SRCS =	src/utils.c\
 		src/expander.c\
 		src/lexer.c\
-		src/error_handler\
-		src/builtins\
 		src/builtin_handler.c\
+		src/builtins\
+		src/main.c\
+		#src/error_handler\
 
 OBJS = $(SRCS:.c=.o)
 

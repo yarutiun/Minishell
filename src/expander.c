@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/02/18 16:04:43 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/18 16:50:36 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,4 @@ char *expand_str(char *env_key)
 //     return(0);
 // }
 
-//setenv returns -1 if variable does not exist
+//getenv returns NUlL if variable does not exist

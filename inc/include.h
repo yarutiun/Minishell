@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/17 13:12:16 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:13:17 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct	s_minishell
 void	init_list(t_token **head, char *split, char **splited);
 void	put_type_tok(t_token **head);
 int		check_for_closed_brackets(char **splited);
+int		init_all(t_token **token, t_minishell *globals, char *split, char **splited, char **envp);
 
 /* BUILTINS */
 int		builtin_cd(t_minishell *ms_data);
@@ -118,5 +119,6 @@ char	*word_dupe(char *str);
 void	fill_words(char **array, char *str);
 int		count_words(char *str);
 char	**ft_split_minishell(char *str);
+int		ft_lstsize_mod(t_token *lst);
 
 #endif

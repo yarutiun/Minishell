@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/06 10:52:00 by nrenz            ###   ########.fr       */
+/*   Updated: 2023/02/18 17:12:57 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,20 @@ char	**ft_split_minishell(char *str)
 	fill_words(array, str);
 	return (array);
     // rl_on_new_line()
+}
+
+int	ft_lstsize_mod(t_token *lst)
+{
+	int		counter;
+	t_token	*current_node;
+
+	current_node = NULL;
+	current_node = lst;
+	counter = 0;
+	while (current_node != NULL)
+	{
+		counter ++;
+		current_node = current_node->next;
+	}
+	return (counter);
 }
