@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/02/18 16:01:50 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/18 16:04:43 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ char *expand_str(char *env_key)
 
 
 
-int main(int argc, char **argv, char **envp)
-{
-    (void) argc;
-    (void) argv;
-    t_minishell *shell_h = NULL;
-    assign_env(envp, shell_h);
-    // printf("%s\n", shell_h->envp[0]);
-    // printf("%s", expand_str("HOME"));
-    return(0);
-}
+// int main(int argc, char **argv, char **envp)
+// {
+//     (void) argc;
+//     (void) argv;
+//     t_minishell *shell_h = NULL;
+//     assign_env(envp, shell_h);
+//     // printf("%s\n", shell_h->envp[0]);
+//     // printf("%s", expand_str("HOME"));
+//     return(0);
+// }
 
 //setenv returns -1 if variable does not exist
