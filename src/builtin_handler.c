@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:02:36 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/18 17:19:03 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:30:47 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,18 @@ int	if_builtin(char *word)
 	return (0);
 }
 
-int	ft_lstsize_mod(t_token *lst)
-{
-	int		counter;
-	t_token	*current_node;
+// int	ft_lstsize_mod(t_token *lst)
+// {
+// 	int		counter;
+// 	t_token	*current_node;
 
-	current_node = NULL;
-	current_node = lst;
-	counter = 0;
-	while (current_node != NULL)
-	{
-		counter ++;
-		current_node = current_node->next;
-	}
-	return (counter);
-}
+// 	current_node = NULL;
+// 	current_node = lst;
+// 	counter = 0;
+// 	while (current_node != NULL)
+// 	{
+// 		counter ++;
+// 		current_node = current_node->next;
+// 	}
+// 	return (counter);
+// }

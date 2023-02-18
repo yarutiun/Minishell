@@ -8,12 +8,14 @@ CFLAGS = -Wall -Wextra -Werror -g -I$(INC)
 RM = rm -rf
 CC = gcc
 SRCS =	src/utils.c\
-		src/expander.c\
 		src/lexer.c\
 		src/builtin_handler.c\
-		src/builtins\
 		src/main.c\
-		#src/error_handler\
+		src/expander.c\
+		#src/builtins\
+		src/error_handler\
+		src/builtin_echo.c\
+		src/init_enviroment.c\
 
 OBJS = $(SRCS:.c=.o)
 
