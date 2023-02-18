@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/02/17 13:01:47 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/18 16:01:50 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,28 @@ int assign_env(char **envp, t_minishell *shell_h)
 }
 
 
-
-// char *expand_and_print(char *env_key)
-// {
-//     char *sos = getenv(env_key);
-//     if (sos == -1)
-//         return(NULL); //add error
-    
-//     return(sos);
-    
-// }
-
+//returns value of env keyword that is given to the function
+//tested, works :)
+char *expand_str(char *env_key)
+{
+    char *sos = getenv(env_key);
+    if (sos == NULL)
+        return(NULL); //add error
+    return(sos);
+}
 
 
 
-// int main(int argc, char **argv, char **envp)
-// {
-//     (void) argc;
-//     (void) argv;
-//     t_minishell *shell_h = NULL;
-//     assign_env(envp, shell_h);
-//     // printf("%s\n", shell_h->envp[0]);
-//     // expand_and_print();
-//     return(0);
-// }
+
+int main(int argc, char **argv, char **envp)
+{
+    (void) argc;
+    (void) argv;
+    t_minishell *shell_h = NULL;
+    assign_env(envp, shell_h);
+    // printf("%s\n", shell_h->envp[0]);
+    // printf("%s", expand_str("HOME"));
+    return(0);
+}
 
 //setenv returns -1 if variable does not exist
