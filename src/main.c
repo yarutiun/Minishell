@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/18 17:15:10 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:33:13 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	main(int argc, char **argv, char **envp)
 		splited = ft_split_minishell(readed);
 		// init_list(&head, readed, splited);
 		// put_type_tok(&head);
-		init_all(&head, ms_data, readed, splited, envp);
+		if(init_all(&head, ms_data, readed, splited, envp) == 0)
+			return(0);
 		// printf("%s	%i\n", head->info, head->type);
 		// init_envp_new_list(ms_data);
 		// print_envp_new_list(ms_data);
