@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddzuba <ddzuba@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/18 17:26:25 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/19 00:22:45 by ddzuba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define WORD 1		   // "Hello World"
 # define PIPE 2		   // "|"
 # define SPACE 3		   // ' '
-# define GREATER_THAN 4 // <
+# define GREATER_THAN 4 //  
 # define LESS_THAN 5	   // >
 # define QUOTES 6	   // " "
 # define HEREDOC 7	   // <<
@@ -52,6 +52,7 @@ enum	e_mini_errors
 	IS_DIR = 19,
 	NOT_DIR = 20
 };
+
 /*
 ** 10 = Quote error, if cant match quotes
 ** 11 = File or Directory error

@@ -40,7 +40,7 @@ void	sub_print_fd(int nb, int fd)
 
 void	ft_putnbr_fd(int nb, int fd)
 {
-	if (nb > 2147483647 || nb < -2147483648)
+	if (nb > 2147483647 || nb < -2147483647)
 	{
 		return ;
 	}
