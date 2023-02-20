@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/20 15:49:20 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:50:32 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ void	fill_words(char **array, char *str);
 int		count_words(char *str);
 char	**ft_split_minishell(char *str);
 int		ft_lstsize_mod(t_token *lst);
+void	free_token(t_token **token);
 
 #endif

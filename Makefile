@@ -12,6 +12,7 @@ SRCS =	src/utils.c\
 		src/builtin_handler.c\
 		src/main.c\
 		src/expander.c\
+		src/free.c\
 		#src/builtins\
 		src/error_handler\
 		src/builtin_echo.c\
