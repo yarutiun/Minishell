@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: ddzuba <ddzuba@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/16 21:54:51 by hboichuk         ###   ########.fr       */
+/*   Updated: 2023/02/19 15:46:22 by ddzuba           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct	s_token
 {
 	int				type;
 	char			*info;
-	// int				len;
+	int				len;
 	// int				index; maybe we need it?
 	struct s_token	*next;
 }	t_token;
