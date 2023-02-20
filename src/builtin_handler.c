@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:02:36 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/18 17:30:47 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:24:30 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,54 +45,24 @@ int	if_builtin(char *word)
 	len_builtin = ft_strlen(word);
 	if (!ft_strncmp(word, "cd", len_builtin) && \
 		len_builtin == 2)
-		{
 			return (1);
-		}
 	if (!ft_strncmp(word, "pwd", len_builtin) && \
 		len_builtin == 3)
-	{
 		return (1);
-	}
 	if (!ft_strncmp(word, "env", len_builtin) && \
 		len_builtin == 3)
-	{
 		return (1);
-	}
 	if (!ft_strncmp(word, "echo", len_builtin) && \
 		len_builtin == 4)
-		{
 			return (1);
-		}
 	if (!ft_strncmp(word, "exit", len_builtin) && \
 	len_builtin == 4)
-	{
 		return (1);
-	}
 	if (!ft_strncmp(word, "unset", len_builtin) && \
 		len_builtin == 5)
-	{
 		return (1);
-	}
 	if (!ft_strncmp(word, "export", len_builtin) && \
 		len_builtin == 6)
-	{
 		return (1);
-	}
 	return (0);
 }
-
-// int	ft_lstsize_mod(t_token *lst)
-// {
-// 	int		counter;
-// 	t_token	*current_node;
-
-// 	current_node = NULL;
-// 	current_node = lst;
-// 	counter = 0;
-// 	while (current_node != NULL)
-// 	{
-// 		counter ++;
-// 		current_node = current_node->next;
-// 	}
-// 	return (counter);
-// }
