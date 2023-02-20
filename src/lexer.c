@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/20 15:50:14 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:56:25 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	put_type_tok(t_token **head)
 	{
 		if (temp->info[0] == '|')
 			temp->type = PIPE;
+		if (temp->info[0] == '"')
+			temp->type = QUOTE;
 		else if (temp->info[0] == '>' && temp->info[1] != '>')
 			temp->type = LESS_THAN;
 		else if (temp->info[0] == '<' && temp->info[1] != '<')
