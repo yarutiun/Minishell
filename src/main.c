@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/20 15:51:18 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:39:12 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 		if(init_all(&head, ms_data, readed, splited, envp) == 0)
 			return(0);
 		put_type_tok(&head);
-		printf("%s     type %i       len %i\n", head->info, head->type, head->len);
+		printf("type: %i\n", head->type);
 	}
 	return (0);
 }

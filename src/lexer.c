@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/20 15:56:25 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:38:38 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,29 @@ void	put_type_tok(t_token **head)
 	temp = *head;
 	while (temp->next)
 	{
-		if (temp->info[0] == '|')
+		if (temp->info[0] == '|' && !temp->info[1])
+		{
 			temp->type = PIPE;
+			// printf("\nwieg78fh38ewh9fjdwhjfe\n");
+		}
 		if (temp->info[0] == '"')
 			temp->type = QUOTE;
-		else if (temp->info[0] == '>' && temp->info[1] != '>')
+		if (temp->info[0] == '>' && temp->info[1] != '>')
 			temp->type = LESS_THAN;
-		else if (temp->info[0] == '<' && temp->info[1] != '<')
+		if (temp->info[0] == '<' && temp->info[1] != '<')
 			temp->type = GREATER_THAN;
-		else if (temp->info[0] == '>' && temp->info[1] == '>')
+		if (temp->info[0] == '>' && temp->info[1] == '>')
 			temp->type = CREATE_IF_NOT_EXIST;
-		else if (temp->info[0] == '<' && temp->info[1] == '<')
+		if (temp->info[0] == '<' && temp->info[1] == '<')
 			temp->type = HEREDOC;
-		else if ((temp->info[0] >= 33 && temp->info[0] <= 59) ||
-		temp->info[0] == 61 || (temp->info[0] >= 63 && temp->info[0] <= 126))
+		if ((temp->info[0] >= 35 && temp->info[0] <= 59) ||
+		temp->info[0] == 61 || (temp->info[0] >= 63 && temp->info[0] <= 123)
+		||  temp->info[0] == 125 || temp->info[0] == 126 ||  temp->info[0] == 33)
 			temp->type = WORD;
-		else
+		if(temp->type == 0)
 			temp->type = SPACE;
+		// if(temp->info[0] == 32)
+			// temp->type = SPACE;
 		temp = temp->next;
 	}
 }
