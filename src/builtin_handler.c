@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:02:36 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/20 17:24:30 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/21 13:47:35 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@
 	checks if the first element in the cmd_group is a builtin
 	if it is, fill t_minihell variable 'cmds' with commands from our minishell input
 */
-void fill_builtin_cmd(t_token **head, t_minishell *cmds)
-{
-	int len;
-	t_token *temp;
-	temp = *head;
+// void fill_builtin_cmd(t_token **head, t_minishell *cmds)
+// {
+// 	int len;
+// 	t_token *temp;
+// 	temp = *head;
 
-	int i = 0;
-	len = ft_lstsize_mod(temp);
-    cmds->builtin_cmd = malloc(sizeof(char *) * (len + 1));
-	while(temp->next)
-	{
-		if(if_builtin(temp->info) == 1)
-		{
-			cmds->builtin_cmd[i] = malloc(sizeof(char *) * (ft_strlen(temp->info) + 1));
-			ft_strcpy(cmds->builtin_cmd[i], temp->info); // segfault fixed
-			i++;
-		}
-		temp = temp->next;
-	}	
-}
+// 	int i = 0;
+// 	len = ft_lstsize_mod(temp);
+//     cmds->builtin_cmd = malloc(sizeof(char *) * (len + 1));
+// 	while(temp->next)
+// 	{
+// 		if(if_builtin(temp->info) == 1)
+// 		{
+// 			cmds->builtin_cmd[i] = malloc(sizeof(char *) * (ft_strlen(temp->info) + 1));
+// 			ft_strcpy(cmds->builtin_cmd[i], temp->info); // segfault fixed
+// 			i++;
+// 		}
+// 		temp = temp->next;
+// 	}	
+// }
 
 /* checks if an input is a bash builtin */
 int	if_builtin(char *word)

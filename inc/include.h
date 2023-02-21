@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/20 16:50:32 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:27:41 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,22 @@ typedef struct	s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct	s_pipe_group
+{
+	char				**builtin_cmd;
+	char				*cmd_path;
+	struct s_pipe_group	*next;
+}	t_pipe_group;
+
+
 typedef struct	s_minishell
 {
 	char 				**args;
 	char				**envp;
 	int					error;
-	char				**builtin_cmd;
-	char				*cmd_path;
 	char 				*pwd;
 	char 				*old_pwd;
 	int					pid;
-	struct s_minishell	*next;
 }	t_minishell;
 
 /* LEXER */
@@ -107,6 +112,9 @@ int		assign_env(char **envp, t_minishell *shell_h);
 /* PARSER */
 void	fill_builtin_cmd(t_token **head, t_minishell *cmds);
 int		if_builtin(char *word);
+int		count_pipes(t_token **head);
+int		malloc_pipe_list(t_pipe_group **head_pipe, t_token **head);
+void	set_pipe_group(t_pipe_group **head_pipe, t_token **head_tok);
 
 /* EXECUTION */
 
