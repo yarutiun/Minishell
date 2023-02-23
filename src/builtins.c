@@ -3,100 +3,160 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 12:02:36 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/07 15:02:20 by yarutiun         ###   ########.fr       */
+/*   Created: 2023/02/07 13:57:16 by nrenz             #+#    #+#             */
+/*   Updated: 2023/02/23 10:12:14 by nrenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-//checks if the first element in the cmd_group full_cmd is a builtin
-// int	check_builtins(t_minishell *cmd_group)
-// {
-// 	int	len_builtin;
+/* 	extra function for builtin cd
+	so you can get HOME path
+*/
+char	*get_env_var(char *var, t_minishell *shell_h)
+{
+	int	i;
 
-// 	if (!cmd_group->builtin_cmd)
-// 		return (0);
-// 	if ((cmd_group->builtin_cmd && ft_strchr(word, '/')) || \
-// 		(cmd_group->cmd_path && ft_strchr(cmd_group->cmd_path, '/')))
-// 		return (0);
-// 	len_builtin = ft_strlen(cmd_group->builtin_cmd);
-// 	if (!ft_strncmp(, "cd", len_builtin) && \
-// 		len_builtin == 2)
-// 		return (1);
-// 	if (!ft_strncmp(word, "pwd", len_builtin) && \
-// 		len_builtin == 3)
-// 		return (1);
-// 	if (!ft_strncmp(word, "env", len_builtin) && \
-// 		len_builtin == 3)
-// 		return (1);
-// 	if (!ft_strncmp(word, "echo", len_builtin) && \
-// 		len_builtin == 4)
-// 		return (1);
-// 	if (!ft_strncmp(word, "exit", len_builtin) && \
-// 		len_builtin == 4)
-// 		return (1);
-// 	if (!ft_strncmp(word, "unset", len_builtin) && \
-// 		len_builtin == 5)
-// 		return (1);
-// 	if (!ft_strncmp(word, "export", len_builtin) && \
-// 		len_builtin == 6)
-// 		return (1);
+	i = 0;
+	while (shell_h->envp[i])
+	{
+		if (ft_strncmp(shell_h->envp[i], var, ft_strlen(var)) == 0)
+			return (shell_h->envp[i] + ft_strlen(var));
+		i++;
+	}
+	return (NULL);
+}
+
+/* 	builtin cd
+	changes directory to HOME if no argument is given
+	changes directory to given argument if one is given
+	tested, works :)
+*/
+int	builtin_cd(t_minishell *ms_data, t_minishell *shell_h)
+{
+	int	i;
+
+	i = 0;
+	if (!ms_data->builtin_cmd[1])
+	{
+		chdir(get_env_var("HOME=", shell_h));
+	}
+	if (ms_data->builtin_cmd[2])
+	{
+		printf("minishell: cd: too many arguments\n");
+		// g_status = 1;
+		return (0);
+	}
+	if (chdir(ms_data->builtin_cmd[1]) == -1)
+	{
+		printf("minishell: cd: %s: No such file or directory\n", \
+		ms_data->builtin_cmd[1]);
+		// g_status = 1;
+		return (0);
+	}
+	// else
+	// 	g_status = 0;
+	return (0);
+}
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_minishell	*ms_data;
+// 	t_minishell	*shell_h;
+
+// 	(void)argc;
+// 	(void)argv;
+// 	ms_data = malloc(sizeof(t_minishell));
+// 	shell_h = malloc(sizeof(t_minishell));
+// 	shell_h->envp = envp;
+// 	ms_data->builtin_cmd = argv;
+// 	builtin_cd(ms_data, shell_h);
+// 	return (0);
 // }
 
-// int	builtin_handler(t_minishell cmd_group, )
-
-
-// this command fills t_minihell variable 'cmds' with commands from our minishell input
-void fill_builtin_cmd(t_token **head, t_minishell *cmds)
+/* 	builtin pwd 
+	printd current working directory to STDOUT
+	tested, works :)
+*/
+int	builtin_pwd(int fd)
 {
-	int len;
-	t_token *temp;
-	temp = *head;
-
-	int i = 0;
-	len = ft_lstsize_mod(temp);
-    cmds->builtin_cmd = malloc(sizeof(char *) * len + 1);
-	while(temp)
+	if (!getcwd(pwd, MAX_PWD))
 	{
-		if(if_builtin(temp->info) == 1)
-		{
-			cmds->builtin_cmd[i] = malloc(sizeof(char *) * ft_strlen(temp->info) + 1);
-			ft_strcpy(cmds->builtin_cmd[i], temp->info); // segfault fixed
-			i++;
-		}
-		temp = temp->next;
-	}	
+		perror("pwd");
+		return (0);
+	}
+	ft_putstr_fd(pwd, fd);
+	ft_putstr_fd("\n", fd);
+	g_status = 0;
+	return (0);
 }
 
-//checks if an input is a bash builtin
-int if_builtin(char *word)
+/* 	builtin pwd optinal function
+	prints current working directory to terminal
+	tested, works :)
+*/
+int	builtin_pwd(t_minishell *ms_data)
 {
-	int	len_builtin;
-	len_builtin = ft_strlen(word);
-	if (!ft_strncmp(word, "cd", len_builtin) && \
-		len_builtin == 2)
-		return (1);
-	if (!ft_strncmp(word, "pwd", len_builtin) && \
-		len_builtin == 3)
-		return (1);
-	if (!ft_strncmp(word, "env", len_builtin) && \
-		len_builtin == 3)
-		return (1);
-	if (!ft_strncmp(word, "echo", len_builtin) && \
-		len_builtin == 4)
-		return (1);
-	if (!ft_strncmp(word, "exit", len_builtin) && \
-		len_builtin == 4)
-		return (1);
-	if (!ft_strncmp(word, "unset", len_builtin) && \
-		len_builtin == 5)
-		return (1);
-	if (!ft_strncmp(word, "export", len_builtin) && \
-		len_builtin == 6)
-		return(1);
-	return(0);
+	char	cwd[256];
+
+	getcwd(cwd, sizeof(cwd));
+	ft_putstr_fd(cwd, 1);
+	ft_putstr_fd("\n", 1);
+	return (0);
 }
 
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_minishell	*ms_data;
+
+// 	ms_data = malloc(sizeof(t_minishell));
+// 	builtin_pwd(ms_data);
+// 	return (0);
+// }
+
+/* 	builtin envp 
+	prints all environment variables to STDOUT
+	tested, doesn't work yet :(
+*/
+int	builtin_envp(t_minishell *ms_data, t_minishell *shell_h, int fd)
+{
+	if (ms_data->builtin_cmd[1])
+	{
+		ft_putstr_fd("env: '", 2);
+		ft_putstr_fd(ms_data->builtin_cmd[1], 2);
+		ft_putstr_fd("': No such file or directory\n", 2);
+		// g_status = 127;
+		return (0);
+	}
+	while (shell_h->next)
+	{
+		ft_putstr_fd(*shell_h->envp, fd);
+		ft_putstr_fd("=", fd);
+		ft_putstr_fd(shell_h->value, fd);
+		ft_putstr_fd("\n", fd);
+		shell_h = shell_h->next;
+	}
+	ft_putstr_fd(*shell_h->envp, fd);
+	ft_putstr_fd("=", fd);
+	ft_putstr_fd(shell_h->value, fd);
+	ft_putstr_fd("\n", fd);
+	// g_status = 0;
+	return (0);
+}
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	t_minishell	*ms_data;
+// 	t_minishell	*shell_h;
+
+// 	(void)argc;
+// 	(void)argv;
+// 	ms_data = malloc(sizeof(t_minishell));
+// 	shell_h = malloc(sizeof(t_minishell));
+// 	shell_h->envp = envp;
+// 	ms_data->builtin_cmd = argv;
+// 	builtin_envp(ms_data, shell_h, 1);
+// 	return (0);
+// }
