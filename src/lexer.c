@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/21 14:59:07 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/23 12:17:07 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	put_type_tok(t_token **head)
 	t_token	*temp;
 
 	temp = *head;
-	// printf("\nwieg78fh38ewh9fjdwhjfe\n");
 	while (temp->next != NULL)
 	{
 		if (temp->info[0] == '|' && !temp->info[1])
@@ -67,10 +66,9 @@ void	put_type_tok(t_token **head)
 			temp->type = WORD;
 		if(temp->type == 0)
 			temp->type = SPACE;
-		// if(temp->info[0] == 32)
-			// temp->type = SPACE;
 		temp = temp->next;
 	}
+	
 }
 
 //returns 0 if all brackets are closed 
@@ -116,8 +114,6 @@ int init_all(t_token **token, t_minishell *globals, char *split, char **splited,
 	put_type_tok(token);
 	if(assign_env(envp, globals) == 0)
 		return(0);
-		// (void) envp;
-	// fill_builtin_cmd(token, globals);
 	globals->pid = 0;
 	globals->error = 0;
 	return(1);

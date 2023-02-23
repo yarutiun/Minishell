@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 12:02:36 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/21 13:47:35 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/23 12:10:25 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 // 			i++;
 // 		}
 // 		temp = temp->next;
-// 	}	
+// 	}	      temp_pipe->builtin_cmd[i] = malloc(sizeof(char *) * (ft_strlen(temp_tok->info) + 1));
 // }
 
 /* checks if an input is a bash builtin */

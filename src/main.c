@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/21 14:59:13 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/02/22 21:04:30 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_minishell		*ms_data;
+	t_minishell		*ms_data = NULL;
 	char			*readed;
-	t_token			*head;
-	t_pipe_group	*head_pipe;
+	t_token			*head = NULL;
+	t_pipe_group	*head_pipe = NULL;
 	char			**splited;
 
 	(void) argv;
