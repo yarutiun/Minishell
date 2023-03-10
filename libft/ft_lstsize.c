@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 12:48:03 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/10 15:23:07 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/24 19:00:25 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:59:04 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int		counter;
-	t_list	*current_node;
+	unsigned int	len;
 
-	current_node = NULL;
-	current_node = lst;
-	counter = 0;
-	while (current_node != NULL)
+	len = 0;
+	while (lst)
 	{
-		counter ++;
-		current_node = current_node->next;
+		lst = lst->next;
+		len++;
 	}
-	return (counter);
+	return (len);
 }
+
+// Counts the number of elements in a list.

@@ -3,82 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 17:18:59 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/09 16:17:29 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/19 19:39:14 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:00:49 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	len(long nb)
+static long int	ft_abs(long int n)
 {
-	int	len;
+	if (n < 0)
+	{
+		return (-n);
+	}
+	else
+	{
+		return (n);
+	}
+}
 
-	len = 0;
-	if (nb < 0)
+static int	ft_len(long int n)
+{
+	int		len;
+
+	if (n <= 0)
 	{
-		nb = nb * -1;
-		len++;
+		len = 1;
 	}
-	if (nb == 0)
+	else
 	{
-		return (1);
+		len = 0;
 	}
-	while (nb > 0)
+	while (n != 0)
 	{
-		nb = nb / 10;
+		n = n / 10;
 		len++;
 	}
 	return (len);
 }
 
-char	*if_zero(char *s)
+char	*ft_itoa(int n)
 {
-	s[0] = '0';
-	return (s);
-}
+	int		len;
+	int		sign;
+	char	*new_string;
 
-char	*ft_itoa(int nb)
-{
-	char	*s;
-	long	n;
-	int		i;
-
-	n = nb;
-	i = len(n);
-	s = (char *)malloc(sizeof(char) * (i + 1));
-	if (!s)
-		return (NULL);
-	s[i--] = '\0';
-	if (n == 0)
-	{
-		if_zero(s);
-	}
 	if (n < 0)
+		sign = -1;
+	else
+		sign = 1;
+	len = ft_len(n);
+	new_string = (char *)malloc(sizeof(char) * len + 1);
+	if (new_string == NULL)
+		return (NULL);
+	new_string[len] = '\0';
+	len--;
+	while (len >= 0)
 	{
-		s[0] = '-';
-		n = n * -1;
+		new_string[len] = '0' + ft_abs(n % 10);
+		n = ft_abs(n / 10);
+		len--;
 	}
-	while (n > 0)
-	{
-		s[i--] = '0' + (n % 10);
-		n = n / 10;
-	}
-	return (s);
+	if (sign == -1)
+		new_string[0] = '-';
+	return (new_string);
 }
 
-// int main (void)
-// {
-// 	int num = 0;
-
-// 	printf("%s",ft_itoa(num));
-// 	return (0);
-
-// }
-
-// in while loop we're making a char out of the int 
-// from the end 
-// then decreasing and going to the next  char
+// A static function in C is a function that has 
+// a scope that is limited to its object file.
+// 
+// Function itoa allocates memory and returns a 'fresh' string of characters
+// terminated with a '\0' that is the char equivalent of the int passed in
+// the parameter. Negative numbers should be managed as well. If the allocation
+// fails the function will return NULL. NOTE: This is a recursive function. If
+// you are unfamiliar with recursive functions it is a function which either
+// calls itself or is in a potential cycle of function calls

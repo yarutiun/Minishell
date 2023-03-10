@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 15:28:08 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/10 15:37:59 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/24 23:52:05 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:57:44 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	while (lst)
+	t_list	*temp;
+
+	temp = lst;
+	while (temp)
 	{
-		f(lst->content);
-		lst = lst->next;
+		f(temp->content);
+		temp = temp->next;
 	}
 }
+
+/*This function will be taking the function f, passed in the parameters, and
+* applying it to every link in our linked list.*/

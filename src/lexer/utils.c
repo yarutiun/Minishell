@@ -1,24 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/28 13:51:36 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/04 15:33:41 by yarutiun         ###   ########.fr       */
+/*   Created: 2023/02/23 19:46:42 by hboichuk          #+#    #+#             */
+/*   Updated: 2023/02/23 19:46:58 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(int c)
-{
-	if (c == '\t' || c == '\n' || c == '\v')
-	{
-		return (1);
-	}
-	else if (c == '\f' || c == '\r' || c == 32)
-	{
-		return (1);
-	}
-	return (0);
-}
+#include "../inc/minishell.h"
+

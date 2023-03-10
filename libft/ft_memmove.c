@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:39:31 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/05 13:58:09 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/03 11:35:10 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:06:30 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*temp_dst;
-	unsigned char	*temp_src;
+	char	*src_char;
+	char	*dst_char;
 
-	temp_dst = (unsigned char *) dst;
-	temp_src = (unsigned char *) src;
-	if (dst == src || len == 0 || !dst || !src)
-	{
-		return (dst);
-	}
-	if (temp_src > temp_dst)
+	src_char = (char *)src;
+	dst_char = (char *)dst;
+	if (src_char > dst_char && (dst_char || src_char))
 	{
 		ft_memcpy(dst, src, len);
-		return (dst);
 	}
-	while (len > 0)
+	else
 	{
-		temp_dst[len - 1] = temp_src[len - 1];
-		len--;
+		while (len > 0)
+		{
+			dst_char[len - 1] = src_char[len - 1];
+			len--;
+		}
 	}
 	return (dst);
 }
+
+// According to the man function copies len bytes from string src to string
+// dst. The two strings may overlap; the copy is always done in a non
+// destructive manner. The ft_memmove function returns the original value of
+// dst.

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 20:04:15 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/09 20:06:20 by yarutiun         ###   ########.fr       */
+/*   Created: 2023/02/26 20:11:19 by hboichuk          #+#    #+#             */
+/*   Updated: 2023/02/27 19:49:53 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
+#include "../inc/minishell.h"
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+int	parser(t_global *global_struct)
+{
+	// t_simple_cmds	*one_cmd;
+
+	global_struct->simple_cmds = NULL;
+	count_pipes(global_struct);
+	return(0);
 }

@@ -1,35 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 19:11:42 by hboichuk          #+#    #+#             */
-/*   Updated: 2022/05/26 20:04:04 by hboichuk         ###   ########.fr       */
+/*   Created: 2023/02/23 16:24:30 by hboichuk          #+#    #+#             */
+/*   Updated: 2023/02/23 16:32:36 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/minishell.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+char	**init_envp(char **envp)
 {
-	char	*s_char;
+	char	**new_envp;
 	size_t	i;
+	size_t	j;
 
 	i = 0;
-	s_char = (char *)s;
-	while (i < n)
+	j = 0;
+	while (envp[i] != NULL)
+		i++;
+	new_envp = ft_calloc(sizeof(char *), i + 1);
+	if (!new_envp)
+		return (NULL);
+	i = 0;
+	while (envp[i] != NULL)
 	{
-		if ((unsigned char)s_char[i] == (unsigned char)c)
+		new_envp[i] = ft_strdup(envp[i]);
+		if (new_envp[i] == NULL)
 		{
-			return ((char *)s + i);
+			while (new_envp[j])
+			{
+				free(new_envp[j]);
+				j++;
+			}
+			free(new_envp);
+			return (new_envp);
 		}
 		i++;
 	}
-	return (0);
+	return (new_envp);
 }
-
-// memchr locates the first occurence of c
-// (converted to an unsigned char) in string s. ft_memchr returns a pointer to
-// the byte located, or NULL if no such byte exists within n bytes.

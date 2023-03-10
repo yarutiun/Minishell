@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 13:04:16 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/10 15:13:39 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/24 19:08:09 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:58:52 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst)
-	{
-		if (!lst->next)
-		{
-			return (lst);
-		}
+	if (lst == NULL)
+		return (0);
+	while (lst->next != NULL)
 		lst = lst->next;
-	}
 	return (lst);
 }
+
+//  Returns the last element of the list.

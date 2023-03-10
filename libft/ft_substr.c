@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/28 13:08:27 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/09 20:05:32 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/16 12:08:04 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:55:38 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned int	i;
-	unsigned int	s_len;
-	char			*substr;
+	char	*string;
+	size_t	new_len;
 
-	if (!s)
+	if (s == 0)
 		return (NULL);
-	s_len = ft_strlen(s);
-	if (start + len > s_len)
-		len = s_len - start;
-	if (s_len < start)
+	if ((unsigned int)ft_strlen(s) < start)
 		return (ft_strdup(""));
-	substr = malloc(sizeof(char) * (len + 1));
-	if (!substr)
+	new_len = ft_strlen(s + start);
+	if (new_len < len)
+		len = new_len;
+	string = (char *) malloc(sizeof(char) * len + 1);
+	if (!string)
 		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		substr[i] = s[start + i];
-		i++;
-	}
-	substr[i] = '\0';
-	return (substr);
+	ft_strlcpy(string, s + start, len + 1);
+	return (string);
 }
+
+/* Allocates (with malloc() and returns a substring from the string ’s’.
+** The substring begins at index ’start’ and is of maximum size ’len’. */

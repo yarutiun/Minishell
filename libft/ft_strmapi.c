@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 21:52:06 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/06 21:58:53 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/21 22:58:41 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:54:05 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	o;
-	size_t	i;
-	char	*str;
+	char			*newstr;
+	unsigned int	len;
+	unsigned int	i;
 
+	if (s == 0 || f == 0)
+		return (0);
+	len = ft_strlen(s);
+	newstr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!newstr)
+		return (0);
 	i = 0;
-	if (!s || !f)
-		return (0);
-	o = ft_strlen(s);
-	str = ((char *)malloc(sizeof(char) * (o + 1)));
-	if (!str)
-		return (0);
-	while (i < o)
+	while (s[i])
 	{
-		str[i] = f(i, s[i]);
+		newstr[i] = f(i, s[i]);
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	newstr[i] = '\0';
+	return (newstr);
 }
+
+/*This function is exactly the same as ft_strmap except that when we run
+* our given function f on the character we also pass to f the specific
+* index of our character in the given string.*/

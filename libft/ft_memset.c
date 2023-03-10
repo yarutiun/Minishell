@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 14:26:14 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/09 19:23:52 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/04/27 20:29:52 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:07:15 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	size_t			i;
-	unsigned char	*ptr;
+	unsigned char	*result;
 
-	i = 0;
-	ptr = (unsigned char *)b;
-	while (i < len)
-		ptr[i++] = (unsigned char)c;
+	result = (unsigned char *)b;
+	while (len > 0)
+	{
+		*result = c;
+		result++;
+		len--;
+	}
 	return (b);
 }
+
+//Function memset - fill a byte string with a byte value.
+//The memset() function writes len bytes of value c
+//(converted to an unsigned char) to the string b.
+//The memset() function returns its first argument.

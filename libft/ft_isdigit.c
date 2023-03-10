@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 12:51:24 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/03 18:05:02 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/04/27 16:25:12 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 19:13:22 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isdigit(int c)
 {
-	if (c <= '9' && c >= '0')
+	if (c >= '0' && c <= '9')
 	{
 		return (1);
 	}
@@ -23,3 +23,5 @@ int	ft_isdigit(int c)
 		return (0);
 	}
 }
+
+// isdigit - standart test for numeric symbols from 0 to 9

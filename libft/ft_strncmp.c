@@ -3,41 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 18:17:47 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/06 16:02:27 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/07 13:42:17 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:54:23 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// #include <stdlib.h>
-// #include <unistd.h>
-// #include <string.h>
-
-// void	ft_print_result(int n)
-// {
-// 	if (n > 0)
-// 		write(1, "1", 1);
-// 	else if (n < 0)
-// 		write(1, "-1", 2);
-// 	else
-// 		write(1, "0", 1);
-// }
-
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	counter;
+	size_t			i;
 
-	counter = 0;
+	i = 0;
 	if (n == 0)
-	{
 		return (0);
-	}
-	while (s1[counter] != '\0' && s1[counter] == s2[counter] && counter < n - 1)
+	while (i < n)
 	{
-		counter++;
+		if (s1[i] != s2[i] || s1[0] == '\0' || s2[0] == '\0')
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	return ((unsigned char)s1[counter] - (unsigned char)s2[counter]);
+	return (0);
 }
+
+//Function compares not more than n characters.
+//Cuz strncmp() is designed for comparing string
+//rather than binary data. Characters that appear
+//after a '\0' character are not compared.

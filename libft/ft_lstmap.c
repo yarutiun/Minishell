@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 15:43:51 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/10 17:53:43 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/24 23:46:30 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:58:04 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*ret_lst;
-	t_list	*new_node;
+	t_list	*temp;
+	t_list	*new_list;
+	t_list	*new_element;
 
-	if (!lst)
-		return (NULL);
-	ret_lst = NULL;
-	while (lst)
+	temp = lst;
+	new_list = NULL;
+	while (temp)
 	{
-		new_node = ft_lstnew((*f)(lst->content));
-		if (!new_node)
+		new_element = ft_lstnew((*f)(temp->content));
+		if (!new_element)
 		{
-			del(new_node);
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
-		ft_lstadd_back(&ret_lst, new_node);
-		lst = lst->next;
+		ft_lstadd_back(&new_list, new_element);
+		temp = temp->next;
 	}
-	return (ret_lst);
+	return (new_list);
 }
+
+// Creates a new list by applying the function f to the content of each
+// element of lst. In case of problems creating an element, deletes the new
+// list by using the function del.

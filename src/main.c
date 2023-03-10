@@ -3,88 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/02/20 13:56:25 by yarutiun         ###   ########.fr       */
+/*   Created: 2023/02/23 14:18:07 by hboichuk          #+#    #+#             */
+/*   Updated: 2023/02/27 21:31:35 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/include.h"
+
+#include "../inc/minishell.h"
+
+void	run_minishell_loop(t_global *minishell)
+{
+	// printf("Here is first line - %s", minishell->args);
+	
+	while (1)
+	{
+		minishell->args = readline("Hi, it's Minihell!...");
+		add_history(minishell->args); //history
+		//quotes
+		lexer(minishell);
+		parser(minishell);
+		//expander
+		//executor
+		//reset?
+		
+		// printf("Here is first line - %s", minishell->args);
+		// printf("\n");
+	}
+	
+	// printf("Here is first line - %s", minishell->args);
+}
+
+void	init_global_struct(char **envp)
+{
+	t_global	*minishell;
+	
+	minishell = (t_global *)ft_calloc(1, sizeof(t_global));
+	minishell->lexer_list = NULL;
+	//implemantation for simple cmd?
+	// paths;??
+	minishell->envp = init_envp(envp);
+	find_pwd(minishell);
+	minishell->pid = NULL;
+	run_minishell_loop(minishell);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_minishell	*ms_data;
-	char	*readed;
-	t_token	*head;
-	char	**splited;
-
-	(void) argv;
-	(void) envp;
-	if (argc != 1)
+	if(argc == 1)
 	{
-		printf("wrong amount of arguments");
-		return(0);
+		init_global_struct(envp);
+		printf("Welcome to Minishell!");
 	}
-	// 	error_args();
-	ms_data = (t_minishell *)ft_calloc(1, sizeof(t_minishell));
-	if (!ms_data)
-		return (1);
-	while (1)
+	else
 	{
-		readed = readline("welcome to minishel: ");
-		splited = ft_split_minishell(readed);
-		add_history(readed);
-		if(init_all(&head, ms_data, readed, splited, envp) == 0)
-			return(0);
-		put_type_tok(&head);
-		// printf("%s\n", head->info);
+		printf("Minishell doesn't need arguments!");
+		exit(0);
 	}
-	return (0);
+	return(0);
 }
-
-// void sig_handler(int signal)
-// {
-//     if(signal == SIGINT)
-//     {
-//         printf("\nexiting shell");
-
-//         // rl_replace_line();
-//         // readline("<qwert   ");
-//     }
-// }
-
-// char	*ft_strcat(char *s1, const char *s2)
-// {
-// 	int		index;
-// 	size_t	i;
-
-// 	index = strlen(s1);
-// 	i = 0;
-// 	while (i < strlen((char *)s2))
-// 	{
-// 		s1[index] = s2[i];
-// 		i++;
-// 		index++;
-// 	}
-// 	s1[index] = '\0';
-// 	return (s1);
-// }
-
-// void	prompt(void)
-// {
-// 	char	cwd[256];
-
-// 	getcwd(cwd, sizeof(cwd));
-// 	ft_strcat(cwd, " : ");
-// 	ft_putstr_fd(cwd, 1);
-// }
-
-// void	sig_handle(int sig)
-// {
-// 	if (sig == SIGINT)
-// 	{
-// 		ft_putstr_fd("\n", 1);
-// 		prompt();
-// 	}
-// }

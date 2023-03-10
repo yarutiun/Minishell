@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/07 13:17:04 by hboichuk          #+#    #+#             */
-/*   Updated: 2022/05/26 20:55:07 by hboichuk         ###   ########.fr       */
+/*   Created: 2023/02/26 20:56:10 by hboichuk          #+#    #+#             */
+/*   Updated: 2023/02/27 17:50:48 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/minishell.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	count_pipes(t_global *global_struct)
 {
-	int		i;
+	t_token	*tmp;
 
-	i = ft_strlen(s);
-	while (i >= 0)
+	tmp = global_struct->lexer_list;
+	global_struct->pipes = 0;
+	while (tmp)
 	{
-		if ((unsigned char)s[i] == (unsigned char)c)
-		{
-			return ((char *)&s[i]);
-		}
-		i--;
+		if (tmp->tok_type == PIPE)
+			global_struct->pipes++;
+		tmp = tmp->next;
 	}
-	return (NULL);
+	// printf("%d", global_struct->pipes);
 }
-
-//The strrchr() function is identical to strchr(), except it
-// locates the last occurrence of c.

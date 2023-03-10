@@ -3,31 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:30:51 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/09 20:01:17 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/05 20:46:05 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:33:17 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, unsigned int dstsize)
+size_t	ft_strlcat(char	*dst, const	char	*src, size_t	dstsize)
 {
-	unsigned int	len_dest;
-	unsigned int	len_src;
-	unsigned int	i;
+	size_t		dst_len;
+	int			src_len;
+	size_t		i;
 
-	len_dest = ft_strlen(dst);
-	len_src = ft_strlen(src);
 	i = 0;
-	if (dstsize <= len_dest)
-		return (len_src + dstsize);
-	while (src[i] && (len_dest + i) < (dstsize - 1))
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (dst_len > dstsize)
+		return (src_len + dstsize);
+	if (dstsize > dst_len)
 	{
-		dst[len_dest + i] = src[i];
-		i++;
+		while (dst_len + 1 + i < dstsize && src[i])
+		{
+			dst[dst_len + i] = src[i];
+			i++;
+		}	
 	}
-	dst[len_dest + i] = '\0';
-	return (len_src + len_dest);
+	dst[dst_len + i] = '\0';
+	return (src_len + dst_len);
 }
+
+//size-bounded string copying and concatennation
+// The strlcat() function appends the NUL-termin string src to the end of dst.
+// It will append at most size - strlen(dst) - 1 bytes, NUL-termin the result.

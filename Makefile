@@ -4,18 +4,18 @@ LIB = libft.a
 SRC = src
 OBJ = obj
 INC = inc
-CFLAGS = -Wall -Wextra -Werror -g -I$(INC)
+CFLAGS = -g -I$(INC) -Wall -Wextra -Werror
 RM = rm -rf
 CC = gcc
-SRCS =	src/utils.c\
-		src/lexer.c\
-		src/builtin_handler.c\
-		src/main.c\
-		src/expander.c\
-		#src/builtins\
-		src/error_handler\
-		src/builtin_echo.c\
-		src/init_enviroment.c\
+SRCS =	src/main.c\
+		src/pwd.c\
+		src/envp.c\
+		src/lexer/lexer.c\
+		src/lexer/lists.c\
+		src/lexer/utils.c\
+		src/parser/parser.c\
+		src/parser/pipex.c\
+		# src/error_handler.c\ //later
 
 OBJS = $(SRCS:.c=.o)
 

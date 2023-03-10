@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:50:05 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/03 18:12:01 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/04/27 19:57:18 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:56:33 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_tolower(int c)
 {
-	if (c >= 65 && c <= 90)
-	{
+	if (c >= 'A' && c <= 'Z')
 		c = c + 32;
-		return (c);
-	}
-	else
-	{
-		return (c);
-	}
+	return (c);
 }
+
+//Function changes upper letters to lower

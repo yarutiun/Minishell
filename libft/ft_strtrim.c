@@ -3,56 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/28 13:42:04 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/07 15:31:52 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/16 20:45:41 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/27 17:47:29 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int
-	ft_char_in_set(char c, char const *set)
-{
-	size_t	i;
-
-	i = 0;
-	while (set[i])
-	{
-		if (set[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*str;
+	char	*new_string;
 	size_t	i;
-	size_t	start;
-	size_t	end;
+	size_t	j;
 
-	start = 0;
-	while (s1[start] && ft_char_in_set(s1[start], set))
-		start++;
-	end = ft_strlen(s1);
-	while (end > start && ft_char_in_set(s1[end - 1], set))
-		end--;
-	str = (char *)malloc(sizeof(*s1) * (end - start + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (start < end)
-		str[i++] = s1[start++];
-	str[i] = 0;
-	return (str);
+i = 0;
+new_string = 0;
+j = ft_strlen(s1);
+	while (s1[i] && ft_strchr(set, s1[i]))
+		i++;
+	while (s1[j - 1] && ft_strchr(set, s1[j - 1]) && j > i)
+		j--;
+new_string = (char *) malloc(sizeof(char) * j - i + 1);
+	if (new_string)
+		ft_strlcpy(new_string, &s1[i], j - i + 1);
+	return (new_string);
 }
 
-//first func. checks if any char from set = to c
-//first loop in strtrim mooves start if there are set chars
-//then we moove end if if there are set chars
-// malloc a new str
-//check if str is normally malloced
-//
+/*This function allocates memory and returns a copy of the string passed in the
+* parameter but without any kind of blank spaces at the start or the end of
+* the string. This function considers blank spaces to be the characters ' ',
+* a standard space, '\n', a new line, and '\t', which is a tabulation space.
+* If there are no spaces at the beginning and end of the parameter string s
+* the function returns a copy of s. If the allocation of memory fails the
+* function returns NULL.*/

@@ -3,44 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 15:27:35 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/09 19:57:39 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/01 20:11:35 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:05:40 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, unsigned int n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned char	*src1;
-	unsigned char	*dest1;
-	unsigned int	counter;
+	unsigned const char	*src_char;
+	unsigned char		*dst_char;
+	size_t				i;
 
-	counter = 0;
-	src1 = (unsigned char *)src;
-	dest1 = (unsigned char *)dest;
-	if (dest1 == NULL && src1 == NULL)
+	i = 0;
+	src_char = src;
+	dst_char = dst;
+	while (i < n)
 	{
-		return (dest);
+		dst_char[i] = src_char[i];
+		i++;
 	}
-	while (counter < n)
-	{
-		dest1[counter] = src1[counter];
-		counter ++;
-	}
-	return (dest);
+	return (dst);
 }
 
-// int main (void){
-
-// char b[100] = "iwuherjweiorj";
-// char a[100];
-// ft_memcpy(a, b, 13);
-// write (1, a, 13);
-// write(1, "\n", 1);
-// write (1, b, 13);
-
-// return 0;
-// }
+// this function copies n bytes from memory area src to
+// memory area dst. If dst and src overlap, behavior is undefined. Applications
+// in which dst and src might overlap should use ft_memmove instead. This
+// function returns the original value of dst

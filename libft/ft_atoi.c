@@ -3,39 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/01 18:06:26 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/06 17:54:56 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/08 20:40:02 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/29 18:25:13 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	get_exception(char c)
+{
+	if (c == ' ' || c == '\n' || c == '\t'
+		|| c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	else
+		return (0);
+}
+
 int	ft_atoi(const char *str)
 {
-	unsigned int	num;
-	int				i;
-	int				ifminus;
+	int		i;
+	int		buffer;
+	int		sign;
 
-	ifminus = 1;
+	buffer = 0;
 	i = 0;
-	num = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\f' || \
-		str[i] == '\r' || str[i] == '\n' || \
-		str[i] == '\v' )
+	sign = 1;
+	while ((str[i] != '\0') && get_exception(str[i]) == 1)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
-	if (str[i] == '+' || str[i] == '-')
+	while ((str[i] != '\0') && str[i] >= '0' && str[i] <= '9')
 	{
-		if (str[i++] == '-')
-			ifminus = -1;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + (str[i] - '0');
+		buffer = buffer * 10 + (str[i] - '0');
+		if (buffer >= 2147483647 && sign == 1)
+			return (2147483647);
+		if (buffer >= 2147483647 && sign == -1)
+			return (-2147483647);
 		i++;
 	}
-	return ((int)(ifminus * num));
+	return (sign * buffer);
 }
+
+// This is a recreation of the atoi function in C. We take a string of
+// characters that are supposed to be a number converted into an int.
+// According to the man, "The atoi function converts the initial portion of
+// the string point to by str to int representation.

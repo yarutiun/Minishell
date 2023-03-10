@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrenz <nrenz@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 12:37:58 by nrenz             #+#    #+#             */
-/*   Updated: 2022/01/10 14:16:53 by nrenz            ###   ########.fr       */
+/*   Created: 2022/04/27 17:01:55 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:53:36 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int	counter;
+	unsigned int	len;
 
-	counter = 0;
-	while (s[counter] != '\0')
-		counter++;
-	return (counter);
+	len = 0;
+	while (s[len] != '\0')
+	{
+		len++;
+	}
+	return (len);
 }
+
+// displays a number of characters in string

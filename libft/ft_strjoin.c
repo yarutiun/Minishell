@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/28 13:22:23 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/06 21:48:47 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/16 15:47:25 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 20:33:04 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,31 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char			*dest;
-	unsigned int	i;
-	unsigned int	size;
+	char	*string;
+	size_t	new_len;
+	int		i;
+	int		j;
 
-	size = (ft_strlen(s1) + ft_strlen(s2) + 1);
 	i = 0;
-	if (s1 == NULL || s2 == NULL)
-	{
+	j = 0;
+	new_len = ft_strlen(s1) + ft_strlen(s2);
+	string = (char *) malloc(sizeof(char) * new_len + 1);
+	if (string == NULL)
 		return (NULL);
-	}
-	dest = (char *) malloc(sizeof (*dest) * (size));
-	if (dest == NULL)
+	while (s1[i] != '\0')
 	{
-		return (NULL);
+		string[i] = s1[i];
+		i++;
 	}
-	while (*s1 != '\0')
+	while (s2[j] != '\0')
 	{
-		dest[i++] = *s1++;
+		string[i + j] = s2[j];
+		j++;
 	}
-	while (*s2 != '\0')
-		dest[i++] = *s2++;
-	dest[i] = '\0';
-	return (dest);
+	string[i + j] = '\0';
+	return (string);
 }
+
+/*This function allocates memory and returns a new string terminated by a '\0'
+* which is the result of a concatenation of the parameters s1 and s2. If the
+* allocation fails the function will return NULL.*/

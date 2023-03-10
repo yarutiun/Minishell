@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 13:52:45 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/03 18:05:01 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/04/27 16:55:17 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 19:18:23 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isprint(int c)
 {
@@ -21,3 +23,6 @@ int	ft_isprint(int c)
 		return (0);
 	}
 }
+
+// The isprint() function tests for any 
+// printing character, including space (` ').

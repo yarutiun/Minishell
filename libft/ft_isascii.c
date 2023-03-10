@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 13:47:36 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/03 18:05:04 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/04/27 16:47:07 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 19:12:58 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isascii(int c)
 {
@@ -21,3 +23,6 @@ int	ft_isascii(int c)
 		return (0);
 	}
 }
+
+//  The isascii() function tests for an ASCII character, 
+// which is any character between 0 and octal 0177 inclusive.

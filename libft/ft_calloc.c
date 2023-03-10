@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 15:44:21 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/11 18:54:57 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/09 19:08:58 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 19:09:07 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,14 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*p;
-	size_t	calc_bytes;
+	void	*buffer;
 
-	calc_bytes = (count * size);
-	if (count != 0 && (calc_bytes / count) != size)
-	{
+	buffer = malloc(count * size);
+	if (count == SIZE_MAX || size == SIZE_MAX)
 		return (NULL);
-	}
-	p = malloc(calc_bytes);
-	if (p == NULL)
-	{
-		return (NULL);
-	}
-	else
-	{
-		ft_bzero(p, calc_bytes);
-		return (p);
-	}
+	ft_memset(buffer, 0, count * size);
+	return (buffer);
 }
-//first if is made because of the max int overlapping
+
+// Function calloc gives you a zero-initialized buffer, while malloc leaves
+// the memory uninitialized.

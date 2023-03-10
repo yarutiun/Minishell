@@ -3,51 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 15:02:11 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/04 17:42:40 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/04/27 20:54:13 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 19:08:24 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
-// #include <unistd.h>
-// #include <string.h>
 #include "libft.h"
 
-void	ft_bzero(void *s, unsigned int n)
+void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
-	unsigned char	*change;
+	int	c;
 
-	i = 0;
-	change = (unsigned char *)s;
-	while (i < n)
-	{
-		*change = '\0';
-		change ++;
-		i ++;
-	}
+	c = 0;
+	ft_memset(s, c, n);
 }
 
-// int		main(int argc, const char *argv[])
-// {
-// 	void	*mem;
-
-// 	alarm(5);
-// 	if (argc == 1 || !(mem = malloc(sizeof(*mem) * 5)))
-// 		return (0);
-// 	if (atoi(argv[1]) == 1)
-// 	{
-// 		memset(mem, 'e', 5);
-// 		ft_bzero(mem, 5);
-// 		write(1, mem, 5);
-// 	}
-// 	else if (atoi(argv[1]) == 2)
-// 	{
-// 		memset(mem, 'e', 5);
-// 		ft_bzero(mem, 0);
-// 		write(1, mem, 5);
-// 	}
-// 	return (0);
-// }
+//Function bzero -- write NULL to a byte string
+//The bzero() function writes n zeroed bytes to the string s.
+//If n is lit zero, bzero() does nothing.

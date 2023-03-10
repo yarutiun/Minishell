@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hboichuk <hboichuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 14:52:53 by yarutiun          #+#    #+#             */
-/*   Updated: 2022/05/07 16:53:38 by yarutiun         ###   ########.fr       */
+/*   Created: 2022/05/17 19:57:30 by hboichuk          #+#    #+#             */
+/*   Updated: 2022/05/26 21:06:20 by hboichuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 
 	split = malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!s || !(split))
+	if (!s || !split)
 		return (0);
 	i = 0;
 	j = 0;
@@ -74,17 +74,23 @@ char	**ft_split(char const *s, char c)
 	return (split);
 }
 
-// //in first function we're
-// //counting the amount of words
-// // counter is the amount
-// // second var. is made to prevent an infinite loop
-
-//then we just duplicate the word in this function
-//it takes the string, the beggining of the word 
-//and its end
-
-//until i is lower the the whole length of the string s
-//further its gonna be index and i because index stays
-//as is until we find the c char
-//and i is increasing
-//in the end telling that the last element of the array is NULL
+// *This function will allocate memory and return 
+// a 'fresh' table of strings (all
+// * terminated by a '\0', the table as well) as 
+// a result of the splitting of
+// * the given string by the given character c. 
+// If memory allocation fails at
+// * any point the function will return NULL. 
+// And example of this function is
+// * ft_split("*welcome*to*the*club*buddy", '*'). 
+// This should return a table
+// * that splits the string int ["welcome", 
+// "to", "the", "club", "buddy"].
+// * This function must be done in three parts. 
+// We will start at the ft_strsplit
+// * function at the bottom. We put ft_strsplit 
+// at the end of our code because in
+// * order to  use other functions we make specifically 
+// for it we have to make sure
+// * we have them made before we get 
+// to our actual function.*/
