@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/Users/yarutiun/Desktop/42_projects/Megashell",
+            "binaryPath": "/Users/yarutiun/Desktop/42_projects/Megashell/minishell",
+            "binaryArgs": []
+        }
+    ]
+}
