@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/21 21:10:56 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:51:46 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		init_list(&head, readed, splited);
 		put_type_tok(&head);
 		expander(&head);
+		// ft_env();
 		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
 		// printf("%s   %i\n", head->next->info, head->next->type);
 		while(head)

@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/21 19:06:49 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:52:12 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char *cut_key(char **env, int index, char *key);
 // static int	find_path_env(char **env, char *key);
 
 /* BUILTINS */
-// int		ft_env(t_minishell *global);
+int		ft_env(void); //tested and works
 // char	*ft_pwd(t_minishell *global);
 
 #endif
