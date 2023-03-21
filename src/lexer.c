@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/20 21:45:05 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:40:01 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void cat_quote(char **splited, int *words, t_token **head)
 	(*words)--;
 	while(*words >= 0 && splited[*words][0] != quote)
 	{
-		temp->info = ft_strjoin(temp->info, splited[*words]);
+		temp->info = ft_strjoin(splited[*words], temp->info);
 		(*words)--;
 	}
 	free(splited[*words]);
@@ -62,7 +62,7 @@ void	init_list(t_token **head, char *split, char **splited)
 		temp = malloc(sizeof(t_token));
 		temp->info = splited[words];
 		temp->len = ft_strlen(splited[words]);
-		temp->type = 0;
+		temp->type = -1;
 		temp->next = *head;
 		*head = temp;
 		words--;
@@ -80,13 +80,18 @@ void	put_type_tok(t_token **head)
 	temp = *head;
 	while (temp != NULL)
 	{
+		if (temp->type != -1)
+		{
+			temp = temp->next;
+			continue;
+		}
 		if (temp->info[0] == '|')
 			temp->type = PIPE;
 		// else if (temp->info[0] == '\"')
-		// 	temp->type = DOUBLE_QUOTES;
+		// 	temp->type = DOUBLE_quote_QUOTES;
 		// else if (temp->info[0] == '\'')
-		else if (temp->info[0] == '>' && temp->info[1] && temp->info[1] == '>')
 		// 	temp->type = SINGLE_QUOTES;
+		else if (temp->info[0] == '>' && temp->info[1] && temp->info[1] == '>')
 			temp->type = APPEND;
 		else if (temp->info[0] == '<' && temp->info[1] && temp->info[1] == '<')
 			temp->type = HEREDOC;
@@ -109,30 +114,30 @@ void	put_type_tok(t_token **head)
 int check_for_closed_brackets(char **splited)
 {
 	int words;
-	int chars;
+	int double_quote;
 
 	words = 0;
 	while(splited[words])
 	{
-		chars = 0;
-		while(splited[words][chars])
+		double_quote = 0;
+		while(splited[words][double_quote])
 		{
-			if(splited[words][chars] == '"')
+			if(splited[words][double_quote] == '"')
 			{
-				chars += 1;
-				while(splited[words][chars] != '\0')
+				double_quote += 1;
+				while(splited[words][double_quote] != '\0')
 				{
-					if(splited[words][chars] == '"')
+					if(splited[words][double_quote] == '"')
 						break;
-					chars ++;
-					if(splited[words][chars] == '\0')
+					double_quote ++;
+					if(splited[words][double_quote] == '\0')
 					{
 						printf("Error: Brackets not closed");
 						return(1);
 					}
 				}
 			}
-			chars++;
+			double_quote++;
 		}
 		words++;
 	}

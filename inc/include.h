@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/20 17:34:49 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:06:49 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
+
+# define MAX_PATH 2000
+
 
 typedef enum e_token 
 {
@@ -72,6 +75,8 @@ typedef struct s_minishell
 	char	*cmd_path;
 }			t_minishell;
 
+extern t_minishell *shell_h;
+
 /* FUNCTIONS */
 int     check_builtins(t_minishell *cmd_group);
 // int     builtin_handler(t_minishell cmd_group, );
@@ -86,15 +91,26 @@ char	**ft_split_minishell(char *str);
 void	init_list(t_token **head, char *split, char **splited);
 void	put_type_tok(t_token **head);
 int		check_for_closed_brackets(char **splited);
+void	cat_quote(char **splited, int *words, t_token **head);
+void	expander(t_token **token);
+/* PARSER */
 
 /* UTILS */
+int		assign_env(char **envp, t_minishell **shell_h);
+char	*get_working_path(char *cmd, char **env);
 int		count_words(char *str);
 void	fill_words(char **array, char *str);
 char	*word_dupe(char *str);
 int		ft_wordlen(char *str);
 int     ft_lstsize_mod(t_token *lst);
+int	find_path_env(char **env, char *key);
+char *cut_key(char **env, int index, char *key);
+void change_words(t_token *temp);
+char *cut_key(char **env, int index, char *key);
+// static int	find_path_env(char **env, char *key);
 
-//pwd
-char *get_pwd(void);
+/* BUILTINS */
+// int		ft_env(t_minishell *global);
+// char	*ft_pwd(t_minishell *global);
 
 #endif

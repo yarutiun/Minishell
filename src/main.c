@@ -6,17 +6,19 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/20 21:50:10 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:10:56 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
+t_minishell *shell_h = NULL;
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
 	(void) argv;
-	(void)  envp;
+	// (void)  envp;
 	// int qwer;
 	char	*readed;
 
@@ -24,19 +26,42 @@ int	main(int argc, char **argv, char **envp)
 	char	**splited;
 	// while (1)
 	// {
-		readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\'";
+		// readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\' owjeofijweijof woefjowijfe";
+		// readed = readline(">prompt: ");
+		readed = "dsfdsf $HOME $$$$$$$$$$ eisadk";
 		splited = ft_split_minishell(readed);
-		int i = 0;
-		while(splited[i]){
-			printf("%s\n", splited[i]);
-			i++;
-		}
+		assign_env(envp, &shell_h);
 		add_history(readed);
 		init_list(&head, readed, splited);
-		// put_type_tok(&head);
-		printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
+		put_type_tok(&head);
+		expander(&head);
+		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
 		// printf("%s   %i\n", head->next->info, head->next->type);
-		// printf("%s   %i\n", head->next->next->info, head->next->next->type);
+		while(head)
+		{
+			printf("content: %s type: %i\n", head->info, head->type);
+			head = head->next;
+		}
+		// printf("%s%i\n", head->next->next->info, head->next->next->type);
 	// }
 	return (0);
 }
+
+
+		// int i = 0;
+		// while(splited[i])
+		//{
+		// 	printf("%s\n", splited[i]);
+		// 	i++;
+		// }
+
+
+// int main(int argc, char **argv, char **envp)
+// {
+//     (void) argc;
+//     (void) argv;
+//     assign_env(envp, &shell_h);
+//     // printf("%s", shell_h->envp[1]);
+//     // expand_and_print();
+//     return(0);
+// }
