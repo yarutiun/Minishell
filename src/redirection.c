@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/22 15:26:49 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/22 16:43:23 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 {
 	int	type = (*token_tmp)->type;
 	skip_space(token_tmp);
-	if ((*token_tmp)->type == HEREDOC)
-	{
-		here_doc(token, token_tmp, tmp, pipes);
-		return ;
-	}
-	if ((*token_tmp)->type != DOUBLE_QUOTES || (*token_tmp)->type != SINGLE_QUOTES || (*token_tmp)->type != WORD)
+	if (!(*token_tmp) || (*token_tmp)->type != DOUBLE_QUOTES || (*token_tmp)->type != SINGLE_QUOTES || (*token_tmp)->type != WORD)
 	{
 		// free_tokens(token);
 		// free_pipes(pipes);
@@ -71,12 +66,47 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 		*tmp = NULL;
 		return ;
 	}
+	if (type == HEREDOC)
+	{
+		here_doc(token, token_tmp, tmp, pipes);
+		return ;
+	}
 	if (type == LESS_THAN)
+	{
 		(*tmp)->input = open((*token_tmp)->info, O_RDONLY);
+		if((*tmp)->input < 0)
+		{
+			// free_tokens(token);
+			// free_pipes(pipes);
+			*token = NULL;
+			*tmp = NULL;
+			return ;
+		}
+	}
 	else if (type == GREATER_THAN)
+	{
 		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_TRUNC);
+		if((*tmp)->output < 0)
+		{
+			// free_tokens(token);
+			// free_pipes(pipes);
+			*token = NULL;
+			*tmp = NULL;
+			return ;
+		}
+	}
 	else if (type == APPEND)
+	{
 		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_APPEND);
+		if((*tmp)->output < 0)
+		{
+			// free_tokens(token);
+			// free_pipes(pipes);
+			*token = NULL;
+			*tmp = NULL;
+			return ;
+		}
+	}
 	*token_tmp = (*token_tmp)->next;
 }
 
@@ -100,7 +130,7 @@ void redirection(t_token **token)
 		else if ((token_tmp)->type == SINGLE_QUOTES || (token_tmp)->type == DOUBLE_QUOTES
 			|| (token_tmp)->type == WORD)
 		{
-
+			
 		}
 	}
 }

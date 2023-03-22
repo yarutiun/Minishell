@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/20 21:06:24 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/22 09:49:53 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	count_words(char *str)
 	return (num_words);
 }
 
-//split BUT it splits for lexer including the whitespaces as tokens
+//split BUT it splits for lexer including the whitespaces and quotes info as tokens
 char	**ft_split_minishell(char *str)
 {
 	int		num_words;

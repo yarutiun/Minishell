@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:06:59 by ddzuba            #+#    #+#             */
-/*   Updated: 2023/03/22 09:27:45 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/22 09:31:17 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*ft_pwd(void)
 		if(shell_h->envp[i][0] == 'P' && shell_h->envp[i][1] == 'W' && shell_h->envp[i][2] == 'D')
 		{
 			pwd = ft_strdup(shell_h->envp[i]);
-	        // printf("%s\n", pwd);
 			return(pwd);
 		}
 		i++;
