@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddzuba <ddzuba@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:05:20 by ddzuba            #+#    #+#             */
-/*   Updated: 2023/03/06 20:16:53 by ddzuba           ###   ########.fr       */
+/*   Updated: 2023/03/22 09:20:02 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/utils.h"
+#include "../inc/utils.h"
 
 /* Searching equal sign in command string */
 size_t	if_equal_sign(char *str)
