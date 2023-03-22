@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/22 19:06:28 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:01:45 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
 t_minishell *shell_h = NULL;
+
+void	count_last(t_pipe_group *pipes)
+{
+	shell_h->last = -1;
+	while(pipes)
+	{
+		pipes = pipes->next;
+		shell_h->last++;
+	}
+}
+
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -29,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		// readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\' owjeofijweijof woefjowijfe";
 		// readed = readline(">prompt: ");
-		
+
 		// readed = "dsfdsfwefregerg > pizdec | echo \"$HOME\" | t | oeifhyi739rewrweu0fuw << woifhwiuefhuiwho >> ef > \'iqewtfy98 > weof\' wiehriuwehrihweuriw | ABC ";
 		readed = "\"\'$HOME\'\"";
 		// readed = readline("prompt > ");
@@ -40,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 		put_type_tok(&head);
 		expander(&head);
 		pipes = redirection(&head);
+		count_last(pipes);
 		// ft_env();
 		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
 		// printf("%s   %i\n", head->next->info, head->next->type);
