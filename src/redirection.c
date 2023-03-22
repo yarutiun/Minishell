@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/22 16:07:15 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/22 18:05:33 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	skip_space(t_token **token)
 {
 	*token = (*token)->next;
-	while ((*token)->type == SPACE)
+	while ((*token) && (*token)->type == SPACE)
 		*token = (*token)->next;
 }
 
@@ -27,7 +27,7 @@ void	here_doc(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t_pipe_g
 	char	*file_name;
 
 	file_name = ft_strdup(".here_doc");
-	charjoin_free(file_name, (*tmp) -> pipe_index + '0');
+	charjoin_free(&file_name, (*tmp) -> pipe_index + '0');
 	limiter = (*token_tmp)->info;
 	file = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	if (file < 0)
@@ -41,8 +41,9 @@ void	here_doc(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t_pipe_g
 	while (1)
 	{
 		buf = readline("> ");
+		charjoin_free(&buf, '\n');
 		if (!buf)
-			return(-1);
+			return ;
 		if (!ft_strncmp(limiter, buf, ft_strlen(limiter)))
 			break ;
 		write(file, buf, ft_strlen(buf));
@@ -58,7 +59,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 {
 	int	type = (*token_tmp)->type;
 	skip_space(token_tmp);
-	if (!(*token_tmp) || (*token_tmp)->type != DOUBLE_QUOTES || (*token_tmp)->type != SINGLE_QUOTES || (*token_tmp)->type != WORD)
+	if (!(*token_tmp) || ((*token_tmp)->type != DOUBLE_QUOTES && (*token_tmp)->type != SINGLE_QUOTES && (*token_tmp)->type != WORD))
 	{
 		// free_tokens(token);
 		// free_pipes(pipes);
@@ -85,7 +86,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 	}
 	else if (type == GREATER_THAN)
 	{
-		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_TRUNC);
+		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_TRUNC | O_CREAT, 0777);
 		if((*tmp)->output < 0)
 		{
 			// free_tokens(token);
@@ -97,7 +98,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 	}
 	else if (type == APPEND)
 	{
-		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_APPEND);
+		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_APPEND | O_CREAT, 0777);
 		if((*tmp)->output < 0)
 		{
 			// free_tokens(token);
@@ -125,7 +126,7 @@ t_pipe_group	*init_pipe(int index)
 	return (pipe);
 }
 
-void redirection(t_token **token)
+t_pipe_group *redirection(t_token **token)
 {
 	t_pipe_group *pipes;
 	t_pipe_group *tmp;
@@ -144,6 +145,8 @@ void redirection(t_token **token)
 			|| (token_tmp)->type == GREATER_THAN || (token_tmp)->type == LESS_THAN )
 		{
 			create_redirect(token, &token_tmp, &tmp, &pipes);
+			if(*token == NULL)
+				return(NULL);
 		}
 		else if ((token_tmp)->type == SINGLE_QUOTES || (token_tmp)->type == DOUBLE_QUOTES
 			|| (token_tmp)->type == WORD)
@@ -164,14 +167,27 @@ void redirection(t_token **token)
 				// free_pipes(pipes);
 				*token = NULL;
 				pipes = NULL;
-				return ;
+				return (NULL);
 			}
+			tmp->argv[count_words] = NULL;
 			count_words = 0;
 			first = tmp->pipe_index;
 			token_tmp = token_tmp->next;
+			tmp->next = init_pipe(first+1);
 			tmp = tmp->next;
-			tmp = init_pipe(first);
 			first = 0;
 		}
+		else
+			token_tmp = token_tmp->next;
 	}
+	if (!first)
+	{
+		// free_tokens(token);
+		// free_pipes(pipes);
+		*token = NULL;
+		pipes = NULL;
+		return (NULL);
+	}
+	tmp->argv[count_words] = NULL;
+	return(pipes);
 }

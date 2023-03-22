@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/22 15:10:32 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/22 17:08:53 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	put_type_tok(t_token **head);
 int		check_for_closed_brackets(char **splited);
 void	cat_quote(char **splited, int *words, t_token **head);
 void	expander(t_token **token);
+t_pipe_group *redirection(t_token **token);
 /* PARSER */
 
 /* UTILS */

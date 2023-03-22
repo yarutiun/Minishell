@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/21 16:40:01 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:01:35 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ void	put_type_tok(t_token **head)
 		else if (temp->info[0] == '<' && temp->info[1] && temp->info[1] == '<')
 			temp->type = HEREDOC;
 		else if (temp->info[0] == '>')
-			temp->type = LESS_THAN;
-		else if (temp->info[0] == '<')
 			temp->type = GREATER_THAN;
+		else if (temp->info[0] == '<')
+			temp->type = LESS_THAN;
 		else if ((temp->info[0] >= 33 && temp->info[0] <= 59) ||
 		temp->info[0] == 61 || (temp->info[0] >= 63 && temp->info[0] <= 126))
 			temp->type = WORD;

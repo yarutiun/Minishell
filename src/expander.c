@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/21 21:50:27 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:00:37 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void sub_dollar(char **ret, char *info, int *i)
     {
         charjoin_free(&key, info[*i]);
         (*i)++;
+        // if(info[*i])
     }
     index = find_path_env(shell_h->envp, key);
     if(index == -1)
