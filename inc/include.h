@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/22 09:25:55 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:10:32 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define MAX_PATH 2000
 
 
-typedef enum e_token 
+typedef enum e_token
 {
 	WORD,
 	PIPE,
@@ -96,6 +96,7 @@ void	expander(t_token **token);
 /* PARSER */
 
 /* UTILS */
+void	charjoin_free(char **str, char add);
 int		assign_env(char **envp, t_minishell **shell_h);
 char	*get_working_path(char *cmd, char **env);
 int		count_words(char *str);
