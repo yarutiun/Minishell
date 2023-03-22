@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/22 16:43:23 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:07:15 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	here_doc(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t_pipe_g
 		// free_tokens(token);
 		// free_pipes(pipes);
 		*token = NULL;
-		*tmp = NULL;
+		*pipes = NULL;
 		return ;
 	}
 	while (1)
@@ -63,7 +63,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 		// free_tokens(token);
 		// free_pipes(pipes);
 		*token = NULL;
-		*tmp = NULL;
+		*pipes = NULL;
 		return ;
 	}
 	if (type == HEREDOC)
@@ -79,7 +79,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 			// free_tokens(token);
 			// free_pipes(pipes);
 			*token = NULL;
-			*tmp = NULL;
+			*pipes = NULL;
 			return ;
 		}
 	}
@@ -91,7 +91,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 			// free_tokens(token);
 			// free_pipes(pipes);
 			*token = NULL;
-			*tmp = NULL;
+			*pipes = NULL;
 			return ;
 		}
 	}
@@ -103,11 +103,26 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 			// free_tokens(token);
 			// free_pipes(pipes);
 			*token = NULL;
-			*tmp = NULL;
+			*pipes = NULL;
 			return ;
 		}
 	}
 	*token_tmp = (*token_tmp)->next;
+}
+
+t_pipe_group	*init_pipe(int index)
+{
+	t_pipe_group *pipe;
+
+	pipe = malloc (sizeof(t_pipe_group));
+	pipe->argv = malloc(sizeof(char *) * 50);
+	pipe->cmd = NULL;
+	pipe->heredoc = NULL;
+	pipe->input = -1;
+	pipe->output = -1;
+	pipe->next = NULL;
+	pipe->pipe_index = index;
+	return (pipe);
 }
 
 void redirection(t_token **token)
@@ -116,10 +131,13 @@ void redirection(t_token **token)
 	t_pipe_group *tmp;
 	t_token		 *token_tmp;
 	int			 first;
+	int			 count_words;
 
-	pipes = malloc(sizeof(t_pipe_group));
+	pipes = init_pipe(0);
 	tmp = pipes;
 	token_tmp = *token;
+	first = 0;
+	count_words = 0;
 	while (token_tmp)
 	{
 		if ((token_tmp)->type == APPEND || (token_tmp)->type == HEREDOC
@@ -130,7 +148,30 @@ void redirection(t_token **token)
 		else if ((token_tmp)->type == SINGLE_QUOTES || (token_tmp)->type == DOUBLE_QUOTES
 			|| (token_tmp)->type == WORD)
 		{
-			
+			if (!first)
+			{
+				tmp->cmd = token_tmp->info;
+				first = 1;
+			}
+			tmp->argv[count_words++] = token_tmp->info;
+			token_tmp=token_tmp->next;
+		}
+		else if (token_tmp->type == PIPE)
+		{
+			if (!first)
+			{
+				// free_tokens(token);
+				// free_pipes(pipes);
+				*token = NULL;
+				pipes = NULL;
+				return ;
+			}
+			count_words = 0;
+			first = tmp->pipe_index;
+			token_tmp = token_tmp->next;
+			tmp = tmp->next;
+			tmp = init_pipe(first);
+			first = 0;
 		}
 	}
 }
