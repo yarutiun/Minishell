@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 15:10:57 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 15:23:04 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	child_proccess_managing_outfds(int out_fd, int pipe_fd[])
 		// 	return (print_error_message("dup2", NULL));
 		return (pipe_fd[1]);
 	}
-	dup2(out_fd, STDOUT_FILENO);
+	if (!out_fd == STDOUT_FILENO)
+		dup2(out_fd, STDOUT_FILENO);
 	// if (check < 0)
 	// 	return (print_error_message("dup2", NULL));
 	close(pipe_fd[1]);
