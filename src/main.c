@@ -6,11 +6,10 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 16:39:06 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 16:40:36 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/include.h"
 
 t_minishell *shell_h = NULL;
 
@@ -42,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 		// readed = readline(">prompt: ");
 
 		// readed = "dsfdsfwefregerg > pizdec | echo \"$HOME\" | t | oeifhyi739rewrweu0fuw << woifhwiuefhuiwho >> ef > \'iqewtfy98 > weof\' wiehriuwehrihweuriw | ABC ";
-		readed = "ffdg >asfdf" ;
+
 		// readed = readline("prompt > ");
 		splited = ft_split_minishell(readed);
 		assign_env(envp, &shell_h);
