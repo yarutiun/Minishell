@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 17:54:44 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 21:09:51 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,12 @@ char *cut_key(char **env, int index, char *key);
 // static int	find_path_env(char **env, char *key);
 
 /* BUILTINS */
-int		ft_env(void); //tested and works
-char	*ft_pwd(void);
-
+int	b_cd(char *arg);
+int	b_echo(char **args);
+int	ft_env(void);
+int	b_exit(char **av);
+int	b_export(char **args);
+int	b_unset(char **args);
+int ft_pwd(void);
+void	set_new(char *arg);
 #endif

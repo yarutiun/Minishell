@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:06:59 by ddzuba            #+#    #+#             */
-/*   Updated: 2023/03/23 18:54:16 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 21:08:32 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // ** is currently located within the file system. When the pwd command is
 // ** executed, the shell will print the full path of the current directory to
 // ** the standard output. */
-char	*ft_pwd(void)
+int ft_pwd(void)
 {
 	int i;
 	int j;
@@ -26,10 +26,10 @@ char	*ft_pwd(void)
 	i = 0;
 	j = 0;
 	j = find_path_env(shell_h->envp, "PWD");
-	pwd = ft_strchr(shell_h->envp, '=');
+	pwd = ft_strchr(shell_h->envp[j], '=');
 	pwd++;
 	ft_putstr_fd(pwd, 1);
-	return (0);
+	return(1);
 }
 
 

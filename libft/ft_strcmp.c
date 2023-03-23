@@ -1,39 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 17:49:09 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/23 21:19:35 by yarutiun         ###   ########.fr       */
+/*   Created: 2023/03/23 21:06:48 by yarutiun          #+#    #+#             */
+/*   Updated: 2023/03/23 21:06:51 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/include.h"
-
-int	b_unset(char **args)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (args[i])
-	{
-		j = find_path_env(shell_h->envp, args[i]);
-		if (j != -1 && shell_h->envp[j])
-		{
-			// free((shell_h->envp[j]));
-			shell_h->envp[j] = NULL;
-		}
-		else
-		{
-			ft_putstr_fd("minishell: unset: `", 2);
-			ft_putstr_fd(args[i], 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
-			return (1);
-		}
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
 		i++;
-	}
-	return (0);
+	return (s1[i] - s2[i]);
 }

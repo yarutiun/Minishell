@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:33:14 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/23 17:34:16 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 21:13:27 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ int	exit_error(int ac, char **av, int exit_status)
 	return (exit_status);
 }
 
-int	b_exit(char **av, t_pipe_group *data)
+int	b_exit(char **av)
 {
-	int	ac;
+	// int	ac;
 	int	exit_status;
 
-	ac = get_str_arr_len(av);
+	// ac = get_str_arr_len(av);
 	exit_status = 1;
-	if (ac > 2)
-	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
-		return (1);
-	}
-	else if (ac == 1)
-		exit_status = 0;
-	exit_status = exit_error(ac, av, exit_status);
-	if (exit_status)
-		exit_status = ft_atoi(av[1]);
+	// if (ac > 2)
+	// {
+	// 	ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
+	// 	return (1);
+	// }
+	// else if (ac == 1)
+		// exit_status = 0;
+	// exit_status = exit_error(1, av, exit_status);
+	// if (exit_status)
+		// exit_status = ft_atoi(av[1]);
 	// free_strarr(g_env);
 	// free_data_in_loop(data);
 	// clear_history();

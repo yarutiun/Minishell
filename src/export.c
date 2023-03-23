@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:27:46 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/23 18:44:19 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 21:17:22 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	set_new(char *arg)
 	char	*st;
 	int		j;
 
-	st = ft_substr(arg, 0, find_index_of_char(arg, '=') + 1);
+	// st = ft_substr(arg, 0, find_index_of_char(arg, '=') + 1);
 	j = find_path_env(shell_h->envp, st);
 	if (j != -1)
 	{
@@ -86,7 +86,7 @@ void	print_export(void)
 		if (!shell_h->envp[i])
 			continue;
 		ft_putstr_fd("declare -x ", 2);
-		ft_putstr_fd(!shell_h->envp[i], 2);
+		ft_putstr_fd(shell_h->envp[i], 2);
 		ft_putstr_fd("\n", 2);
 		i++;
 	}
@@ -102,7 +102,7 @@ int	b_export(char **args)
 		return (1);
 	}
 	i = 0;
-	if (check_keyword(args[0]) || !args[2])
+	if (check_keyword(args[1]) || !args[2])
 	{
 		ft_putstr_fd("minishell: export: `", 2);
 		ft_putstr_fd(args[i], 2);

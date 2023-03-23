@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:38:17 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/23 17:39:25 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 21:13:52 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../inc/include.h"
 
 void	echo_putstr_fd(char *arg, int fd)
 {

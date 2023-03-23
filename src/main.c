@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 18:25:11 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/23 21:22:06 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	main(int argc, char **argv, char **envp)
 		// readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\' owjeofijweijof woefjowijfe";
 		// readed = readline(">prompt: ");
 
-		readed = "cat sat|grep d>input";
-
+		readed = "cd ..";
+		
 		// readed = readline("prompt > ");
 		splited = ft_split_minishell(readed);
 		assign_env(envp, &shell_h);
@@ -54,6 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		pipes = redirection(&head);
 		count_last(pipes);
 		executor(pipes);
+		ft_env();
 		// ft_env();
 		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
 		// printf("%s   %i\n", head->next->info, head->next->type);

@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 16:16:17 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/23 21:14:35 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,49 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out
 	// return (fork_and_execute(data, in_fd, out_fd));
 }
 
+int	check_builtin(t_pipe_group *pipes)
+{
+	if (ft_strcmp(pipes->argv[0], "pwd") == 0)
+		return (1);
+	else if (ft_strcmp(pipes->argv[0], "env") == 0)
+		return (2);
+	else if (ft_strcmp(pipes->argv[0], "unset") == 0)
+		return (3);
+	else if (ft_strcmp(pipes->argv[0], "echo") == 0)
+		return (4);
+	else if (ft_strcmp(pipes->argv[0], "export") == 0)
+		return (5);
+	else if (ft_strcmp(pipes->argv[0], "cd") == 0)
+		return (6);
+	else if (ft_strcmp(pipes->argv[0], "exit") == 0)
+		return (7);
+	return (0);
+}
+
+int	exec_builtin(t_pipe_group *pipes)
+{
+	if (ft_strcmp(pipes->argv[0], "pwd") == 0)
+		return (ft_pwd());
+	else if (ft_strcmp(pipes->argv[0], "env") == 0)
+		return (ft_env());
+	else if (ft_strcmp(pipes->argv[0], "unset") == 0)
+		return (b_unset(&pipes->argv[1]));
+	else if (ft_strcmp(pipes->argv[0], "echo") == 0)
+		return (b_echo(pipes->argv));
+	else if (ft_strcmp(pipes->argv[0], "export") == 0)
+		return (b_export(pipes->argv));
+	else if (ft_strcmp(pipes->argv[0], "cd") == 0)
+		return (b_cd(pipes->argv[1]));
+	else if (ft_strcmp(pipes->argv[0], "exit") == 0)
+		return (b_exit(pipes->argv));
+	return (-1);
+}
+
+// void exec_builtin(char *cmd)
+// {
+	
+// }
+
 int	executor(t_pipe_group *data)
 {
 	int				pipe_fd;
@@ -136,6 +179,12 @@ int	executor(t_pipe_group *data)
 	prev = NULL;
 	while (data)
 	{
+		if(check_builtin(data) && shell_h->last == 0)
+		{
+			exec_builtin(data);
+			data = data->next;
+			continue;
+		}
 		pipe_fd = command_exec_prep(data, prev, pipe_fd, -1);
 		prev = data;
 		data = data->next;
