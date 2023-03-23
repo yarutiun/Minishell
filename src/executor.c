@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 14:46:27 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 15:04:29 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd, char *x_p)
 	// 	return (print_error_message("fork", NULL));
 	if (pid == 0)
 		child_process_prep(data, in_fd, out_fd, pipe_fd);
-	waitpid(pid, &(shell_h->error), NULL);
+	waitpid(pid, &(shell_h->error), 0);
 	// handle_sigs_interactive();
 	if ((shell_h->error) > 255)
 		(shell_h->error) /= 256;

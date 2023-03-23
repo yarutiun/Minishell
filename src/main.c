@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 14:48:20 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 15:16:51 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*head = NULL;
 	t_pipe_group *pipes = NULL;
 	char	**splited;
-	while (1)
-	{
+	// while (1)
+	// {
 		// readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\' owjeofijweijof woefjowijfe";
 		// readed = readline(">prompt: ");
 
 		// readed = "dsfdsfwefregerg > pizdec | echo \"$HOME\" | t | oeifhyi739rewrweu0fuw << woifhwiuefhuiwho >> ef > \'iqewtfy98 > weof\' wiehriuwehrihweuriw | ABC ";
-		readed = "\"\'$HOME\'\"";
+		readed = "echo \"qwe\"";
 		// readed = readline("prompt > ");
 		splited = ft_split_minishell(readed);
 		assign_env(envp, &shell_h);
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 		// }
 		// ft_pwd();
 		// printf("%s%i\n", head->next->next->info, head->next->next->type);
-	}
+	// }
 	return (0);
 }
 

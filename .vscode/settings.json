@@ -4,6 +4,11 @@
             "cwd": "/Users/yarutiun/Desktop/42_projects/Megashell",
             "binaryPath": "/Users/yarutiun/Desktop/42_projects/Megashell/minishell",
             "binaryArgs": []
+        },
+        {
+            "cwd": "/Users/yarutiun/Desktop/42_projects/megaashell",
+            "binaryPath": "/Users/yarutiun/Desktop/42_projects/megaashell/minishell",
+            "binaryArgs": []
         }
     ]
 }

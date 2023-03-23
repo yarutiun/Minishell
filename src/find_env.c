@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:25:52 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/22 19:29:33 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 15:10:10 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char	*get_working_path(char *cmd, char **env)
 	char	*one_path;
 	char	*one_command_path;
 
-	if (access(cmd, F_OK))
+	if (!access(cmd, F_OK))
 		return (cmd);
 	j = find_path_env(env, "PWD=");
-	one_command_path = ft_strjoin(j, cmd);
+	one_command_path = ft_strjoin(env[j], cmd);
 	if (!access(one_command_path, F_OK))
 		return (one_command_path);
 	i = find_path_env(env, "PATH=");
@@ -58,12 +58,12 @@ char	*get_working_path(char *cmd, char **env)
 		free(one_path);
 		if (!access(one_command_path, F_OK))
 		{
-			ft_free_strings(binary_paths);
+			// ft_free_strings(binary_paths);
 			return (one_command_path);
 		}
 		free(one_command_path);
 	}
-	ft_free_strings(binary_paths);
+	// ft_free_strings(binary_paths);
 	return (NULL);
 }
 
