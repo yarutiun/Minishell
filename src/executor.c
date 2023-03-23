@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 15:04:29 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:07:14 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	executor(t_pipe_group *data)
 	pipe_fd = STDIN_FILENO;
 	while (data)
 	{
-		pipe_fd = command_exec_prep(data, prev, pipe_fd, STDOUT_FILENO);
+		pipe_fd = command_exec_prep(data, prev, pipe_fd, -1);
 		prev = data;
 		data = data->next;
 	}
