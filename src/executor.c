@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 15:28:56 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 16:16:17 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	child_proccess_managing_outfds(int out_fd, int pipe_fd[])
 		dup2(out_fd, STDOUT_FILENO);
 	// if (check < 0)
 	// 	return (print_error_message("dup2", NULL));
-	close(pipe_fd[1]);
+	// close(pipe_fd[1]);
 	// if (check < 0)
 	// 	return (print_error_message("close", NULL));
 	return (out_fd);
@@ -39,6 +39,7 @@ void	child_process_prep(t_pipe_group *data, int in_fd, int out_fd, int pipe_fd[]
 	int		out;
 	char	*x_p;
 
+	ft_putstr_fd("child start", 1);
 	if (in_fd != STDIN_FILENO)
 		dup2(in_fd, STDIN_FILENO);
 	// if (in < 0)
@@ -47,10 +48,11 @@ void	child_process_prep(t_pipe_group *data, int in_fd, int out_fd, int pipe_fd[]
 	// if (out < 0)
 	// 	exit(-1);
 	x_p = get_working_path(data->cmd, shell_h->envp);
+	ft_putstr_fd("child after", 1);
 	execve(x_p, data->argv, shell_h->envp);
 	// print_error_message("execve", data->command[data->i].cmd_flags[0]);
-	// close(in);
-	// close(out);
+	close(in_fd);
+	close(out);
 	exit(-1);
 }
 
@@ -62,6 +64,8 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd, char *x_p)
 	// if (pipe(pipe_fd) == -1)
 	// 	return (print_error_message("pipe", NULL));
 	// handle_child_signals();
+	pipe(pipe_fd);
+	ft_putstr_fd("fork start", 1);
 	pid = fork();
 	// if (pid == -1)
 	// 	return (print_error_message("fork", NULL));
@@ -72,10 +76,10 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd, char *x_p)
 	if ((shell_h->error) > 255)
 		(shell_h->error) /= 256;
 	close(pipe_fd[1]);
-	// if (in_fd > 2)
-	// 	close(in_fd);
-	// if (out_fd > 2)
-	// 	close(out_fd);
+	if (in_fd > 2)
+		close(in_fd);
+	if (out_fd > 2)
+		close(out_fd);
 	return (pipe_fd[0]);
 }
 
@@ -89,7 +93,7 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out
 		out_fd = STDOUT_FILENO;
 	if (data->input != -1)
 		in_fd = data->input;
-	else if (prev->output != -1)
+	else if (prev && prev->output != -1)
 		in_fd = STDIN_FILENO;
 	x_p = get_working_path(data->cmd, shell_h->envp);
 	if (!x_p)
@@ -129,6 +133,7 @@ int	executor(t_pipe_group *data)
 	t_pipe_group	*prev;
 
 	pipe_fd = STDIN_FILENO;
+	prev = NULL;
 	while (data)
 	{
 		pipe_fd = command_exec_prep(data, prev, pipe_fd, -1);
