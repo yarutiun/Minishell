@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/22 18:57:22 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 14:47:30 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ void	cat_quote(char **splited, int *words, t_token **head);
 void	expander(t_token **token);
 t_pipe_group *redirection(t_token **token);
 /* PARSER */
+
+/* EXECUTOR*/
+
+int	executor(t_pipe_group *data);
+
 
 /* UTILS */
 void	charjoin_free(char **str, char add);

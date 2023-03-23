@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/22 19:01:45 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 14:48:20 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,26 @@ int	main(int argc, char **argv, char **envp)
 		expander(&head);
 		pipes = redirection(&head);
 		count_last(pipes);
+		executor(pipes);
 		// ft_env();
 		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
 		// printf("%s   %i\n", head->next->info, head->next->type);
-		while(head)
-		{
-			printf("content: %s type: %i\n", head->info, head->type);
-			head = head->next;
-		}
-		while(pipes)
-		{
-			printf("cmd: %s\n", pipes->cmd);
-			int i = 0;
-			while(pipes->argv[i])
-			{
-				printf("	pipe group:	%s\n", pipes->argv[i]);
-				i++;
-			}
-			pipes = pipes->next;
-		}
+		// while(head)
+		// {
+		// 	printf("content: %s type: %i\n", head->info, head->type);
+		// 	head = head->next;
+		// }
+		// while(pipes)
+		// {
+		// 	printf("cmd: %s\n", pipes->cmd);
+		// 	int i = 0;
+		// 	while(pipes->argv[i])
+		// 	{
+		// 		printf("	pipe group:	%s\n", pipes->argv[i]);
+		// 		i++;
+		// 	}
+		// 	pipes = pipes->next;
+		// }
 		// ft_pwd();
 		// printf("%s%i\n", head->next->next->info, head->next->next->type);
 	}
