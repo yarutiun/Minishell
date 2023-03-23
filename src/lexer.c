@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 16:38:22 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 18:14:32 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,38 +172,6 @@ t_token *new_token(int *i, char *info)
 	return (new);
 }
 
-void find_tokens(t_token *temp)
-{
-	t_token *new;
-	t_token *new_tok;
-	t_token *new_struct;
-	int i;
-
-	i = 0;
-	new_struct = new;
-	new = malloc(sizeof(t_token));
-	new->info = NULL;
-	new->type = WORD;
-	while (temp->info[i])
-	{
-		if (temp->info[i] == '<' || temp->info[i] == '>' || temp->info[i] == '|')
-		{
-			new->next = new_token(&i, temp->info);
-			new_tok = new->next;
-			new = malloc(sizeof(t_token));
-			new_tok->next = new;
-			new -> type = WORD;
-			new -> info = NULL;
-		}
-		else
-		{
-			charjoin_free(&(new->info), temp->info[i]);
-		}
-	}
-	new->next = temp->next;
-	temp->next = new_struct;
-}
-
 void	split_words(t_token	**head)
 {
 	t_token *temp;
@@ -214,6 +182,46 @@ void	split_words(t_token	**head)
 		if (temp->type == WORD)
 		{
 			find_tokens(&temp);
+			continue;
 		}
+		temp = temp->next;
 	}
 }
+
+void find_tokens(t_token **temp)
+{
+	t_token *new;
+	t_token *new_tok;
+	t_token *new_struct;
+	int i;
+
+	i = 0;
+	new = malloc(sizeof(t_token));
+	new_struct = new;
+	new->info = NULL;
+	new->type = WORD;
+	while ((*temp)->info[i])
+	{
+		if ((*temp)->info[i] == '<' || (*temp)->info[i] == '>' || (*temp)->info[i] == '|')
+		{
+			new->next = new_token(&i, (*temp)->info);
+			new_tok = new->next;
+			new_tok->next = malloc(sizeof(t_token));
+			new = new_tok->next;
+			new -> type = WORD;
+			new -> info = NULL;
+			continue;
+		}
+		else
+		{
+			charjoin_free(&(new->info), (*temp)->info[i]);
+		}
+		i++;
+	}
+	free((*temp)->info);
+	(*temp)->info = NULL;
+	new->next = (*temp)->next;
+	(*temp)->next = new_struct;
+	(*temp) = new->next;
+}
+

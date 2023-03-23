@@ -14,7 +14,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIB_F)/$(LIB)
-@$(CC) $(CFLAGS)  $(OBJS) $(LIB_F)/$(LIB) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS)  $(OBJS) $(LIB_F)/$(LIB) -o $(NAME) -lreadline
 
 $(LIB_F)/$(LIB):
 	@make -C $(LIB_F)

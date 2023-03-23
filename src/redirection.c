@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/22 18:59:02 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 18:23:09 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,11 @@ t_pipe_group *redirection(t_token **token)
 		else if ((token_tmp)->type == SINGLE_QUOTES || (token_tmp)->type == DOUBLE_QUOTES
 			|| (token_tmp)->type == WORD)
 		{
+			if (! (token_tmp->info))
+			{
+				token_tmp=token_tmp->next;
+				continue;
+			}
 			if (!first)
 			{
 				tmp->cmd = token_tmp->info;

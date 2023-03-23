@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 16:40:36 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 18:25:11 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../inc/include.h"
 
 t_minishell *shell_h = NULL;
 
@@ -40,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 		// readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\' owjeofijweijof woefjowijfe";
 		// readed = readline(">prompt: ");
 
-		// readed = "dsfdsfwefregerg > pizdec | echo \"$HOME\" | t | oeifhyi739rewrweu0fuw << woifhwiuefhuiwho >> ef > \'iqewtfy98 > weof\' wiehriuwehrihweuriw | ABC ";
+		readed = "cat sat|grep d>input";
 
 		// readed = readline("prompt > ");
 		splited = ft_split_minishell(readed);
@@ -48,18 +49,19 @@ int	main(int argc, char **argv, char **envp)
 		add_history(readed);
 		init_list(&head, readed, splited);
 		put_type_tok(&head);
-		// expander(&head);
-		// pipes = redirection(&head);
-		// count_last(pipes);
-		// executor(pipes);
+		split_words(&head);
+		expander(&head);
+		pipes = redirection(&head);
+		count_last(pipes);
+		executor(pipes);
 		// ft_env();
 		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
 		// printf("%s   %i\n", head->next->info, head->next->type);
-		while(head)
-		{
-			printf("content: %s type: %i\n", head->info, head->type);
-			head = head->next;
-		}
+		// while(head)
+		// {
+		// 	printf("content: %s type: %i\n", head->info, head->type);
+		// 	head = head->next;
+		// }
 		// while(pipes)
 		// {
 		// 	printf("cmd: %s\n", pipes->cmd);

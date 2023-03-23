@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 14:47:30 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 18:13:01 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void    fill_builtin_cmd(t_token **head, t_minishell *cmds);
 void	error_handler(char *error_msg);
 
 /* LEXER*/
+void	split_words(t_token	**head);
+void 	find_tokens(t_token **temp);
 char	**ft_split_minishell(char *str);
 void	init_list(t_token **head, char *split, char **splited);
 void	put_type_tok(t_token **head);

@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/22 19:00:37 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:18:06 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void expander(t_token **token)
     temp = *token;
     while(temp)
     {
-        if(temp->type == WORD && temp->info[0] == '$' && temp->info[1])
+        if(temp->type == WORD && temp->info && temp->info[0] == '$' && temp->info[1])
             // if(temp->info[ft_strlen(temp->info) - 1] != '$')
                 change_words(temp);
         if (temp->type == DOUBLE_QUOTES)
