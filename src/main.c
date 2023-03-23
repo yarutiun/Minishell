@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 16:29:13 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:39:06 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,25 @@ int	main(int argc, char **argv, char **envp)
 		// readed = readline(">prompt: ");
 
 		// readed = "dsfdsfwefregerg > pizdec | echo \"$HOME\" | t | oeifhyi739rewrweu0fuw << woifhwiuefhuiwho >> ef > \'iqewtfy98 > weof\' wiehriuwehrihweuriw | ABC ";
-		readed = "cat" ;
+		readed = "ffdg >asfdf" ;
 		// readed = readline("prompt > ");
 		splited = ft_split_minishell(readed);
 		assign_env(envp, &shell_h);
 		add_history(readed);
 		init_list(&head, readed, splited);
 		put_type_tok(&head);
-		expander(&head);
-		pipes = redirection(&head);
-		count_last(pipes);
-		executor(pipes);
+		// expander(&head);
+		// pipes = redirection(&head);
+		// count_last(pipes);
+		// executor(pipes);
 		// ft_env();
 		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
 		// printf("%s   %i\n", head->next->info, head->next->type);
-		// while(head)
-		// {
-		// 	printf("content: %s type: %i\n", head->info, head->type);
-		// 	head = head->next;
-		// }
+		while(head)
+		{
+			printf("content: %s type: %i\n", head->info, head->type);
+			head = head->next;
+		}
 		// while(pipes)
 		// {
 		// 	printf("cmd: %s\n", pipes->cmd);

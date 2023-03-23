@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/22 18:01:35 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:38:22 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void cat_quote(char **splited, int *words, t_token **head)
 {
 	char quote;
 	t_token *temp;
-	
+
 	temp = malloc(sizeof(t_token));
 	temp->info = NULL;
 	quote = splited[*words][0];
@@ -37,7 +37,7 @@ void cat_quote(char **splited, int *words, t_token **head)
 		temp->type = DOUBLE_QUOTES;
 	temp->next = *head;
 	*head = temp;
-	(*words)--;	
+	(*words)--;
 }
 
 void	init_list(t_token **head, char *split, char **splited)
@@ -108,7 +108,7 @@ void	put_type_tok(t_token **head)
 	}
 }
 
-//returns 0 if all brackets are closed 
+//returns 0 if all brackets are closed
 //returns 1 if not and printf an error message
 //this function will be called in "init_list" function
 int check_for_closed_brackets(char **splited)
@@ -142,4 +142,78 @@ int check_for_closed_brackets(char **splited)
 		words++;
 	}
 	return(0);
+}
+
+t_token *new_token(int *i, char *info)
+{
+	t_token *new;
+
+	new = malloc(sizeof(t_token));
+	new->info = NULL;
+	if (info[*i] == '|')
+		new->type = PIPE;
+	else if (info[*i] == '>' && info[(*i) + 1] && info[(*i) + 1] == '>')
+	{
+		new->type = APPEND;
+		(*i) += 2;
+		return (new);
+	}
+	else if (info[(*i)] == '<' && info[(*i) + 1] && info[(*i) + 1] == '<')
+	{
+		new->type = HEREDOC;
+		(*i) += 2;
+		return (new);
+	}
+	else if (info[(*i)] == '>')
+		new->type = GREATER_THAN;
+	else if (info[(*i)] == '<')
+		new->type = LESS_THAN;
+	(*i)++;
+	return (new);
+}
+
+void find_tokens(t_token *temp)
+{
+	t_token *new;
+	t_token *new_tok;
+	t_token *new_struct;
+	int i;
+
+	i = 0;
+	new_struct = new;
+	new = malloc(sizeof(t_token));
+	new->info = NULL;
+	new->type = WORD;
+	while (temp->info[i])
+	{
+		if (temp->info[i] == '<' || temp->info[i] == '>' || temp->info[i] == '|')
+		{
+			new->next = new_token(&i, temp->info);
+			new_tok = new->next;
+			new = malloc(sizeof(t_token));
+			new_tok->next = new;
+			new -> type = WORD;
+			new -> info = NULL;
+		}
+		else
+		{
+			charjoin_free(&(new->info), temp->info[i]);
+		}
+	}
+	new->next = temp->next;
+	temp->next = new_struct;
+}
+
+void	split_words(t_token	**head)
+{
+	t_token *temp;
+
+	temp = *head;
+	while (temp)
+	{
+		if (temp->type == WORD)
+		{
+			find_tokens(&temp);
+		}
+	}
 }
