@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 15:07:14 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/23 15:10:57 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out
 
 	if (data->output != -1)
 		out_fd = data->output;
-	else if (data->input != -1)
+	else if (shell_h->last == data->pipe_index)
+		out_fd = STDOUT_FILENO;
+	if (data->input != -1)
 		in_fd = data->input;
 	else if (prev->output != -1)
 		in_fd = STDIN_FILENO;
-	else if (shell_h->last == data->pipe_index)
-		out_fd = STDOUT_FILENO;
 	x_p = get_working_path(data->cmd, shell_h->envp);
 	if (!x_p)
 	{
