@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 18:18:06 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:57:56 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-//this function assigns shell_h->envp 
+//this function assigns shell_h->envp
 //sets value of our envp to structure
 int assign_env(char **envp, t_minishell **shell_h)
 {
     int counter;
     int len;
     char **temp;
-    
+
     counter = 0;
     int i = 0;
     *shell_h = malloc(sizeof(t_minishell));
@@ -27,7 +27,7 @@ int assign_env(char **envp, t_minishell **shell_h)
         return(0);
     while(envp[counter])
         counter++;
-    temp = malloc(sizeof(char *) * counter);
+    temp = malloc(sizeof(char *) * 1000);
     if(!temp)
         return(0);
     while(i != counter)
@@ -41,6 +41,7 @@ int assign_env(char **envp, t_minishell **shell_h)
         len = 0;
     }
     (*shell_h)->envp = temp;
+	(*shell_h)->current_env = counter;
     // printf("%s", shell_h->envp[0]);
     // printf("%s", shell_h->envp[1]);
     return(1);
@@ -74,7 +75,7 @@ void change_words(t_token *temp)
     int index;
     char *key;
     char *ret;
-    
+
     key = ft_substr(temp->info, 1, ft_strlen(temp->info) - 1);
     index = find_path_env(shell_h->envp, key);
     if(index == -1)
@@ -178,4 +179,3 @@ void expander(t_token **token)
 // }
 
 // setenv returns -1 if variable does not exist
-

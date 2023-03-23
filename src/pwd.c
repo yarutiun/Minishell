@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:06:59 by ddzuba            #+#    #+#             */
-/*   Updated: 2023/03/22 09:31:17 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:54:16 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,10 @@ char	*ft_pwd(void)
 
 	i = 0;
 	j = 0;
-	while(shell_h->envp[i])
-	{
-		if(shell_h->envp[i][0] == 'P' && shell_h->envp[i][1] == 'W' && shell_h->envp[i][2] == 'D')
-		{
-			pwd = ft_strdup(shell_h->envp[i]);
-			return(pwd);
-		}
-		i++;
-	}
+	j = find_path_env(shell_h->envp, "PWD");
+	pwd = ft_strchr(shell_h->envp, '=');
+	pwd++;
+	ft_putstr_fd(pwd, 1);
 	return (0);
 }
 
@@ -52,4 +47,3 @@ char	*ft_pwd(void)
 //     printf("%s", pwd);
 // 	return(0);
 // }
-
