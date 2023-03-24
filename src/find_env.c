@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:25:52 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 15:00:11 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:12:44 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,3 @@ char	*get_working_path(char *cmd, char **env)
 	ft_free_strings(binary_paths);
 	return (NULL);
 }
-
-// int main (int argc, char **argv, char **envp)
-// {
-//     int i = 0;
-//     char *buf;
-//     i = find_path_env(envp, "PATH");
-//     buf = cut_key(envp, i, "PATH");
-//     printf("%s", buf);
-//     return(0);
-// }

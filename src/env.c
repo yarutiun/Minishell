@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:26:23 by ddzuba            #+#    #+#             */
-/*   Updated: 2023/03/24 11:37:24 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 18:11:19 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,3 @@ int	ft_env(void)
 	}
 	return (0);
 }
-
-// int main(int argc, char **argv, char **envp)
-// {
-// 	assign_env(envp, &shell_h);
-// 	ft_env();
-// 	return(0);
-// }

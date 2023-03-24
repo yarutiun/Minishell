@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 14:44:58 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:42:04 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,16 @@ int assign_env(char **envp, t_minishell **shell_h)
     i = 0;
     while(i != counter)
     {
-        // len = ft_strlen(envp[i]);
         temp[i] = strdup(envp[i]);
         if(!temp[i])
             return(0);
-        // temp[i] = envp[i];
         i++;
-        // len = 0;
     }
 	envp[counter] = NULL;
     (*shell_h)->envp = temp;
 	(*shell_h)->current_env = counter;
 	(*shell_h)->head = NULL;
 	(*shell_h)->pipes = NULL;
-    // printf("%s", shell_h->envp[0]);
-    // printf("%s", shell_h->envp[1]);
     return(1);
 }
 
@@ -85,7 +80,12 @@ void change_words(t_token *temp)
     char *key;
     char *ret;
 
-    key = ft_substr(temp->info, 1, ft_strlen(temp->info) - 1);
+    if (temp->info[*i] == '?' && ( !(temp->info[*i]) || temp->info[*i + 1] == ' '))
+	{
+		free(temp->info);
+		temp->info = ft_itoa(shell_h->error);
+	}
+	key = ft_substr(temp->info, 1, ft_strlen(temp->info) - 1);
     index = find_path_env(shell_h->envp, key);
     if(index == -1)
     {
@@ -110,11 +110,14 @@ void sub_dollar(char **ret, char *info, int *i)
 
     key = NULL;
     (*i)++;
+	if (info[*i] == '?' && ( !(info[*i]) || info[*i + 1] == ' '))
+	{
+		strjoin_free(ret, ft_itoa(shell_h->error));
+	}
     while(info[*i] != ' ' && info[*i] != '\0')
     {
         charjoin_free(&key, info[*i]);
         (*i)++;
-        // if(info[*i])
     }
     index = find_path_env(shell_h->envp, key);
     if(index == -1)
@@ -165,26 +168,9 @@ void expander(t_token **token)
     while(temp)
     {
         if(temp->type == WORD && temp->info && temp->info[0] == '$' && temp->info[1])
-            // if(temp->info[ft_strlen(temp->info) - 1] != '$')
                 change_words(temp);
         if (temp->type == DOUBLE_QUOTES)
             change_quotes(temp);
         temp = temp->next;
     }
 }
-
-
-
-
-// int main(int argc, char **argv, char **envp)
-// {
-//     (void) argc;
-//     (void) argv;
-//     t_minishell *shell_h = NULL;
-//     assign_env(envp, shell_h);
-//     printf("%s", shell_h->envp[0]);
-//     // expand_and_print();
-//     return(0);
-// }
-
-// setenv returns -1 if variable does not exist

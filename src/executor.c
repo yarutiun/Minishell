@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 17:18:03 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:10:27 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	child_process_prep(t_pipe_group *data, int in_fd, int out_fd, int pipe_fd[]
 	char	*x_p;
 
 	child_sig();
-	// ft_putstr_fd("child start", 1);
 	if (in_fd != STDIN_FILENO)
 		dup2(in_fd, STDIN_FILENO);
 	out = child_proccess_managing_outfds(out_fd, pipe_fd);
@@ -86,7 +85,6 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd)
 	int	pid;
 
 	pipe(pipe_fd);
-	// ft_putstr_fd("fork start", 1);
 	pid = fork();
 	if (pid == 0)
 		child_process_prep(data, in_fd, out_fd, pipe_fd);

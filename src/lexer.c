@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 17:37:13 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:29:00 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
-
-//initializes a list for tokens and fills info with actual simbols and words
-//allocates memory for nodes
 
 void cat_quote(char **splited, int *words, t_token **head)
 {
@@ -40,14 +37,44 @@ void cat_quote(char **splited, int *words, t_token **head)
 	(*words)--;
 }
 
+int check_for_closed_brackets(char **splited)
+{
+	int		quote;
+	int		i;
+
+	quote = 0;
+	i = 0;
+	while (splited[i])
+	{
+		if (quote)
+		{
+			if (quote == 1 && (strcmp(splited[i], "\'") == 0))
+				quote = 0;
+			else if (quote == 2 && (strcmp(splited[i], "\"") == 0))
+				quote = 0;
+		}
+		else if ((strcmp(splited[i], "\'") == 0))
+			quote = 1;
+		else if ((strcmp(splited[i], "\"") == 0))
+			quote = 2;
+		i++;
+	}
+	if (quote)
+		return (1);
+	return (0);
+}
+
 void	init_list(t_token **head, char *split, char **splited)
 {
 	int		words;
 	int		in_splited;
 	t_token	*temp;
 
-	// if(check_for_closed_brackets(splited) == 1) //if one of brackets not closed just exit programm
-		// exit(EXIT_FAILURE);
+	if(check_for_closed_brackets(splited) == 1)
+	{
+		throw_error("minishell: brackets not closed\n");
+		return ;
+	} //if one of brackets not closed just exit programm
 	in_splited = count_words(split);
 	words = count_words(split);
 	words -= 1;
@@ -223,4 +250,3 @@ void find_tokens(t_token **temp)
 	(*temp)->next = new_struct;
 	(*temp) = new->next;
 }
-
