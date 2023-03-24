@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 17:57:56 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 11:57:52 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int assign_env(char **envp, t_minishell **shell_h)
         return(0);
     while(i != counter)
     {
-        len = ft_strlen(envp[i]);
-        temp[i] = malloc(sizeof(char *) * len);
+        // len = ft_strlen(envp[i]);
+        temp[i] = strdup(envp[i]);
         if(!temp[i])
             return(0);
-        temp[i] = envp[i];
+        // temp[i] = envp[i];
         i++;
-        len = 0;
+        // len = 0;
     }
     (*shell_h)->envp = temp;
 	(*shell_h)->current_env = counter;

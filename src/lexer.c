@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 18:14:32 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:39:21 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,15 @@ void	put_type_tok(t_token **head)
 		// 	temp->type = DOUBLE_quote_QUOTES;
 		// else if (temp->info[0] == '\'')
 		// 	temp->type = SINGLE_QUOTES;
-		else if (temp->info[0] == '>' && temp->info[1] && temp->info[1] == '>')
+		else if (temp->info[0] == '>' && temp->info[1] && temp->info[1] == '>' && !(temp->info[2]))
 			temp->type = APPEND;
-		else if (temp->info[0] == '<' && temp->info[1] && temp->info[1] == '<')
+		else if (temp->info[0] == '<' && temp->info[1] && temp->info[1] == '<' && !(temp->info[2]))
 			temp->type = HEREDOC;
-		else if (temp->info[0] == '>')
+		else if (temp->info[0] == '>' && !(temp->info[1]))
 			temp->type = GREATER_THAN;
-		else if (temp->info[0] == '<')
+		else if (temp->info[0] == '<' && !(temp->info[1]))
 			temp->type = LESS_THAN;
-		else if ((temp->info[0] >= 33 && temp->info[0] <= 59) ||
-		temp->info[0] == 61 || (temp->info[0] >= 63 && temp->info[0] <= 126))
+		else if (temp->info[0] != ' ')
 			temp->type = WORD;
 		else
 			temp->type = SPACE;

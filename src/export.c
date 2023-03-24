@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:27:46 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/23 21:17:22 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:55:33 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,21 @@ void	change_env(char *arg, int index)
 	shell_h->envp[index] = ft_strdup(arg);
 }
 
+int	find_index_of_char(char *arg, char c)
+{
+	int	i = 0;
+
+	while(arg[i] != c)
+		i++;
+	return (i);
+}
+
 void	set_new(char *arg)
 {
 	char	*st;
 	int		j;
 
-	// st = ft_substr(arg, 0, find_index_of_char(arg, '=') + 1);
+	st = ft_substr(arg, 0, find_index_of_char(arg, '=') + 1);
 	j = find_path_env(shell_h->envp, st);
 	if (j != -1)
 	{
@@ -56,7 +65,7 @@ void	set_new(char *arg)
 	}
 	else
 		shell_h->envp[(shell_h->current_env)++] = arg;
-	free(st);
+	// free(st);
 }
 
 // void	add_env(char *arg)

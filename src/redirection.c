@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/23 18:23:09 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:26:55 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	skip_space(t_token **token)
 {
 	*token = (*token)->next;
-	while ((*token) && (*token)->type == SPACE)
+	while ((*token) && ((*token)->type == SPACE || ((*token)->type == WORD  &&  !((*token)->info))))
 		*token = (*token)->next;
 }
 

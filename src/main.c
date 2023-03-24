@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 21:22:06 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 12:41:26 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 		// readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\' owjeofijweijof woefjowijfe";
 		// readed = readline(">prompt: ");
 
-		readed = "cd ..";
+		readed = "echo d>fdg sdjf gkjfdhg >> df";
 		
 		// readed = readline("prompt > ");
 		splited = ft_split_minishell(readed);
@@ -49,20 +49,26 @@ int	main(int argc, char **argv, char **envp)
 		add_history(readed);
 		init_list(&head, readed, splited);
 		put_type_tok(&head);
-		split_words(&head);
-		expander(&head);
-		pipes = redirection(&head);
-		count_last(pipes);
-		executor(pipes);
-		ft_env();
-		// ft_env();
-		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
-		// printf("%s   %i\n", head->next->info, head->next->type);
 		// while(head)
 		// {
 		// 	printf("content: %s type: %i\n", head->info, head->type);
 		// 	head = head->next;
 		// }
+		split_words(&head);
+		// while(head)
+		// {
+		// 	printf("content: %s type: %i\n", head->info, head->type);
+		// 	head = head->next;
+		// }
+		expander(&head);
+		pipes = redirection(&head);
+		count_last(pipes);
+		// b_echo(pipes->argv);
+		executor(pipes);
+		// c
+		// ft_env();
+		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
+		// printf("%s   %i\n", head->next->info, head->next->type);
 		// while(pipes)
 		// {
 		// 	printf("cmd: %s\n", pipes->cmd);

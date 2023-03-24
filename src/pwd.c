@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:06:59 by ddzuba            #+#    #+#             */
-/*   Updated: 2023/03/23 21:08:32 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:46:01 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int ft_pwd(void)
 	pwd = ft_strchr(shell_h->envp[j], '=');
 	pwd++;
 	ft_putstr_fd(pwd, 1);
+	ft_putstr_fd("\n", 1);
 	return(1);
 }
 
