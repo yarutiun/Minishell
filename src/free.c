@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:24:25 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 14:23:10 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 14:46:09 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void free_t_token(t_token **token)
 	t_token	*tmp;
 	t_token	*next;
 
-	if (!token)
+	if (!(*token))
 		return ;
 	tmp = *token;
 	while(tmp)
@@ -35,13 +35,13 @@ void free_t_pipe(t_pipe_group **token)
 	t_pipe_group	*tmp;
 	t_pipe_group	*next;
 
-	if (!token)
+	if (!(*token))
 		return ;
 	tmp = *token;
 	while(tmp)
 	{
 		next = tmp->next;
-		ft_free_strings(tmp->argv);
+		free_argv(tmp->argv);
 		if (tmp->heredoc)
 			unlink(tmp->heredoc);
 		free(tmp->heredoc);
@@ -56,8 +56,8 @@ void	free_shell_h()
 	int	i;
 
 	i = 0;
-	free_t_pipe(shell_h->pipes);
-	free_t_token(shell_h->head);
+	free_t_pipe(&(shell_h->pipes));
+	free_t_token(&(shell_h->head));
 	while (i < shell_h->current_env)
 	{
 		free(shell_h->envp[i]);

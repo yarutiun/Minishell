@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 14:18:39 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 15:11:18 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ int	main(int argc, char **argv, char **envp)
 		// readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\' owjeofijweijof woefjowijfe";
 		// readed = readline(">prompt: ");
 
-		readed = "ls | grep a | cat > txt";
-
+		readed = "ls | qwerght | pwd";
+		
 		// readed = readline("prompt > ");
 		splited = ft_split_minishell(readed);
 		assign_env(envp, &shell_h);
 		add_history(readed);
 		init_list(&(shell_h->head), readed, splited);
+		t_token *check = shell_h->head;
 		put_type_tok(&(shell_h->head));
 		// while(head)
 		// {
@@ -61,6 +62,8 @@ int	main(int argc, char **argv, char **envp)
 		// }
 		expander(&(shell_h->head));
 		shell_h->pipes = redirection(&(shell_h->head));
+		if(shell_h->pipes == NULL)
+			return 1;
 		count_last(shell_h->pipes);
 		// b_echo(pipes->argv);
 		executor(shell_h->pipes);

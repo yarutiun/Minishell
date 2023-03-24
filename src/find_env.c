@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:25:52 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 13:50:19 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:00:11 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_working_path(char *cmd, char **env)
 	char	*one_command_path;
 
 	if (!access(cmd, F_OK))
-		return (cmd);
+		return (ft_strdup(cmd));
 	j = find_path_env(env, "PWD=");
 	one_command_path = ft_strjoin(env[j], cmd);
 	if (!access(one_command_path, F_OK))

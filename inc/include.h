@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 14:13:35 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 14:45:46 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void	free_t_token(t_token **token);
 void	free_shell_h();
 void	throw_error(char *error);
 void	throw_error_exec(char *error);
+void	free_argv(char **argv);
+void	free_env(char **env);
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 13:55:54 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 14:44:58 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ int assign_env(char **envp, t_minishell **shell_h)
     temp = malloc(sizeof(char *) * 1000);
     if(!temp)
         return(0);
+    while(i < 1000)
+	{
+		temp[i] = NULL;
+		i++;
+	}
+    i = 0;
     while(i != counter)
     {
         // len = ft_strlen(envp[i]);

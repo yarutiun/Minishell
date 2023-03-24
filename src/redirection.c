@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 14:11:37 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 15:15:57 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,16 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 t_pipe_group	*init_pipe(int index)
 {
 	t_pipe_group *pipe;
+	int i;
 
+	i = 0;
 	pipe = malloc (sizeof(t_pipe_group));
 	pipe->argv = malloc(sizeof(char *) * 50);
+	while(i < 50)
+	{
+		pipe->argv[i] = NULL;
+		i++;
+	}
 	pipe->cmd = NULL;
 	pipe->heredoc = NULL;
 	pipe->input = -1;
@@ -142,10 +149,10 @@ t_pipe_group *redirection(t_token **token)
 			}
 			if (!first)
 			{
-				tmp->cmd = token_tmp->info;
+				tmp->cmd = ft_strdup(token_tmp->info);
 				first = 1;
 			}
-			tmp->argv[count_words++] = token_tmp->info;
+			tmp->argv[count_words++] = tmp->cmd;
 			token_tmp=token_tmp->next;
 		}
 		else if (token_tmp->type == PIPE)
