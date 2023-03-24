@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 18:42:04 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 18:49:36 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,11 @@ void change_words(t_token *temp)
     char *key;
     char *ret;
 
-    if (temp->info[*i] == '?' && ( !(temp->info[*i]) || temp->info[*i + 1] == ' '))
+    if (temp->info[1] == '?' && ( !(temp->info[2]) || temp->info[2] == ' '))
 	{
 		free(temp->info);
 		temp->info = ft_itoa(shell_h->error);
+        return ;
 	}
 	key = ft_substr(temp->info, 1, ft_strlen(temp->info) - 1);
     index = find_path_env(shell_h->envp, key);

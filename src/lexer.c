@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 18:29:00 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 18:45:09 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int check_for_closed_brackets(char **splited)
 	return (0);
 }
 
-void	init_list(t_token **head, char *split, char **splited)
+int	init_list(t_token **head, char *split, char **splited)
 {
 	int		words;
 	int		in_splited;
@@ -73,7 +73,7 @@ void	init_list(t_token **head, char *split, char **splited)
 	if(check_for_closed_brackets(splited) == 1)
 	{
 		throw_error("minishell: brackets not closed\n");
-		return ;
+		return (1);
 	} //if one of brackets not closed just exit programm
 	in_splited = count_words(split);
 	words = count_words(split);
@@ -96,6 +96,7 @@ void	init_list(t_token **head, char *split, char **splited)
 		in_splited--;
 	}
 	free(splited);
+	return(0);
 }
 
 
@@ -132,42 +133,6 @@ void	put_type_tok(t_token **head)
 			temp->type = SPACE;
 		temp = temp->next;
 	}
-}
-
-//returns 0 if all brackets are closed
-//returns 1 if not and printf an error message
-//this function will be called in "init_list" function
-int check_for_closed_brackets(char **splited)
-{
-	int words;
-	int double_quote;
-
-	words = 0;
-	while(splited[words])
-	{
-		double_quote = 0;
-		while(splited[words][double_quote])
-		{
-			if(splited[words][double_quote] == '"')
-			{
-				double_quote += 1;
-				while(splited[words][double_quote] != '\0')
-				{
-					if(splited[words][double_quote] == '"')
-						break;
-					double_quote ++;
-					if(splited[words][double_quote] == '\0')
-					{
-						printf("Error: Brackets not closed");
-						return(1);
-					}
-				}
-			}
-			double_quote++;
-		}
-		words++;
-	}
-	return(0);
 }
 
 t_token *new_token(int *i, char *info)

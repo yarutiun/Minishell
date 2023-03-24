@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 16:46:12 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 18:46:49 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	error_handler(char *error_msg);
 void	split_words(t_token	**head);
 void 	find_tokens(t_token **temp);
 char	**ft_split_minishell(char *str);
-void	init_list(t_token **head, char *split, char **splited);
+int	init_list(t_token **head, char *split, char **splited);
 void	put_type_tok(t_token **head);
 int		check_for_closed_brackets(char **splited);
 void	cat_quote(char **splited, int *words, t_token **head);
@@ -106,6 +106,7 @@ int	executor(t_pipe_group *data);
 
 
 /* UTILS */
+int check_for_closed_brackets(char **splited);
 void	charjoin_free(char **str, char add);
 int		assign_env(char **envp, t_minishell **shell_h);
 char	*get_working_path(char *cmd, char **env);
