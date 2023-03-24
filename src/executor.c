@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 11:47:28 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 13:49:03 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	child_process_prep(t_pipe_group *data, int in_fd, int out_fd, int pipe_fd[]
 	exit(-1);
 }
 
-int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd, char *x_p)
+int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd)
 {
 	int	pipe_fd[2];
 	int	pid;
@@ -136,7 +136,8 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out
 		// ft_put_error();
 		return (STDIN_FILENO);
 	}
-	return(fork_and_execute(data, in_fd, out_fd, x_p));
+	free(x_p);
+	return(fork_and_execute(data, in_fd, out_fd));
 	// if (data->command[i].input[0])
 	// 	in_fd = prep_input_fd(data, i, in_fd);
 	// if (in_fd < 0)

@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:25:52 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/23 15:10:10 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:50:19 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*get_working_path(char *cmd, char **env)
 	one_command_path = ft_strjoin(env[j], cmd);
 	if (!access(one_command_path, F_OK))
 		return (one_command_path);
+	free(one_command_path);
 	i = find_path_env(env, "PATH=");
 	binary_paths = ft_split(env[i] + 5, ':');
 	i = -1;
@@ -58,12 +59,12 @@ char	*get_working_path(char *cmd, char **env)
 		free(one_path);
 		if (!access(one_command_path, F_OK))
 		{
-			// ft_free_strings(binary_paths);
+			ft_free_strings(binary_paths);
 			return (one_command_path);
 		}
 		free(one_command_path);
 	}
-	// ft_free_strings(binary_paths);
+	ft_free_strings(binary_paths);
 	return (NULL);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:24:25 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 13:41:51 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 13:43:53 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_shell_h()
 	int	i;
 
 	i = 0;
-	while (i < shell_h->current_env);
+	while (i < shell_h->current_env)
 	{
 		free(shell_h->envp[i]);
 		i++;
