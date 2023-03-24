@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:25:52 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 18:12:44 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 19:39:32 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ int	find_path_env(char **env, char *key)
 	while (env[i])
 	{
 		if (ft_strnstr(env[i], key, ft_strlen(key)))
-			return(i);
+			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-char *cut_key(char **env, int index, char *key)
+char	*cut_key(char **env, int index, char *key)
 {
-    char *buf;
+	char	*buf;
 
-    buf = ft_substr(env[index], ft_strlen(key) + 1, (ft_strlen(env[index]) - 1 - ft_strlen(key)));
-    return(buf);
+	buf = ft_substr(env[index], ft_strlen(key) + 1,
+			(ft_strlen(env[index]) - 1 - ft_strlen(key)));
+	return (buf);
 }
 
 char	*get_working_path(char *cmd, char **env)

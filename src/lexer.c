@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 18:45:09 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 19:42:40 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-void cat_quote(char **splited, int *words, t_token **head)
+void	cat_quote(char **splited, int *words, t_token **head)
 {
-	char quote;
-	t_token *temp;
+	char	quote;
+	t_token	*temp;
 
 	temp = malloc(sizeof(t_token));
 	temp->info = NULL;
 	quote = splited[*words][0];
 	(*words)--;
-	while(*words >= 0 && splited[*words][0] != quote)
+	while (*words >= 0 && splited[*words][0] != quote)
 	{
 		temp->info = ft_strjoin(splited[*words], temp->info);
 		(*words)--;
 	}
 	free(splited[*words]);
 	temp->len = ft_strlen(temp->info);
-	if(quote == '\'')
+	if (quote == '\'')
 		temp->type = SINGLE_QUOTES;
 	else
 		temp->type = DOUBLE_QUOTES;
@@ -37,7 +37,7 @@ void cat_quote(char **splited, int *words, t_token **head)
 	(*words)--;
 }
 
-int check_for_closed_brackets(char **splited)
+int	check_for_closed_brackets(char **splited)
 {
 	int		quote;
 	int		i;
@@ -70,21 +70,21 @@ int	init_list(t_token **head, char *split, char **splited)
 	int		in_splited;
 	t_token	*temp;
 
-	if(check_for_closed_brackets(splited) == 1)
+	if (check_for_closed_brackets(splited) == 1)
 	{
 		throw_error("minishell: brackets not closed\n");
 		return (1);
-	} //if one of brackets not closed just exit programm
+	}
 	in_splited = count_words(split);
 	words = count_words(split);
 	words -= 1;
 	in_splited -= 2;
 	while (0 <= words)
 	{
-		if(splited[words][0] == '\"' || splited[words][0] == '\'')
+		if (splited[words][0] == '\"' || splited[words][0] == '\'')
 		{
 			cat_quote(splited, &words, head);
-			continue;
+			continue ;
 		}
 		temp = malloc(sizeof(t_token));
 		temp->info = splited[words];
@@ -96,11 +96,9 @@ int	init_list(t_token **head, char *split, char **splited)
 		in_splited--;
 	}
 	free(splited);
-	return(0);
+	return (0);
 }
 
-
-//sets token types
 void	put_type_tok(t_token **head)
 {
 	t_token	*temp;
@@ -111,17 +109,15 @@ void	put_type_tok(t_token **head)
 		if (temp->type != -1)
 		{
 			temp = temp->next;
-			continue;
+			continue ;
 		}
 		if (temp->info[0] == '|' && !(temp->info[1]))
 			temp->type = PIPE;
-		// else if (temp->info[0] == '\"')
-		// 	temp->type = DOUBLE_quote_QUOTES;
-		// else if (temp->info[0] == '\'')
-		// 	temp->type = SINGLE_QUOTES;
-		else if (temp->info[0] == '>' && temp->info[1] && temp->info[1] == '>' && !(temp->info[2]))
+		else if (temp->info[0] == '>' && temp->info[1]
+			&& temp->info[1] == '>' && !(temp->info[2]))
 			temp->type = APPEND;
-		else if (temp->info[0] == '<' && temp->info[1] && temp->info[1] == '<' && !(temp->info[2]))
+		else if (temp->info[0] == '<' && temp->info[1]
+			&& temp->info[1] == '<' && !(temp->info[2]))
 			temp->type = HEREDOC;
 		else if (temp->info[0] == '>' && !(temp->info[1]))
 			temp->type = GREATER_THAN;
@@ -135,9 +131,9 @@ void	put_type_tok(t_token **head)
 	}
 }
 
-t_token *new_token(int *i, char *info)
+t_token	*new_token(int *i, char *info)
 {
-	t_token *new;
+	t_token	*new;
 
 	new = malloc(sizeof(t_token));
 	new->info = NULL;
@@ -165,7 +161,7 @@ t_token *new_token(int *i, char *info)
 
 void	split_words(t_token	**head)
 {
-	t_token *temp;
+	t_token	*temp;
 
 	temp = *head;
 	while (temp)
@@ -173,18 +169,18 @@ void	split_words(t_token	**head)
 		if (temp->type == WORD)
 		{
 			find_tokens(&temp);
-			continue;
+			continue ;
 		}
 		temp = temp->next;
 	}
 }
 
-void find_tokens(t_token **temp)
+void	find_tokens(t_token **temp)
 {
-	t_token *new;
-	t_token *new_tok;
-	t_token *new_struct;
-	int i;
+	t_token	*new;
+	t_token	*new_tok;
+	t_token	*new_struct;
+	int		i;
 
 	i = 0;
 	new = malloc(sizeof(t_token));
@@ -193,7 +189,8 @@ void find_tokens(t_token **temp)
 	new->type = WORD;
 	while ((*temp)->info[i])
 	{
-		if ((*temp)->info[i] == '<' || (*temp)->info[i] == '>' || (*temp)->info[i] == '|')
+		if ((*temp)->info[i] == '<' || (*temp)->info[i] == '>'
+			|| (*temp)->info[i] == '|')
 		{
 			new->next = new_token(&i, (*temp)->info);
 			new_tok = new->next;
@@ -201,7 +198,7 @@ void find_tokens(t_token **temp)
 			new = new_tok->next;
 			new -> type = WORD;
 			new -> info = NULL;
-			continue;
+			continue ;
 		}
 		else
 		{

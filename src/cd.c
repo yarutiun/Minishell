@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:22:39 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/23 18:03:23 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 19:15:48 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	change_dir(char *arg)
 	temp = getcwd(0, 256);
 	str1 = ft_strjoin("OLDPWD=", sub);
 	str2 = ft_strjoin("PWD=", temp);
-	i =  find_path_env(shell_h->envp, "OLDPWD");
+	i = find_path_env(shell_h->envp, "OLDPWD");
 	if (i != -1)
 		shell_h->envp[i] = ft_strdup(str1);
 	else
@@ -45,7 +45,8 @@ int	b_cd(char *arg)
 {
 	if (!arg)
 	{
-		if (change_dir(cut_key(shell_h->envp, find_path_env(shell_h->envp, "HOME"), "HOME")) == -1)
+		if (change_dir(cut_key(shell_h->envp,
+					find_path_env(shell_h->envp, "HOME"), "HOME")) == -1)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 	}
 	else

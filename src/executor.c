@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 18:10:27 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 19:18:25 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int	child_proccess_managing_outfds(int out_fd, int pipe_fd[])
 		dup2(out_fd, STDOUT_FILENO);
 	return (out_fd);
 }
+
 int	exec_builtin_child(t_pipe_group *pipes)
 {
-	int err;
+	int	err;
 
 	if (ft_strcmp(pipes->argv[0], "pwd") == 0)
 		err = (ft_pwd());
@@ -52,14 +53,15 @@ int	exec_builtin_parent(t_pipe_group *pipes)
 	else if (ft_strcmp(pipes->argv[0], "cd") == 0)
 		err = b_cd(pipes->argv[1]);
 	else if (ft_strcmp(pipes->argv[0], "exit") == 0)
-		err =  b_exit(pipes->argv);
+		err = b_exit(pipes->argv);
 	else
 		return (-1);
 	shell_h->error = err;
 	return (0);
 }
 
-void	child_process_prep(t_pipe_group *data, int in_fd, int out_fd, int pipe_fd[])
+void	child_process_prep(t_pipe_group *data, int in_fd,
+								int out_fd, int pipe_fd[])
 {
 	int		in;
 	int		out;
@@ -69,7 +71,7 @@ void	child_process_prep(t_pipe_group *data, int in_fd, int out_fd, int pipe_fd[]
 	if (in_fd != STDIN_FILENO)
 		dup2(in_fd, STDIN_FILENO);
 	out = child_proccess_managing_outfds(out_fd, pipe_fd);
-	if(exec_builtin_child(data) != -1)
+	if (exec_builtin_child(data) != -1)
 		exit(0);
 	x_p = get_working_path(data->cmd, shell_h->envp);
 	execve(x_p, data->argv, shell_h->envp);
@@ -99,7 +101,8 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd)
 	return (pipe_fd[0]);
 }
 
-int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out_fd)
+int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev,
+										int in_fd, int out_fd)
 {
 	char	*x_p;
 
@@ -118,7 +121,7 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out
 		return (STDIN_FILENO);
 	}
 	free(x_p);
-	return(fork_and_execute(data, in_fd, out_fd));
+	return (fork_and_execute(data, in_fd, out_fd));
 }
 
 int	executor(t_pipe_group *data)
@@ -130,10 +133,10 @@ int	executor(t_pipe_group *data)
 	prev = NULL;
 	while (data)
 	{
-		if(shell_h->last == 0 && exec_builtin_parent(data) != -1)
+		if (shell_h->last == 0 && exec_builtin_parent(data) != -1)
 		{
 			data = data->next;
-			continue;
+			continue ;
 		}
 		pipe_fd = command_exec_prep(data, prev, pipe_fd, -1);
 		prev = data;

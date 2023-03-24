@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 17:17:09 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 19:47:11 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 void	skip_space(t_token **token)
 {
 	*token = (*token)->next;
-	while ((*token) && ((*token)->type == SPACE || ((*token)->type == WORD  &&  !((*token)->info))))
+	while ((*token) && ((*token)->type == SPACE
+			|| ((*token)->type == WORD && !((*token)->info))))
 		*token = (*token)->next;
 }
 
-void	here_doc(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t_pipe_group **pipes)
+void	here_doc(t_token **token, t_token **token_tmp,
+					t_pipe_group **tmp, t_pipe_group **pipes)
 {
 	int		file;
 	char	*buf;
@@ -27,7 +29,7 @@ void	here_doc(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t_pipe_g
 	char	*file_name;
 
 	file_name = ft_strdup(".here_doc");
-	charjoin_free(&file_name, (*tmp) -> pipe_index + '0');
+	charjoin_free(&file_name, (*tmp)->pipe_index + '0');
 	limiter = (*token_tmp)->info;
 	file = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	if (file < 0)
@@ -52,11 +54,16 @@ void	here_doc(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t_pipe_g
 	*token_tmp = (*token_tmp)->next;
 }
 
-void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t_pipe_group **pipes)
+void	create_redirect(t_token **token, t_token **token_tmp,
+					t_pipe_group **tmp, t_pipe_group **pipes)
 {
-	int	type = (*token_tmp)->type;
+	int	type;
+
+	type = (*token_tmp)->type;
 	skip_space(token_tmp);
-	if (!(*token_tmp) || ((*token_tmp)->type != DOUBLE_QUOTES && (*token_tmp)->type != SINGLE_QUOTES && (*token_tmp)->type != WORD))
+	if (!(*token_tmp) || ((*token_tmp)->type != DOUBLE_QUOTES
+			&& (*token_tmp)->type != SINGLE_QUOTES
+			&& (*token_tmp)->type != WORD))
 	{
 		throw_error("minishell: syntax error near unexpected token\n");
 		return ;
@@ -69,7 +76,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 	if (type == LESS_THAN)
 	{
 		(*tmp)->input = open((*token_tmp)->info, O_RDONLY);
-		if((*tmp)->input < 0)
+		if ((*tmp)->input < 0)
 		{
 			throw_error("minishell: couldn't open such file or directory\n");
 			return ;
@@ -77,8 +84,9 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 	}
 	else if (type == GREATER_THAN)
 	{
-		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_TRUNC | O_CREAT, 0777);
-		if((*tmp)->output < 0)
+		(*tmp)->output = open((*token_tmp)->info,
+				O_WRONLY | O_TRUNC | O_CREAT, 0777);
+		if ((*tmp)->output < 0)
 		{
 			throw_error("minishell: couldn't open such file or directory\n");
 			return ;
@@ -86,8 +94,9 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 	}
 	else if (type == APPEND)
 	{
-		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_APPEND | O_CREAT, 0777);
-		if((*tmp)->output < 0)
+		(*tmp)->output = open((*token_tmp)->info,
+				O_WRONLY | O_APPEND | O_CREAT, 0777);
+		if ((*tmp)->output < 0)
 		{
 			throw_error("minishell: couldn't open such file or directory\n");
 			return ;
@@ -98,13 +107,13 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 
 t_pipe_group	*init_pipe(int index)
 {
-	t_pipe_group *pipe;
-	int i;
+	t_pipe_group	*pipe;
+	int				i;
 
 	i = 0;
 	pipe = malloc (sizeof(t_pipe_group));
 	pipe->argv = malloc(sizeof(char *) * 50);
-	while(i < 50)
+	while (i < 50)
 	{
 		pipe->argv[i] = NULL;
 		i++;
@@ -118,12 +127,12 @@ t_pipe_group	*init_pipe(int index)
 	return (pipe);
 }
 
-t_pipe_group *redirection(t_token **token)
+t_pipe_group	*redirection(t_token **token)
 {
-	t_pipe_group *tmp;
-	t_token		 *token_tmp;
-	int			 first;
-	int			 count_words;
+	t_pipe_group	*tmp;
+	t_token			*token_tmp;
+	int				first;
+	int				count_words;
 
 	shell_h->pipes = init_pipe(0);
 	tmp = shell_h->pipes;
@@ -133,19 +142,21 @@ t_pipe_group *redirection(t_token **token)
 	while (token_tmp)
 	{
 		if ((token_tmp)->type == APPEND || (token_tmp)->type == HEREDOC
-			|| (token_tmp)->type == GREATER_THAN || (token_tmp)->type == LESS_THAN )
+			|| (token_tmp)->type == GREATER_THAN
+			|| (token_tmp)->type == LESS_THAN)
 		{
 			create_redirect(token, &token_tmp, &tmp, &(shell_h->pipes));
-			if((shell_h->pipes) == NULL)
-				return(NULL);
+			if ((shell_h->pipes) == NULL)
+				return (NULL);
 		}
-		else if ((token_tmp)->type == SINGLE_QUOTES || (token_tmp)->type == DOUBLE_QUOTES
+		else if ((token_tmp)->type == SINGLE_QUOTES
+			|| (token_tmp)->type == DOUBLE_QUOTES
 			|| (token_tmp)->type == WORD)
 		{
 			if (! (token_tmp->info))
 			{
-				token_tmp=token_tmp->next;
-				continue;
+				token_tmp = token_tmp->next;
+				continue ;
 			}
 			tmp->argv[count_words] = ft_strdup(token_tmp->info);
 			if (!first)
@@ -154,7 +165,7 @@ t_pipe_group *redirection(t_token **token)
 				first = 1;
 			}
 			count_words++;
-			token_tmp=token_tmp->next;
+			token_tmp = token_tmp->next;
 		}
 		else if (token_tmp->type == PIPE)
 		{
@@ -167,7 +178,7 @@ t_pipe_group *redirection(t_token **token)
 			count_words = 0;
 			first = tmp->pipe_index;
 			token_tmp = token_tmp->next;
-			tmp->next = init_pipe(first+1);
+			tmp->next = init_pipe(first + 1);
 			tmp = tmp->next;
 			first = 0;
 		}
@@ -180,5 +191,5 @@ t_pipe_group *redirection(t_token **token)
 		return (NULL);
 	}
 	tmp->argv[count_words] = NULL;
-	return((shell_h->pipes));
+	return ((shell_h->pipes));
 }

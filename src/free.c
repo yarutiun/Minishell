@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:24:25 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 14:46:09 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 19:40:06 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-void free_t_token(t_token **token)
+void	free_t_token(t_token **token)
 {
 	t_token	*tmp;
 	t_token	*next;
@@ -20,7 +20,7 @@ void free_t_token(t_token **token)
 	if (!(*token))
 		return ;
 	tmp = *token;
-	while(tmp)
+	while (tmp)
 	{
 		next = tmp->next;
 		free(tmp->info);
@@ -30,7 +30,7 @@ void free_t_token(t_token **token)
 	*token = NULL;
 }
 
-void free_t_pipe(t_pipe_group **token)
+void	free_t_pipe(t_pipe_group **token)
 {
 	t_pipe_group	*tmp;
 	t_pipe_group	*next;
@@ -38,7 +38,7 @@ void free_t_pipe(t_pipe_group **token)
 	if (!(*token))
 		return ;
 	tmp = *token;
-	while(tmp)
+	while (tmp)
 	{
 		next = tmp->next;
 		free_argv(tmp->argv);
@@ -51,7 +51,7 @@ void free_t_pipe(t_pipe_group **token)
 	*token = NULL;
 }
 
-void	free_shell_h()
+void	free_shell_h(void)
 {
 	int	i;
 

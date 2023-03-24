@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:27:46 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 18:12:37 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 19:38:38 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ void	change_env(char *arg, int index)
 
 int	find_index_of_char(char *arg, char c)
 {
-	int	i = 0;
+	int	i;
 
-	while(arg[i] != c)
+	i = 0;
+	while (arg[i] != c)
 		i++;
 	return (i);
 }
@@ -75,7 +76,7 @@ void	print_export(void)
 	while (shell_h->envp[i])
 	{
 		if (!shell_h->envp[i])
-			continue;
+			continue ;
 		ft_putstr_fd("declare -x ", 2);
 		ft_putstr_fd(shell_h->envp[i], 2);
 		ft_putstr_fd("\n", 2);
