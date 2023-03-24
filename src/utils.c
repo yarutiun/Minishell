@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/22 09:49:53 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 19:01:42 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,25 @@ int	ft_lstsize_mod(t_token *lst)
 		current_node = current_node->next;
 	}
 	return (counter);
+}
+
+void	put_lvl(void)
+{
+	int	i;
+	int lvl;
+	char	*last;
+	char	**uns;
+
+	uns = malloc(sizeof(char *) * 2);
+	uns[1] = NULL;
+	i = find_path_env(shell_h->envp, "SHLVL=");
+	last = ft_strchr(shell_h->envp[i], '=') + 1;
+	lvl = ft_atoi(last);
+	uns[0] = ft_strdup("SHLVL");
+	b_unset(uns);
+	last = ft_strjoin("SHLVL=", ft_itoa(lvl + 1));
+	set_new(last);
+	free(last);
+	free(uns[0]);
+	free(uns);
 }
