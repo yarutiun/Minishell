@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 14:45:46 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 16:46:12 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,15 @@ void	throw_error_exec(char *error);
 void	free_argv(char **argv);
 void	free_env(char **env);
 
+
+//signals
+
+void	signals(void);
+void	child_sig(void);
+void	heredoc_sig(void);
+void	sig_handle(int sig);
+void	sig_handle_child(int sig);
+void	heredoc_sig_handle(int sig);
 
 
 // static int	find_path_env(char **env, char *key);

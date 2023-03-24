@@ -9,7 +9,8 @@ DEBUG_SEG_FAULTS = -fsanitize=address #for segfault checking
 RM = rm -rf
 CC = gcc
 SRCS = src/main.c src/utils.c src/lexer.c src/expander.c src/find_env.c src/env.c src/pwd.c src/redirection.c src/executor.c \
-		src/cd.c src/export.c src/exit.c src/echo.c src/unset.c src/free.c src/error.c
+		src/cd.c src/export.c src/exit.c src/echo.c src/unset.c src/free.c src/error.c \
+		src/signals.c src/handle.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 14:16:31 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 16:47:06 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	child_process_prep(t_pipe_group *data, int in_fd, int out_fd, int pipe_fd[]
 	int		out;
 	char	*x_p;
 
+	child_sig();
 	ft_putstr_fd("child start", 1);
 	if (in_fd != STDIN_FILENO)
 		dup2(in_fd, STDIN_FILENO);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 15:11:18 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 16:46:42 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	main(int argc, char **argv, char **envp)
 		// readed = "\"\'\"\'dljskfnkjlsdn kdfnslfndsjkln\' owjeofijweijof woefjowijfe";
 		// readed = readline(">prompt: ");
 
-		readed = "ls | qwerght | pwd";
-		
-		// readed = readline("prompt > ");
+		// readed = "ls | qwerght | pwd";
+		signals();
+		readed = readline("minishell > ");
 		splited = ft_split_minishell(readed);
 		assign_env(envp, &shell_h);
 		add_history(readed);
