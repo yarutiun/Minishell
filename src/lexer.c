@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 12:39:21 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 17:37:13 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	put_type_tok(t_token **head)
 			temp = temp->next;
 			continue;
 		}
-		if (temp->info[0] == '|')
+		if (temp->info[0] == '|' && !(temp->info[1]))
 			temp->type = PIPE;
 		// else if (temp->info[0] == '\"')
 		// 	temp->type = DOUBLE_quote_QUOTES;

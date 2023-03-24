@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 15:15:57 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 17:17:09 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,12 +147,13 @@ t_pipe_group *redirection(t_token **token)
 				token_tmp=token_tmp->next;
 				continue;
 			}
+			tmp->argv[count_words] = ft_strdup(token_tmp->info);
 			if (!first)
 			{
-				tmp->cmd = ft_strdup(token_tmp->info);
+				tmp->cmd = tmp->argv[count_words];
 				first = 1;
 			}
-			tmp->argv[count_words++] = tmp->cmd;
+			count_words++;
 			token_tmp=token_tmp->next;
 		}
 		else if (token_tmp->type == PIPE)
