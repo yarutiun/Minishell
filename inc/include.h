@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/23 21:09:51 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:42:53 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ typedef struct s_minishell
 {
 	char	**envp;
 	int		error;
-	char	**builtin_cmd;
-	char	*cmd_path;
 	int		current_env;
 	int		last;
 }			t_minishell;
@@ -118,6 +116,11 @@ int	find_path_env(char **env, char *key);
 char *cut_key(char **env, int index, char *key);
 void change_words(t_token *temp);
 char *cut_key(char **env, int index, char *key);
+void 	free_t_pipe(t_pipe_group **token);
+void	free_t_token(t_token **token);
+void	free_shell_h();
+
+
 // static int	find_path_env(char **env, char *key);
 
 /* BUILTINS */

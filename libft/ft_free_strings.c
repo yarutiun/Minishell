@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_free_strings.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 17:49:09 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 13:21:08 by dsas             ###   ########.fr       */
+/*   Created: 2023/03/24 13:32:07 by dsas              #+#    #+#             */
+/*   Updated: 2023/03/24 13:32:14 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/include.h"
 
-int	b_unset(char **args)
+#include "libft.h"
+
+void	ft_free_strings(char **str)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (args[i])
+	while (str[i])
 	{
-		j = find_path_env(shell_h->envp, args[i]);
-		if (j != -1 && shell_h->envp[j])
-		{
-			free((shell_h->envp[j]));
-			shell_h->envp[j] = NULL;
-		}
-		else
-		{
-			ft_putstr_fd("minishell: unset: `", 2);
-			ft_putstr_fd(args[i], 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
-			return (1);
-		}
+		free(str[i]);
 		i++;
 	}
-	return (0);
+	if (str)
+		free(str);
 }

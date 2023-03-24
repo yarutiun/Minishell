@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:27:46 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 11:55:33 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 13:38:19 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	set_new(char *arg)
 	}
 	else
 		shell_h->envp[(shell_h->current_env)++] = arg;
+
 	// free(st);
 }
 

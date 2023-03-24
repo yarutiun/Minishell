@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 12:41:26 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 13:43:08 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 		// readed = readline(">prompt: ");
 
 		readed = "echo d>fdg sdjf gkjfdhg >> df";
-		
+
 		// readed = readline("prompt > ");
 		splited = ft_split_minishell(readed);
 		assign_env(envp, &shell_h);
@@ -65,6 +65,9 @@ int	main(int argc, char **argv, char **envp)
 		count_last(pipes);
 		// b_echo(pipes->argv);
 		executor(pipes);
+		free_t_token(&head);
+		free_t_pipe(&pipes);
+		free_shell_h();
 		// c
 		// ft_env();
 		// printf("info = %s  %d  len = %i\n", head->next->info, head->type, head->len);
