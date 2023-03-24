@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 19:01:42 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 19:07:24 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ void	put_lvl(void)
 	b_unset(uns);
 	last = ft_strjoin("SHLVL=", ft_itoa(lvl + 1));
 	set_new(last);
-	free(last);
 	free(uns[0]);
 	free(uns);
 }

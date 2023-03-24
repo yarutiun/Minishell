@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 15:26:23 by ddzuba            #+#    #+#             */
-/*   Updated: 2023/03/24 18:11:19 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 19:05:32 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ int	ft_env(void)
 
 	i = 0;
 
-	while (shell_h->envp[i])
+	while (i < shell_h->current_env)
 	{
 		if (shell_h->envp[i] == NULL)
+		{
+			i++;	
 			continue;
+		}
 		printf("%s\n", shell_h->envp[i]);
 		i++;
 	}
