@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 13:37:25 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 13:55:54 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int assign_env(char **envp, t_minishell **shell_h)
 	envp[counter] = NULL;
     (*shell_h)->envp = temp;
 	(*shell_h)->current_env = counter;
+	(*shell_h)->head = NULL;
+	(*shell_h)->pipes = NULL;
     // printf("%s", shell_h->envp[0]);
     // printf("%s", shell_h->envp[1]);
     return(1);

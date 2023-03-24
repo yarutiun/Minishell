@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 12:26:55 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 14:11:37 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	here_doc(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t_pipe_g
 	file = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	if (file < 0)
 	{
-		// free_tokens(token);
-		// free_pipes(pipes);
-		*token = NULL;
-		*pipes = NULL;
+		throw_error("minishell: couldn't open HEREDOC\n");
 		return ;
 	}
 	while (1)
@@ -61,10 +58,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 	skip_space(token_tmp);
 	if (!(*token_tmp) || ((*token_tmp)->type != DOUBLE_QUOTES && (*token_tmp)->type != SINGLE_QUOTES && (*token_tmp)->type != WORD))
 	{
-		// free_tokens(token);
-		// free_pipes(pipes);
-		*token = NULL;
-		*pipes = NULL;
+		throw_error("minishell: syntax error near unexpected token\n");
 		return ;
 	}
 	if (type == HEREDOC)
@@ -77,10 +71,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 		(*tmp)->input = open((*token_tmp)->info, O_RDONLY);
 		if((*tmp)->input < 0)
 		{
-			// free_tokens(token);
-			// free_pipes(pipes);
-			*token = NULL;
-			*pipes = NULL;
+			throw_error("minishell: couldn't open such file or directory\n");
 			return ;
 		}
 	}
@@ -89,10 +80,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_TRUNC | O_CREAT, 0777);
 		if((*tmp)->output < 0)
 		{
-			// free_tokens(token);
-			// free_pipes(pipes);
-			*token = NULL;
-			*pipes = NULL;
+			throw_error("minishell: couldn't open such file or directory\n");
 			return ;
 		}
 	}
@@ -101,10 +89,7 @@ void	create_redirect(t_token **token, t_token **token_tmp, t_pipe_group **tmp, t
 		(*tmp)->output = open((*token_tmp)->info, O_WRONLY | O_APPEND | O_CREAT, 0777);
 		if((*tmp)->output < 0)
 		{
-			// free_tokens(token);
-			// free_pipes(pipes);
-			*token = NULL;
-			*pipes = NULL;
+			throw_error("minishell: couldn't open such file or directory\n");
 			return ;
 		}
 	}
@@ -128,14 +113,13 @@ t_pipe_group	*init_pipe(int index)
 
 t_pipe_group *redirection(t_token **token)
 {
-	t_pipe_group *pipes;
 	t_pipe_group *tmp;
 	t_token		 *token_tmp;
 	int			 first;
 	int			 count_words;
 
-	pipes = init_pipe(0);
-	tmp = pipes;
+	shell_h->pipes = init_pipe(0);
+	tmp = shell_h->pipes;
 	token_tmp = *token;
 	first = 0;
 	count_words = 0;
@@ -144,8 +128,8 @@ t_pipe_group *redirection(t_token **token)
 		if ((token_tmp)->type == APPEND || (token_tmp)->type == HEREDOC
 			|| (token_tmp)->type == GREATER_THAN || (token_tmp)->type == LESS_THAN )
 		{
-			create_redirect(token, &token_tmp, &tmp, &pipes);
-			if(*token == NULL)
+			create_redirect(token, &token_tmp, &tmp, &(shell_h->pipes));
+			if((shell_h->pipes) == NULL)
 				return(NULL);
 		}
 		else if ((token_tmp)->type == SINGLE_QUOTES || (token_tmp)->type == DOUBLE_QUOTES
@@ -168,10 +152,7 @@ t_pipe_group *redirection(t_token **token)
 		{
 			if (!first)
 			{
-				// free_tokens(token);
-				// free_pipes(pipes);
-				*token = NULL;
-				pipes = NULL;
+				throw_error("minishell: syntax error near unexpected token\n");
 				return (NULL);
 			}
 			tmp->argv[count_words] = NULL;
@@ -187,12 +168,9 @@ t_pipe_group *redirection(t_token **token)
 	}
 	if (!first)
 	{
-		// free_tokens(token);
-		// free_pipes(pipes);
-		*token = NULL;
-		pipes = NULL;
+		throw_error("minishell: syntax error near unexpected token\n");
 		return (NULL);
 	}
 	tmp->argv[count_words] = NULL;
-	return(pipes);
+	return((shell_h->pipes));
 }

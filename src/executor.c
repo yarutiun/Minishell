@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 13:49:03 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:16:31 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,10 @@ int	child_proccess_managing_outfds(int out_fd, int pipe_fd[])
 	if (out_fd == -1 || out_fd == -2)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);
-		// if (check < 0)
-		// 	return (print_error_message("dup2", NULL));
 		return (pipe_fd[1]);
 	}
 	if (out_fd != STDOUT_FILENO)
 		dup2(out_fd, STDOUT_FILENO);
-	// if (check < 0)
-	// 	return (print_error_message("dup2", NULL));
-	// close(pipe_fd[1]);
-	// if (check < 0)
-	// 	return (print_error_message("close", NULL));
 	return (out_fd);
 }
 int	exec_builtin_child(t_pipe_group *pipes)
@@ -75,17 +68,12 @@ void	child_process_prep(t_pipe_group *data, int in_fd, int out_fd, int pipe_fd[]
 	ft_putstr_fd("child start", 1);
 	if (in_fd != STDIN_FILENO)
 		dup2(in_fd, STDIN_FILENO);
-	// if (in < 0)
-	// 	exit(-1);
 	out = child_proccess_managing_outfds(out_fd, pipe_fd);
-	// if (out < 0)
-	// 	exit(-1);
 	if(exec_builtin_child(data) != -1)
 		exit(0);
 	x_p = get_working_path(data->cmd, shell_h->envp);
-	ft_putstr_fd("child after", 1);
 	execve(x_p, data->argv, shell_h->envp);
-	// print_error_message("execve", data->command[data->i].cmd_flags[0]);
+	throw_error_exec("minishell: couldn't run process\n");
 	close(in_fd);
 	close(out);
 	exit(-1);
@@ -96,18 +84,12 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd)
 	int	pipe_fd[2];
 	int	pid;
 
-	// if (pipe(pipe_fd) == -1)
-	// 	return (print_error_message("pipe", NULL));
-	// handle_child_signals();
 	pipe(pipe_fd);
 	ft_putstr_fd("fork start", 1);
 	pid = fork();
-	// if (pid == -1)
-	// 	return (print_error_message("fork", NULL));
 	if (pid == 0)
 		child_process_prep(data, in_fd, out_fd, pipe_fd);
 	waitpid(pid, &(shell_h->error), 0);
-	// handle_sigs_interactive();
 	if ((shell_h->error) > 255)
 		(shell_h->error) /= 256;
 	close(pipe_fd[1]);
@@ -133,60 +115,12 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out
 	x_p = get_working_path(data->cmd, shell_h->envp);
 	if (!x_p)
 	{
-		// ft_put_error();
+		throw_error_exec("minishell: command not found\n");
 		return (STDIN_FILENO);
 	}
 	free(x_p);
 	return(fork_and_execute(data, in_fd, out_fd));
-	// if (data->command[i].input[0])
-	// 	in_fd = prep_input_fd(data, i, in_fd);
-	// if (in_fd < 0)
-	// 	return (cleanup_command(0, 0, 0));
-	// if (data->command[i].input[0] == NULL && i < 1)
-	// 	in_fd = -2;
-	// if (data->command[i].output[0])
-	// 	out_fd = prep_output_fd(data, i, STDOUT_FILENO);
-	// if (out_fd < 0)
-	// 	return (cleanup_command(1, in_fd, 0));
-	// if (data->command[i].output[0] == NULL && i < (data->command_amt - 1))
-	// 	out_fd = -2;
-	// if (data->command[i].cmd_flags[0] == NULL)
-	// 	return (cleanup_command(2, in_fd, out_fd));
-	// if (find_exeption_command(data->command[i].cmd_flags[0]) != NULL)
-	// 	return (fork_for_exeption_command(data, in_fd, out_fd));
-	// x_p = find_executable_path(data->command[i].cmd_flags[0], data->env, data);
-	// if (x_p == NULL)
-	// 	return (cleanup_command(2, in_fd, out_fd));
-	// if (data->command[i].cmd_flags[0] != x_p)
-	// 	free(data->command[i].cmd_flags[0]);
-	// data->command[i].cmd_flags[0] = x_p;
-	// return (fork_and_execute(data, in_fd, out_fd));
 }
-
-// int	check_builtin_parent(t_pipe_group *pipes)
-// {
-// 	if (ft_strcmp(pipes->argv[0], "pwd") == 0)
-// 		return (1);
-// 	else if (ft_strcmp(pipes->argv[0], "env") == 0)
-// 		return (2);
-// 	else if (ft_strcmp(pipes->argv[0], "unset") == 0)
-// 		return (3);
-// 	else if (ft_strcmp(pipes->argv[0], "echo") == 0)
-// 		return (4);
-// 	else if (ft_strcmp(pipes->argv[0], "export") == 0)
-// 		return (5);
-// 	else if (ft_strcmp(pipes->argv[0], "cd") == 0)
-// 		return (6);
-// 	else if (ft_strcmp(pipes->argv[0], "exit") == 0)
-// 		return (7);
-// 	return (0);
-// }
-
-
-// void exec_builtin(char *cmd)
-// {
-	
-// }
 
 int	executor(t_pipe_group *data)
 {

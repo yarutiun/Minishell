@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 13:42:53 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/24 14:13:35 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ typedef struct	s_pipe_group
 
 typedef struct s_minishell
 {
-	char	**envp;
-	int		error;
-	int		current_env;
-	int		last;
+	char			**envp;
+	int				error;
+	int				current_env;
+	int				last;
+	t_pipe_group	*pipes;
+	t_token			*head;
 }			t_minishell;
 
 extern t_minishell *shell_h;
@@ -119,6 +121,9 @@ char *cut_key(char **env, int index, char *key);
 void 	free_t_pipe(t_pipe_group **token);
 void	free_t_token(t_token **token);
 void	free_shell_h();
+void	throw_error(char *error);
+void	throw_error_exec(char *error);
+
 
 
 // static int	find_path_env(char **env, char *key);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 13:50:51 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:18:39 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	// int qwer;
 	char	*readed;
 
-	t_token	*head = NULL;
-	t_pipe_group *pipes = NULL;
+
 	char	**splited;
 	// while (1)
 	// {
@@ -47,26 +46,24 @@ int	main(int argc, char **argv, char **envp)
 		splited = ft_split_minishell(readed);
 		assign_env(envp, &shell_h);
 		add_history(readed);
-		init_list(&head, readed, splited);
-		put_type_tok(&head);
+		init_list(&(shell_h->head), readed, splited);
+		put_type_tok(&(shell_h->head));
 		// while(head)
 		// {
 		// 	printf("content: %s type: %i\n", head->info, head->type);
 		// 	head = head->next;
 		// }
-		split_words(&head);
+		split_words(&(shell_h->head));
 		// while(head)
 		// {
 		// 	printf("content: %s type: %i\n", head->info, head->type);
 		// 	head = head->next;
 		// }
-		expander(&head);
-		pipes = redirection(&head);
-		count_last(pipes);
+		expander(&(shell_h->head));
+		shell_h->pipes = redirection(&(shell_h->head));
+		count_last(shell_h->pipes);
 		// b_echo(pipes->argv);
-		executor(pipes);
-		free_t_token(&head);
-		free_t_pipe(&pipes);
+		executor(shell_h->pipes);
 		free_shell_h();
 		// c
 		// ft_env();
