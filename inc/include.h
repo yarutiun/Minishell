@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 15:29:48 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:14:36 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <unistd.h>
 
 # define MAX_PATH 2000
-
+# define SYNTAX_ERROR "minishell: syntax error near unexpected token\n"
 
 typedef enum e_token
 {
@@ -134,7 +134,7 @@ char *cut_key(char **env, int index, char *key);
 void 	free_t_pipe(t_pipe_group **token);
 void	free_t_token(t_token **token);
 void	free_shell_h();
-void	throw_error(char *error);
+int		throw_error(char *error)
 void	throw_error_exec(char *error);
 void	free_argv(char **argv);
 void	free_env(char **env);
@@ -163,4 +163,5 @@ int	b_export(char **args);
 int	b_unset(char **args);
 int ft_pwd(void);
 void	set_new(char *arg);
+
 #endif

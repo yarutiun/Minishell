@@ -6,17 +6,18 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:56:50 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 19:16:46 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 16:12:51 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-void	throw_error(char *error)
+int	throw_error(char *error)
 {
 	ft_putstr_fd(error, 2);
 	free_t_pipe(&(shell_h->pipes));
 	free_t_token(&(shell_h->head));
+	return (1);
 }
 
 void	throw_error_exec(char *error)
