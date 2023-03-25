@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 15:31:28 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:39:52 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	put_lvl();
 	signals();
 
-		readed = "grep a << q";
+		readed = "ls";
 		splited = ft_split_minishell(readed);
 		add_history(readed);
 		if((init_list(&(shell_h->head), readed, splited) == 1))

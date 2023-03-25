@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 15:38:03 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 15:58:17 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ char	*quotes_dupe(char *str)
 	return (word);
 }
 
-void	fill_word_end(char **array, char *str, int *word_index)
+void	fill_word_end(char **array, char **str, int *word_index)
 {
-	array[*word_index] = word_dupe(str);
+	array[*word_index] = word_dupe(*str);
 	(*word_index)++;
-	while (*str != '\0' && *str != ' ' && *str != '\t'
-		&& *str != '\n' && *str != '\'' && *str != '\"')
-		++str;
+	while (**str != '\0' && **str != ' ' && **str != '\t'
+		&& **str != '\n' && **str != '\'' && **str != '\"')
+		++(*str);
 }
 
 void	fill_words(char **array, char *str)
@@ -88,6 +88,6 @@ void	fill_words(char **array, char *str)
 			word_index++;
 			continue ;
 		}
-		fill_word_end(array, str, &word_index);
+		fill_word_end(array, &str, &word_index);
 	}
 }
