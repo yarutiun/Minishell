@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 16:29:02 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 16:41:21 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,21 +134,14 @@ int	redirection_loop(t_pipe_group **tmp, t_token **token_tmp,
 		else if ((*token_tmp)->type == SINGLE_QUOTES
 			|| (*token_tmp)->type == DOUBLE_QUOTES
 			|| (*token_tmp)->type == WORD)
-			if (quote_if(tmp, token_tmp, first, count_words))
-				continue ;
+			{
+				if (quote_if(tmp, token_tmp, first, count_words))
+					continue;
+			}
 		else if ((*token_tmp)->type == PIPE)
 		{
 			if (pipe_if(tmp, token_tmp, first, count_words))
 				return (throw_error(SYNTAX_ERROR));
-			// if (!(*first))
-			// 	return (throw_error(SYNTAX_ERROR));
-			// (*tmp)->argv[*count_words] = NULL;
-			// *count_words = 0;
-			// *first = (*tmp)->pipe_index;
-			// *token_tmp = (*token_tmp)->next;
-			// (*tmp)->next = init_pipe(*first + 1);
-			// *tmp = (*tmp)->next;
-			// *first = 0;
 		}
 		else
 			*token_tmp = (*token_tmp)->next;
