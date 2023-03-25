@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 16:32:52 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 16:43:07 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ t_pipe_group	*init_pipe(int index)
 	return (pipe);
 }
 
-int	quote_if(t_pipe_group **tmp, t_token **token_tmp, int *first, int *count_words)
+int	quote_if(t_pipe_group **tmp, t_token **token_tmp,
+						int *first, int *count_words)
 {
 	if (!((*token_tmp)->info))
 	{
@@ -118,34 +119,35 @@ int	pipe_if(t_pipe_group **tmp, t_token **token_tmp,
 	return (0);
 }
 
-int	redirection_loop(t_pipe_group **tmp, t_token **token_tmp,
+int	redirection_loop(t_pipe_group **tmp, t_token **tok,
 					int *first, int *count_words)
 {
-	while (*token_tmp)
+	while (*tok)
 	{
-		if ((*token_tmp)->type == APPEND || (*token_tmp)->type == HEREDOC
-			|| (*token_tmp)->type == GREATER_THAN
-			|| (*token_tmp)->type == LESS_THAN)
+		if ((*tok)->type == APPEND || (*tok)->type == HEREDOC
+			|| (*tok)->type == GREATER_THAN || (*tok)->type == LESS_THAN)
 		{
-			create_red(&(shell_h->head), token_tmp, tmp, &(shell_h->pipes));
+			create_red(&(shell_h->head), tok, tmp, &(shell_h->pipes));
 			if ((shell_h->pipes) == NULL)
 				return (1);
 		}
-		else if ((*token_tmp)->type == SINGLE_QUOTES
-			|| (*token_tmp)->type == DOUBLE_QUOTES
-			|| (*token_tmp)->type == WORD)
+		else if ((*tok)->type == SINGLE_QUOTES
+			|| (*tok)->type == DOUBLE_QUOTES || (*tok)->type == WORD)
 		{
-			if (quote_if(tmp, token_tmp, first, count_words))
+			if (quote_if(tmp, tok, first, count_words))
 				continue ;
 		}
-		else if ((*token_tmp)->type == PIPE)
-			if (pipe_if(tmp, token_tmp, first, count_words))
+		else if ((*tok)->type == PIPE)
+		{
+			if (pipe_if(tmp, tok, first, count_words))
 				return (throw_error(SYNTAX_ERROR));
+		}
 		else
-			*token_tmp = (*token_tmp)->next;
+			*tok = (*tok)->next;
 	}
 	return (0);
 }
+
 
 t_pipe_group	*redirection(t_token **token)
 {
