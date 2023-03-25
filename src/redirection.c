@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 15:27:31 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:00:58 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	here_doc_finish(t_token **token_tmp,
 	*token_tmp = (*token_tmp)->next;
 }
 
-void	here_doc(t_token **token_tmp, t_pipe_group **tmp)
+int	here_doc(t_token **token_tmp, t_pipe_group **tmp)
 {
 	int		file;
 	char	*buf;
@@ -51,7 +51,7 @@ void	here_doc(t_token **token_tmp, t_pipe_group **tmp)
 	if (file < 0)
 	{
 		throw_error("minishell: couldn't open HEREDOC\n");
-		return ;
+		return (1);
 	}
 	while (1)
 	{
@@ -66,4 +66,5 @@ void	here_doc(t_token **token_tmp, t_pipe_group **tmp)
 	free(buf);
 	close(file);
 	here_doc_finish(token_tmp, tmp, &file_name);
+	return (0);
 }

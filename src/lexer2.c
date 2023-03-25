@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:54:24 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 15:14:46 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:07:32 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ void	put_type_tok(t_token **head)
 	temp = *head;
 	while (temp != NULL)
 	{
-		if (temp->type != -1)
-		{
-			temp = temp->next;
+		if (put_skip(&temp))
 			continue ;
-		}
 		if (temp->info[0] == '|' && !(temp->info[1]))
 			temp->type = PIPE;
 		else if (temp->info[0] == '>' && temp->info[1]
