@@ -1,11 +1,6 @@
 Makefile
-TODO
-dfgb
 inc
 libft
 minishell
-q
-rot
 src
-text
 txt

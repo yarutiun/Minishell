@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 16:14:36 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 16:30:40 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ char *cut_key(char **env, int index, char *key);
 void 	free_t_pipe(t_pipe_group **token);
 void	free_t_token(t_token **token);
 void	free_shell_h();
-int		throw_error(char *error)
+int		throw_error(char *error);
 void	throw_error_exec(char *error);
 void	free_argv(char **argv);
 void	free_env(char **env);
