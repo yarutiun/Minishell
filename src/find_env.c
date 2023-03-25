@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:25:52 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/25 15:01:38 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:51:13 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	find_path_env(char **env, char *key)
 	int	i;
 
 	i = 0;
-	while (i < shell_h->current_env)
+	while (i < g_shell_h->current_env)
 	{
 		if (env[i] && ft_strnstr(env[i], key, ft_strlen(key)))
 			return (i);

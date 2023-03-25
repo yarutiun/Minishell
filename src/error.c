@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:56:50 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 16:12:51 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:49:54 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	throw_error(char *error)
 {
 	ft_putstr_fd(error, 2);
-	free_t_pipe(&(shell_h->pipes));
-	free_t_token(&(shell_h->head));
+	free_t_pipe(&(g_shell_h->pipes));
+	free_t_token(&(g_shell_h->head));
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:27:46 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 19:53:00 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:51:02 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_keyword(char *args)
 
 void	change_env(char *arg, int index)
 {
-	shell_h->envp[index] = ft_strdup(arg);
+	g_shell_h->envp[index] = ft_strdup(arg);
 }
 
 int	find_index_of_char(char *arg, char c)
@@ -58,14 +58,14 @@ void	set_new(char *arg)
 	int		j;
 
 	st = ft_substr(arg, 0, find_index_of_char(arg, '=') + 1);
-	j = find_path_env(shell_h->envp, st);
+	j = find_path_env(g_shell_h->envp, st);
 	if (j != -1)
 	{
-		free(shell_h->envp[j]);
-		shell_h->envp[j] = arg;
+		free(g_shell_h->envp[j]);
+		g_shell_h->envp[j] = arg;
 	}
 	else
-		shell_h->envp[(shell_h->current_env)++] = arg;
+		g_shell_h->envp[(g_shell_h->current_env)++] = arg;
 }
 
 void	print_export(void)
@@ -73,12 +73,12 @@ void	print_export(void)
 	int		i;
 
 	i = 0;
-	while (shell_h->envp[i])
+	while (g_shell_h->envp[i])
 	{
-		if (!shell_h->envp[i])
+		if (!g_shell_h->envp[i])
 			continue ;
 		ft_putstr_fd("declare -x ", 2);
-		ft_putstr_fd(shell_h->envp[i], 2);
+		ft_putstr_fd(g_shell_h->envp[i], 2);
 		ft_putstr_fd("\n", 2);
 		i++;
 	}

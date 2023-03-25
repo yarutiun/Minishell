@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:49:09 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 13:21:08 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:52:18 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	b_unset(char **args)
 	i = 0;
 	while (args[i])
 	{
-		j = find_path_env(shell_h->envp, args[i]);
-		if (j != -1 && shell_h->envp[j])
+		j = find_path_env(g_shell_h->envp, args[i]);
+		if (j != -1 && g_shell_h->envp[j])
 		{
-			free((shell_h->envp[j]));
-			shell_h->envp[j] = NULL;
+			free((g_shell_h->envp[j]));
+			g_shell_h->envp[j] = NULL;
 		}
 		else
 		{

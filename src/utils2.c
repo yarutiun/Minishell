@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:56:07 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 19:56:19 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:52:30 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	put_lvl(void)
 
 	uns = malloc(sizeof(char *) * 2);
 	uns[1] = NULL;
-	i = find_path_env(shell_h->envp, "SHLVL=");
-	last = ft_strchr(shell_h->envp[i], '=') + 1;
+	i = find_path_env(g_shell_h->envp, "SHLVL=");
+	last = ft_strchr(g_shell_h->envp[i], '=') + 1;
 	lvl = ft_atoi(last);
 	uns[0] = ft_strdup("SHLVL");
 	b_unset(uns);

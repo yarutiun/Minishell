@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:50:52 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 19:51:14 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:50:10 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev,
 
 	if (data->output != -1)
 		out_fd = data->output;
-	else if (shell_h->last == data->pipe_index)
+	else if (g_shell_h->last == data->pipe_index)
 		out_fd = STDOUT_FILENO;
 	if (data->input != -1)
 		in_fd = data->input;
 	else if (prev && prev->output != -1)
 		in_fd = STDIN_FILENO;
-	x_p = get_working_path(data->cmd, shell_h->envp);
+	x_p = get_working_path(data->cmd, g_shell_h->envp);
 	if (!x_p)
 	{
 		throw_error_exec("minishell: command not found\n");
@@ -44,7 +44,7 @@ int	executor(t_pipe_group *data)
 	prev = NULL;
 	while (data)
 	{
-		if (shell_h->last == 0 && exec_builtin_parent(data) != -1)
+		if (g_shell_h->last == 0 && exec_builtin_parent(data) != -1)
 		{
 			data = data->next;
 			continue ;

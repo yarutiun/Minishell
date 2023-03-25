@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 13:06:59 by ddzuba            #+#    #+#             */
-/*   Updated: 2023/03/24 19:43:14 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:51:49 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_pwd(void)
 
 	i = 0;
 	j = 0;
-	j = find_path_env(shell_h->envp, "PWD");
-	pwd = ft_strchr(shell_h->envp[j], '=');
+	j = find_path_env(g_shell_h->envp, "PWD");
+	pwd = ft_strchr(g_shell_h->envp[j], '=');
 	pwd++;
 	ft_putstr_fd(pwd, 1);
 	ft_putstr_fd("\n", 1);

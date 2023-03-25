@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 19:50:48 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:50:02 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	exec_builtin_child(t_pipe_group *pipes)
 		err = (b_echo(pipes->argv));
 	else
 		return (-1);
-	shell_h->error = err;
+	g_shell_h->error = err;
 	return (0);
 }
 
@@ -56,7 +56,7 @@ int	exec_builtin_parent(t_pipe_group *pipes)
 		err = b_exit(pipes->argv);
 	else
 		return (-1);
-	shell_h->error = err;
+	g_shell_h->error = err;
 	return (0);
 }
 
@@ -73,8 +73,8 @@ void	child_process_prep(t_pipe_group *data, int in_fd,
 	out = child_proccess_managing_outfds(out_fd, pipe_fd);
 	if (exec_builtin_child(data) != -1)
 		exit(0);
-	x_p = get_working_path(data->cmd, shell_h->envp);
-	execve(x_p, data->argv, shell_h->envp);
+	x_p = get_working_path(data->cmd, g_shell_h->envp);
+	execve(x_p, data->argv, g_shell_h->envp);
 	throw_error_exec("minishell: couldn't run process\n");
 	close(in_fd);
 	close(out);
@@ -90,9 +90,9 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd)
 	pid = fork();
 	if (pid == 0)
 		child_process_prep(data, in_fd, out_fd, pipe_fd);
-	waitpid(pid, &(shell_h->error), 0);
-	if ((shell_h->error) > 255)
-		(shell_h->error) /= 256;
+	waitpid(pid, &(g_shell_h->error), 0);
+	if ((g_shell_h->error) > 255)
+		(g_shell_h->error) /= 256;
 	close(pipe_fd[1]);
 	if (in_fd > 2)
 		close(in_fd);

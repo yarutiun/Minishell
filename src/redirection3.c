@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:01:56 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 17:04:09 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:52:01 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	redirection_loop(t_pipe_group **tmp, t_token **tok,
 		if ((*tok)->type == APPEND || (*tok)->type == HEREDOC
 			|| (*tok)->type == GREATER_THAN || (*tok)->type == LESS_THAN)
 		{
-			create_red(&(shell_h->head), tok, tmp, &(shell_h->pipes));
-			if ((shell_h->pipes) == NULL)
+			create_red(&(g_shell_h->head), tok, tmp, &(g_shell_h->pipes));
+			if ((g_shell_h->pipes) == NULL)
 				return (1);
 		}
 		else if ((*tok)->type == SINGLE_QUOTES
@@ -48,8 +48,8 @@ t_pipe_group	*redirection(t_token **token)
 	int				first;
 	int				count_words;
 
-	shell_h->pipes = init_pipe(0);
-	tmp = shell_h->pipes;
+	g_shell_h->pipes = init_pipe(0);
+	tmp = g_shell_h->pipes;
 	token_tmp = *token;
 	first = 0;
 	count_words = 0;
@@ -61,5 +61,5 @@ t_pipe_group	*redirection(t_token **token)
 		return (NULL);
 	}
 	tmp->argv[count_words] = NULL;
-	return ((shell_h->pipes));
+	return ((g_shell_h->pipes));
 }

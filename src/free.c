@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:24:25 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 19:40:06 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:51:29 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	free_shell_h(void)
 	int	i;
 
 	i = 0;
-	free_t_pipe(&(shell_h->pipes));
-	free_t_token(&(shell_h->head));
-	while (i < shell_h->current_env)
+	free_t_pipe(&(g_shell_h->pipes));
+	free_t_token(&(g_shell_h->head));
+	while (i < g_shell_h->current_env)
 	{
-		free(shell_h->envp[i]);
+		free(g_shell_h->envp[i]);
 		i++;
 	}
-	free(shell_h->envp);
-	free(shell_h);
+	free(g_shell_h->envp);
+	free(g_shell_h);
 	clear_history();
 }

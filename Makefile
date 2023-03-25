@@ -11,7 +11,7 @@ CC = gcc
 SRCS = src/main.c src/utils.c src/lexer.c src/expander.c src/find_env.c src/env.c src/pwd.c src/redirection.c src/executor.c \
 		src/cd.c src/export.c src/exit.c src/echo.c src/unset.c src/free.c src/error.c \
 		src/signals.c src/handle.c src/executor2.c src/expander2.c src/redirection2.c src/lexer2.c src/export2.c \
-		src/utils2.c
+		src/utils2.c src/lexer3.c src/redirection3.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

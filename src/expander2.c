@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:52:06 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 14:22:50 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:50:50 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ void	sub_dollar(char **ret, char *info, int *i)
 	(*i)++;
 	if (info[*i] == '?' && (!(info[*i]) || info[*i + 1] == ' '))
 	{
-		strjoin_free(ret, ft_itoa(shell_h->error));
+		strjoin_free(ret, ft_itoa(g_shell_h->error));
 	}
 	while (info[*i] != ' ' && info[*i] != '\0')
 	{
 		charjoin_free(&key, info[*i]);
 		(*i)++;
 	}
-	index = find_path_env(shell_h->envp, key);
+	index = find_path_env(g_shell_h->envp, key);
 	if (index == -1)
 	{
 		free(key);
 		return ;
 	}
-	ret1 = cut_key(shell_h->envp, index, key);
+	ret1 = cut_key(g_shell_h->envp, index, key);
 	free(key);
 	strjoin_free(ret, ret1);
 	free(ret1);

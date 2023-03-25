@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/25 14:48:22 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:50:33 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_vars_env(int	*counter, char ***temp, int *i, char **envp)
 {
 	*counter = 0;
 	*i = 0;
-	shell_h = malloc(sizeof(t_minishell));
+	g_shell_h = malloc(sizeof(t_minishell));
 	while (envp[*counter])
 		(*counter)++;
 	*temp = malloc(sizeof(char *) * 1000);
@@ -45,10 +45,10 @@ int	assign_env(char **envp)
 		i++;
 	}
 	envp[counter] = NULL;
-	shell_h->envp = temp;
-	shell_h->current_env = counter;
-	shell_h->head = NULL;
-	shell_h->pipes = NULL;
+	g_shell_h->envp = temp;
+	g_shell_h->current_env = counter;
+	g_shell_h->head = NULL;
+	g_shell_h->pipes = NULL;
 	return (1);
 }
 
@@ -84,11 +84,11 @@ void	change_words(t_token *temp)
 	if (temp->info[1] == '?' && (!(temp->info[2]) || temp->info[2] == ' '))
 	{
 		free(temp->info);
-		temp->info = ft_itoa(shell_h->error);
+		temp->info = ft_itoa(g_shell_h->error);
 		return ;
 	}
 	key = ft_substr(temp->info, 1, ft_strlen(temp->info) - 1);
-	index = find_path_env(shell_h->envp, key);
+	index = find_path_env(g_shell_h->envp, key);
 	if (index == -1)
 	{
 		free(temp->info);
@@ -97,7 +97,7 @@ void	change_words(t_token *temp)
 		temp->info = ft_strdup("");
 		return ;
 	}
-	ret = cut_key(shell_h->envp, index, key);
+	ret = cut_key(g_shell_h->envp, index, key);
 	free(temp->info);
 	free(key);
 	temp->info = ret;

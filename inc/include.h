@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 16:51:46 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:49:40 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_minishell
 	t_token			*head;
 }			t_minishell;
 
-extern t_minishell *shell_h;
+extern t_minishell *g_shell_h;
 
 /* FUNCTIONS */
 int     check_builtins(t_minishell *cmd_group);
@@ -111,10 +111,9 @@ int	exec_builtin_parent(t_pipe_group *pipes);
 /* PARSER */
 
 /* EXECUTOR*/
-
 int	executor(t_pipe_group *data);
 void	skip_space(t_token **token);
-void	here_doc(t_token **token_tmp, t_pipe_group **tmp);
+int	here_doc(t_token **token_tmp, t_pipe_group **tmp);
 
 void	print_export(void);
 
@@ -141,6 +140,15 @@ void	free_argv(char **argv);
 void	free_env(char **env);
 int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev,
 										int in_fd, int out_fd);
+int	put_skip(t_token **temp);
+int	quote_if(t_pipe_group **tmp, t_token **token_tmp,
+						int *first, int *count_words);
+int	pipe_if(t_pipe_group **tmp, t_token **token_tmp,
+			int *first, int *count_words);
+t_pipe_group	*init_pipe(int index);
+int	create_red(t_token **token, t_token **token_tmp,
+					t_pipe_group **tmp, t_pipe_group **pipes);
+
 
 
 //signals
