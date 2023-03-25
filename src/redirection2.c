@@ -6,13 +6,13 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 16:20:17 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 16:29:02 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-void	create_redirect(t_token **token, t_token **token_tmp,
+void	create_red(t_token **token, t_token **token_tmp,
 					t_pipe_group **tmp, t_pipe_group **pipes)
 {
 	int	type;
@@ -103,7 +103,23 @@ int	quote_if(t_pipe_group **tmp, t_token **token_tmp, int *first, int *count_wor
 	return (0);
 }
 
-int	redirection_loop(t_pipe_group **tmp, t_token **token_tmp, int *first, int *count_words)
+int	pipe_if(t_pipe_group **tmp, t_token **token_tmp,
+			int *first, int *count_words)
+{
+	if (!(*first))
+		return (1);
+	(*tmp)->argv[*count_words] = NULL;
+	*count_words = 0;
+	*first = (*tmp)->pipe_index;
+	*token_tmp = (*token_tmp)->next;
+	(*tmp)->next = init_pipe(*first + 1);
+	*tmp = (*tmp)->next;
+	*first = 0;
+	return (0);
+}
+
+int	redirection_loop(t_pipe_group **tmp, t_token **token_tmp,
+					int *first, int *count_words)
 {
 	while (*token_tmp)
 	{
@@ -111,41 +127,28 @@ int	redirection_loop(t_pipe_group **tmp, t_token **token_tmp, int *first, int *c
 			|| (*token_tmp)->type == GREATER_THAN
 			|| (*token_tmp)->type == LESS_THAN)
 		{
-			create_redirect(&(shell_h->head), token_tmp, tmp, &(shell_h->pipes));
+			create_red(&(shell_h->head), token_tmp, tmp, &(shell_h->pipes));
 			if ((shell_h->pipes) == NULL)
 				return (1);
 		}
 		else if ((*token_tmp)->type == SINGLE_QUOTES
 			|| (*token_tmp)->type == DOUBLE_QUOTES
 			|| (*token_tmp)->type == WORD)
-		{
 			if (quote_if(tmp, token_tmp, first, count_words))
 				continue ;
-			// if (!((*token_tmp)->info))
-			// {
-			// 	*token_tmp = (*token_tmp)->next;
-			// 	continue ;
-			// }
-			// (*tmp)->argv[*count_words] = ft_strdup((*token_tmp)->info);
-			// if (!(*first))
-			// {
-			// 	(*tmp)->cmd = (*tmp)->argv[*count_words];
-			// 	*first = 1;
-			// }
-			// (*count_words)++;
-			// *token_tmp = (*token_tmp)->next;
-		}
 		else if ((*token_tmp)->type == PIPE)
 		{
-			if (!(*first))
+			if (pipe_if(tmp, token_tmp, first, count_words))
 				return (throw_error(SYNTAX_ERROR));
-			(*tmp)->argv[*count_words] = NULL;
-			*count_words = 0;
-			*first = (*tmp)->pipe_index;
-			*token_tmp = (*token_tmp)->next;
-			(*tmp)->next = init_pipe(*first + 1);
-			*tmp = (*tmp)->next;
-			*first = 0;
+			// if (!(*first))
+			// 	return (throw_error(SYNTAX_ERROR));
+			// (*tmp)->argv[*count_words] = NULL;
+			// *count_words = 0;
+			// *first = (*tmp)->pipe_index;
+			// *token_tmp = (*token_tmp)->next;
+			// (*tmp)->next = init_pipe(*first + 1);
+			// *tmp = (*tmp)->next;
+			// *first = 0;
 		}
 		else
 			*token_tmp = (*token_tmp)->next;
