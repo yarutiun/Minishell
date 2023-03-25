@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 14:44:45 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 14:57:04 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	temp_assign(t_token **temp, t_token **head, char **splited, int *words)
 	(*temp)->len = ft_strlen(splited[*words]);
 	(*temp)->type = -1;
 	(*temp)->next = *head;
-	*head = temp;
+	*head = *temp;
 	(*words)--;
 }
 

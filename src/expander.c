@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/25 14:40:40 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 14:48:22 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_vars_env(int	*counter, char ***temp, int *i, char **envp)
 	*counter = 0;
 	*i = 0;
 	shell_h = malloc(sizeof(t_minishell));
-	while (envp[counter])
+	while (envp[*counter])
 		(*counter)++;
 	*temp = malloc(sizeof(char *) * 1000);
 	if (!(*temp))
@@ -45,10 +45,10 @@ int	assign_env(char **envp)
 		i++;
 	}
 	envp[counter] = NULL;
-	(*shell_h)->envp = temp;
-	(*shell_h)->current_env = counter;
-	(*shell_h)->head = NULL;
-	(*shell_h)->pipes = NULL;
+	shell_h->envp = temp;
+	shell_h->current_env = counter;
+	shell_h->head = NULL;
+	shell_h->pipes = NULL;
 	return (1);
 }
 

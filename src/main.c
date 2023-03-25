@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 19:12:54 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 15:02:08 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	main(int argc, char **argv, char **envp)
 
 	char	**splited;
 
-	assign_env(envp, &shell_h);
+	assign_env(envp);
 	put_lvl();
 	signals();
 
-		readed = "env";
+		readed = "echo \"$OLDPWD 8oufoijoqd\"";
 		splited = ft_split_minishell(readed);
 		add_history(readed);
 		if((init_list(&(shell_h->head), readed, splited) == 1))

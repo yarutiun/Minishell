@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 19:02:11 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 14:52:47 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,17 @@ int     check_builtins(t_minishell *cmd_group);
 // int     builtin_handler(t_minishell cmd_group, );
 int     if_builtin(char *word);
 void    fill_builtin_cmd(t_token **head, t_minishell *cmds);
+void	sub_dollar(char **ret, char *info, int *i);
+void	strjoin_free(char **str, char *add);
+void	charjoin_free(char **str, char add);
+int	check_keyword(char *args);
 
 /* ERRORS */
 void	error_handler(char *error_msg);
 
 /* LEXER*/
+void	expander(t_token **token);
+void	init_vars_env(int	*counter, char ***temp, int *i, char **envp);
 void	split_words(t_token	**head);
 void 	find_tokens(t_token **temp);
 char	**ft_split_minishell(char *str);
@@ -98,17 +104,24 @@ int		check_for_closed_brackets(char **splited);
 void	cat_quote(char **splited, int *words, t_token **head);
 void	expander(t_token **token);
 t_pipe_group *redirection(t_token **token);
+void	change_quotes(t_token *temp);
+int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd);
+int	exec_builtin_parent(t_pipe_group *pipes);
 /* PARSER */
 
 /* EXECUTOR*/
 
 int	executor(t_pipe_group *data);
+void	skip_space(t_token **token);
+void	here_doc(t_token **token, t_token **token_tmp,
+					t_pipe_group **tmp, t_pipe_group **pipes);
 
+void	print_export(void);
 
 /* UTILS */
 int check_for_closed_brackets(char **splited);
 void	charjoin_free(char **str, char add);
-int		assign_env(char **envp, t_minishell **shell_h);
+int	assign_env(char **envp);
 char	*get_working_path(char *cmd, char **env);
 int		count_words(char *str);
 void	fill_words(char **array, char *str);
@@ -126,6 +139,8 @@ void	throw_error(char *error);
 void	throw_error_exec(char *error);
 void	free_argv(char **argv);
 void	free_env(char **env);
+int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev,
+										int in_fd, int out_fd);
 
 
 //signals
