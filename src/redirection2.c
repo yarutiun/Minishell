@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 16:06:00 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 16:17:56 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	redirection_loop(t_pipe_group **tmp, t_token **token_tmp, int *first, int *c
 			|| (*token_tmp)->type == GREATER_THAN
 			|| (*token_tmp)->type == LESS_THAN)
 		{
-			create_redirect(shell_h->head, token_tmp, tmp, &(shell_h->pipes));
+			create_redirect(&(shell_h->head), token_tmp, tmp, &(shell_h->pipes));
 			if ((shell_h->pipes) == NULL)
 				return (1);
 		}
@@ -126,7 +126,7 @@ int	redirection_loop(t_pipe_group **tmp, t_token **token_tmp, int *first, int *c
 			*count_words = 0;
 			*first = (*tmp)->pipe_index;
 			*token_tmp = (*token_tmp)->next;
-			*tmp->next = init_pipe(*first + 1);
+			(*tmp)->next = init_pipe(*first + 1);
 			*tmp = (*tmp)->next;
 			*first = 0;
 		}
