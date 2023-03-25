@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   redirection2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 16:52:47 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:08:02 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-int	open_output(t_pipe_group **tmp, t_token **token_tmp)
+int	open_output(t_pipe_group **tmp, t_token **token_tmp, int type)
 {
-	if ((*token_tmp)->type == APPEND)
+	if (type == APPEND)
 		(*tmp)->output = open((*token_tmp)->info,
 				O_WRONLY | O_APPEND | O_CREAT, 0777);
 	else
@@ -25,7 +25,7 @@ int	open_output(t_pipe_group **tmp, t_token **token_tmp)
 	return (0);
 }
 
-void	create_red(t_token **token, t_token **token_tmp,
+int	create_red(t_token **token, t_token **token_tmp,
 					t_pipe_group **tmp, t_pipe_group **pipes)
 {
 	int	type;
@@ -35,27 +35,21 @@ void	create_red(t_token **token, t_token **token_tmp,
 	if (!(*token_tmp) || ((*token_tmp)->type != DOUBLE_QUOTES
 			&& (*token_tmp)->type != SINGLE_QUOTES
 			&& (*token_tmp)->type != WORD))
-	{
-		throw_error(SYNTAX_ERROR);
-		return ;
-	}
+		return(throw_error(SYNTAX_ERROR));
 	if (type == HEREDOC)
 	{
 		here_doc(token_tmp, tmp);
-		return ;
+		return (0);
 	}
 	if (type == LESS_THAN)
 	{
 		(*tmp)->input = open((*token_tmp)->info, O_RDONLY);
 		if ((*tmp)->input < 0)
-		{
-			throw_error(OPEN_ERROR);
-			return ;
-		}
+			return(throw_error(OPEN_ERROR));
 	}
 	else if (type == GREATER_THAN || type == APPEND)
 	{
-		if (open_output(tmp, token_tmp))
+		if (open_output(tmp, token_tmp, type))
 			return (throw_error(OPEN_ERROR));
 		// (*tmp)->output = open((*token_tmp)->info,
 		// 		O_WRONLY | O_TRUNC | O_CREAT, 0777);
@@ -76,6 +70,7 @@ void	create_red(t_token **token, t_token **token_tmp,
 	// 	}
 	// }
 	*token_tmp = (*token_tmp)->next;
+	return (0);
 }
 
 t_pipe_group	*init_pipe(int index)
