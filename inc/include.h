@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 14:52:47 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:29:48 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ int	exec_builtin_parent(t_pipe_group *pipes);
 
 int	executor(t_pipe_group *data);
 void	skip_space(t_token **token);
-void	here_doc(t_token **token, t_token **token_tmp,
-					t_pipe_group **tmp, t_pipe_group **pipes);
+void	here_doc(t_token **token_tmp, t_pipe_group **tmp);
 
 void	print_export(void);
 

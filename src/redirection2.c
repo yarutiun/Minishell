@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 19:55:34 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 15:30:15 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	create_redirect(t_token **token, t_token **token_tmp,
 	}
 	if (type == HEREDOC)
 	{
-		here_doc(token, token_tmp, tmp, pipes);
+		here_doc(token_tmp, tmp);
 		return ;
 	}
 	if (type == LESS_THAN)
