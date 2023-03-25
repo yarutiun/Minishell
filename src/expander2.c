@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:52:06 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 19:52:31 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 14:22:50 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,33 @@ void	expander(t_token **token)
 			change_quotes(temp);
 		temp = temp->next;
 	}
+}
+
+void	sub_dollar(char **ret, char *info, int *i)
+{
+	char	*key;
+	int		index;
+	char	*ret1;
+
+	key = NULL;
+	(*i)++;
+	if (info[*i] == '?' && (!(info[*i]) || info[*i + 1] == ' '))
+	{
+		strjoin_free(ret, ft_itoa(shell_h->error));
+	}
+	while (info[*i] != ' ' && info[*i] != '\0')
+	{
+		charjoin_free(&key, info[*i]);
+		(*i)++;
+	}
+	index = find_path_env(shell_h->envp, key);
+	if (index == -1)
+	{
+		free(key);
+		return ;
+	}
+	ret1 = cut_key(shell_h->envp, index, key);
+	free(key);
+	strjoin_free(ret, ret1);
+	free(ret1);
 }

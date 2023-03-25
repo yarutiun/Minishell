@@ -6,35 +6,37 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 19:51:58 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 14:40:40 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
 
-int	assign_env(char **envp, t_minishell **shell_h)
+void	init_vars_env(int	*counter, char ***temp, int *i, char **envp)
+{
+	*counter = 0;
+	*i = 0;
+	shell_h = malloc(sizeof(t_minishell));
+	while (envp[counter])
+		(*counter)++;
+	*temp = malloc(sizeof(char *) * 1000);
+	if (!(*temp))
+		return ;
+	while (*i < 1000)
+	{
+		(*temp)[*i] = NULL;
+		(*i)++;
+	}
+	*i = 0;
+}
+
+int	assign_env(char **envp)
 {
 	int		counter;
-	int		len;
 	char	**temp;
 	int		i;
 
-	counter = 0;
-	i = 0;
-	*shell_h = malloc(sizeof(t_minishell));
-	if (!(*shell_h))
-		return (0);
-	while (envp[counter])
-		counter++;
-	temp = malloc(sizeof(char *) * 1000);
-	if (!temp)
-		return (0);
-	while (i < 1000)
-	{
-		temp[i] = NULL;
-		i++;
-	}
-	i = 0;
+	init_vars_env(&counter, &temp, &i, envp);
 	while (i != counter)
 	{
 		temp[i] = strdup(envp[i]);
@@ -100,33 +102,4 @@ void	change_words(t_token *temp)
 	free(key);
 	temp->info = ret;
 	temp->len = ft_strlen(ret);
-}
-
-void	sub_dollar(char **ret, char *info, int *i)
-{
-	char	*key;
-	int		index;
-	char	*ret1;
-
-	key = NULL;
-	(*i)++;
-	if (info[*i] == '?' && (!(info[*i]) || info[*i + 1] == ' '))
-	{
-		strjoin_free(ret, ft_itoa(shell_h->error));
-	}
-	while (info[*i] != ' ' && info[*i] != '\0')
-	{
-		charjoin_free(&key, info[*i]);
-		(*i)++;
-	}
-	index = find_path_env(shell_h->envp, key);
-	if (index == -1)
-	{
-		free(key);
-		return ;
-	}
-	ret1 = cut_key(shell_h->envp, index, key);
-	free(key);
-	strjoin_free(ret, ret1);
-	free(ret1);
 }

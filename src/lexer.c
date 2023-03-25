@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/24 19:54:18 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 14:44:45 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,21 @@ int	check_for_closed_brackets(char **splited)
 	return (0);
 }
 
+void	temp_assign(t_token **temp, t_token **head, char **splited, int *words)
+{
+	*temp = malloc(sizeof(t_token));
+	(*temp)->info = splited[*words];
+	(*temp)->len = ft_strlen(splited[*words]);
+	(*temp)->type = -1;
+	(*temp)->next = *head;
+	*head = temp;
+	(*words)--;
+}
+
+
 int	init_list(t_token **head, char *split, char **splited)
 {
 	int		words;
-	int		in_splited;
 	t_token	*temp;
 
 	if (check_for_closed_brackets(splited) == 1)
@@ -75,10 +86,8 @@ int	init_list(t_token **head, char *split, char **splited)
 		throw_error("minishell: brackets not closed\n");
 		return (1);
 	}
-	in_splited = count_words(split);
 	words = count_words(split);
 	words -= 1;
-	in_splited -= 2;
 	while (0 <= words)
 	{
 		if (splited[words][0] == '\"' || splited[words][0] == '\'')
@@ -86,14 +95,7 @@ int	init_list(t_token **head, char *split, char **splited)
 			cat_quote(splited, &words, head);
 			continue ;
 		}
-		temp = malloc(sizeof(t_token));
-		temp->info = splited[words];
-		temp->len = ft_strlen(splited[words]);
-		temp->type = -1;
-		temp->next = *head;
-		*head = temp;
-		words--;
-		in_splited--;
+		temp_assign(&temp, head, splited, &words);
 	}
 	free(splited);
 	return (0);

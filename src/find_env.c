@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:25:52 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/24 19:39:32 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 14:33:05 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,28 @@ char	*cut_key(char **env, int index, char *key)
 	return (buf);
 }
 
+char	*get_working_path_loop(char ***binary_paths, char **one_path,
+								char **one_command_path, char	*cmd)
+{
+	int	i;
+
+	i = -1;
+	while ((*binary_paths)[++i])
+	{
+		*one_path = ft_strjoin((*binary_paths)[i], "/");
+		*one_command_path = ft_strjoin(*one_path, cmd);
+		free(*one_path);
+		if (!access(*one_command_path, F_OK))
+		{
+			ft_free_strings(*binary_paths);
+			return (*one_command_path);
+		}
+		free(*one_command_path);
+	}
+	ft_free_strings(*binary_paths);
+	return (NULL);
+}
+
 char	*get_working_path(char *cmd, char **env)
 {
 	int		i;
@@ -52,19 +74,6 @@ char	*get_working_path(char *cmd, char **env)
 	free(one_command_path);
 	i = find_path_env(env, "PATH=");
 	binary_paths = ft_split(env[i] + 5, ':');
-	i = -1;
-	while (binary_paths[++i])
-	{
-		one_path = ft_strjoin(binary_paths[i], "/");
-		one_command_path = ft_strjoin(one_path, cmd);
-		free(one_path);
-		if (!access(one_command_path, F_OK))
-		{
-			ft_free_strings(binary_paths);
-			return (one_command_path);
-		}
-		free(one_command_path);
-	}
-	ft_free_strings(binary_paths);
-	return (NULL);
+	return (get_working_path_loop(&binary_paths,
+			&one_path, &one_command_path, cmd));
 }
