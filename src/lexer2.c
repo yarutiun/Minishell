@@ -6,7 +6,7 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:54:24 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 19:54:39 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 15:12:41 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,29 +88,22 @@ void	split_words(t_token	**head)
 	}
 }
 
-void	find_tokens(t_token **temp)
+void	find_tokens_loop(t_token **temp, t_token **new, t_token **new_tok)
 {
-	t_token	*new;
-	t_token	*new_tok;
-	t_token	*new_struct;
-	int		i;
+	int	i;
 
 	i = 0;
-	new = malloc(sizeof(t_token));
-	new_struct = new;
-	new->info = NULL;
-	new->type = WORD;
 	while ((*temp)->info[i])
 	{
 		if ((*temp)->info[i] == '<' || (*temp)->info[i] == '>'
 			|| (*temp)->info[i] == '|')
 		{
-			new->next = new_token(&i, (*temp)->info);
-			new_tok = new->next;
-			new_tok->next = malloc(sizeof(t_token));
-			new = new_tok->next;
-			new -> type = WORD;
-			new -> info = NULL;
+			(*new)->next = new_token(&i, (*temp)->info);
+			(*new_tok) = (*new)->next;
+			(*new_tok)->next = malloc(sizeof(t_token));
+			(*new) = (*new_tok)->next;
+			(*new)->type = WORD;
+			(*new)->info = NULL;
 			continue ;
 		}
 		else
@@ -119,6 +112,19 @@ void	find_tokens(t_token **temp)
 		}
 		i++;
 	}
+}
+
+void	find_tokens(t_token **temp)
+{
+	t_token	*new;
+	t_token	*new_tok;
+	t_token	*new_struct;
+
+	new = malloc(sizeof(t_token));
+	new_struct = new;
+	new->info = NULL;
+	new->type = WORD;
+	find_tokens_loop(temp, &new, &new_tok);
 	free((*temp)->info);
 	(*temp)->info = NULL;
 	new->next = (*temp)->next;
