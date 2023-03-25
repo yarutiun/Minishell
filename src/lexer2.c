@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:54:24 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 15:12:41 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 15:14:46 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	find_tokens_loop(t_token **temp, t_token **new, t_token **new_tok)
 		}
 		else
 		{
-			charjoin_free(&(new->info), (*temp)->info[i]);
+			charjoin_free(&((*new)->info), (*temp)->info[i]);
 		}
 		i++;
 	}
