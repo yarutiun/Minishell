@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   include.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 16:30:40 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:51:46 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 # define MAX_PATH 2000
 # define SYNTAX_ERROR "minishell: syntax error near unexpected token\n"
+# define OPEN_ERROR "minishell: couldn't open such file or directory\n"
 
 typedef enum e_token
 {

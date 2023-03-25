@@ -6,11 +6,24 @@
 /*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 16:43:07 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 16:52:47 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/include.h"
+
+int	open_output(t_pipe_group **tmp, t_token **token_tmp)
+{
+	if ((*token_tmp)->type == APPEND)
+		(*tmp)->output = open((*token_tmp)->info,
+				O_WRONLY | O_APPEND | O_CREAT, 0777);
+	else
+		(*tmp)->output = open((*token_tmp)->info,
+				O_WRONLY | O_TRUNC | O_CREAT, 0777);
+	if ((*tmp)->output < 0)
+		return (1);
+	return (0);
+}
 
 void	create_red(t_token **token, t_token **token_tmp,
 					t_pipe_group **tmp, t_pipe_group **pipes)
@@ -23,7 +36,7 @@ void	create_red(t_token **token, t_token **token_tmp,
 			&& (*token_tmp)->type != SINGLE_QUOTES
 			&& (*token_tmp)->type != WORD))
 	{
-		throw_error("minishell: syntax error near unexpected token\n");
+		throw_error(SYNTAX_ERROR);
 		return ;
 	}
 	if (type == HEREDOC)
@@ -36,30 +49,32 @@ void	create_red(t_token **token, t_token **token_tmp,
 		(*tmp)->input = open((*token_tmp)->info, O_RDONLY);
 		if ((*tmp)->input < 0)
 		{
-			throw_error("minishell: couldn't open such file or directory\n");
+			throw_error(OPEN_ERROR);
 			return ;
 		}
 	}
-	else if (type == GREATER_THAN)
+	else if (type == GREATER_THAN || type == APPEND)
 	{
-		(*tmp)->output = open((*token_tmp)->info,
-				O_WRONLY | O_TRUNC | O_CREAT, 0777);
-		if ((*tmp)->output < 0)
-		{
-			throw_error("minishell: couldn't open such file or directory\n");
-			return ;
-		}
+		if (open_output(tmp, token_tmp))
+			return (throw_error(OPEN_ERROR));
+		// (*tmp)->output = open((*token_tmp)->info,
+		// 		O_WRONLY | O_TRUNC | O_CREAT, 0777);
+		// if ((*tmp)->output < 0)
+		// {
+		// 	throw_error("minishell: couldn't open such file or directory\n");
+		// 	return ;
+		// }
 	}
-	else if (type == APPEND)
-	{
-		(*tmp)->output = open((*token_tmp)->info,
-				O_WRONLY | O_APPEND | O_CREAT, 0777);
-		if ((*tmp)->output < 0)
-		{
-			throw_error("minishell: couldn't open such file or directory\n");
-			return ;
-		}
-	}
+	// else if (type == APPEND)
+	// {
+	// 	(*tmp)->output = open((*token_tmp)->info,
+	// 			O_WRONLY | O_APPEND | O_CREAT, 0777);
+	// 	if ((*tmp)->output < 0)
+	// 	{
+	// 		throw_error("minishell: couldn't open such file or directory\n");
+	// 		return ;
+	// 	}
+	// }
 	*token_tmp = (*token_tmp)->next;
 }
 
