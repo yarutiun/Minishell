@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 15:30:15 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:06:00 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,57 @@ t_pipe_group	*init_pipe(int index)
 	return (pipe);
 }
 
+int	redirection_loop(t_pipe_group **tmp, t_token **token_tmp, int *first, int *count_words)
+{
+	while (*token_tmp)
+	{
+		if ((*token_tmp)->type == APPEND || (*token_tmp)->type == HEREDOC
+			|| (*token_tmp)->type == GREATER_THAN
+			|| (*token_tmp)->type == LESS_THAN)
+		{
+			create_redirect(shell_h->head, token_tmp, tmp, &(shell_h->pipes));
+			if ((shell_h->pipes) == NULL)
+				return (1);
+		}
+		else if ((*token_tmp)->type == SINGLE_QUOTES
+			|| (*token_tmp)->type == DOUBLE_QUOTES
+			|| (*token_tmp)->type == WORD)
+		{
+			if (! ((*token_tmp)->info))
+			{
+				*token_tmp = (*token_tmp)->next;
+				continue ;
+			}
+			(*tmp)->argv[*count_words] = ft_strdup((*token_tmp)->info);
+			if (!(*first))
+			{
+				(*tmp)->cmd = (*tmp)->argv[*count_words];
+				*first = 1;
+			}
+			(*count_words)++;
+			*token_tmp = (*token_tmp)->next;
+		}
+		else if ((*token_tmp)->type == PIPE)
+		{
+			if (!(*first))
+			{
+				throw_error("minishell: syntax error near unexpected token\n");
+				return (1);
+			}
+			(*tmp)->argv[*count_words] = NULL;
+			*count_words = 0;
+			*first = (*tmp)->pipe_index;
+			*token_tmp = (*token_tmp)->next;
+			*tmp->next = init_pipe(*first + 1);
+			*tmp = (*tmp)->next;
+			*first = 0;
+		}
+		else
+			*token_tmp = (*token_tmp)->next;
+	}
+	return (0);
+}
+
 t_pipe_group	*redirection(t_token **token)
 {
 	t_pipe_group	*tmp;
@@ -97,52 +148,54 @@ t_pipe_group	*redirection(t_token **token)
 	token_tmp = *token;
 	first = 0;
 	count_words = 0;
-	while (token_tmp)
-	{
-		if ((token_tmp)->type == APPEND || (token_tmp)->type == HEREDOC
-			|| (token_tmp)->type == GREATER_THAN
-			|| (token_tmp)->type == LESS_THAN)
-		{
-			create_redirect(token, &token_tmp, &tmp, &(shell_h->pipes));
-			if ((shell_h->pipes) == NULL)
-				return (NULL);
-		}
-		else if ((token_tmp)->type == SINGLE_QUOTES
-			|| (token_tmp)->type == DOUBLE_QUOTES
-			|| (token_tmp)->type == WORD)
-		{
-			if (! (token_tmp->info))
-			{
-				token_tmp = token_tmp->next;
-				continue ;
-			}
-			tmp->argv[count_words] = ft_strdup(token_tmp->info);
-			if (!first)
-			{
-				tmp->cmd = tmp->argv[count_words];
-				first = 1;
-			}
-			count_words++;
-			token_tmp = token_tmp->next;
-		}
-		else if (token_tmp->type == PIPE)
-		{
-			if (!first)
-			{
-				throw_error("minishell: syntax error near unexpected token\n");
-				return (NULL);
-			}
-			tmp->argv[count_words] = NULL;
-			count_words = 0;
-			first = tmp->pipe_index;
-			token_tmp = token_tmp->next;
-			tmp->next = init_pipe(first + 1);
-			tmp = tmp->next;
-			first = 0;
-		}
-		else
-			token_tmp = token_tmp->next;
-	}
+	if (redirection_loop(&tmp, &token_tmp, &first, &count_words))
+		return (NULL);
+	// while (token_tmp)
+	// {
+	// 	if ((token_tmp)->type == APPEND || (token_tmp)->type == HEREDOC
+	// 		|| (token_tmp)->type == GREATER_THAN
+	// 		|| (token_tmp)->type == LESS_THAN)
+	// 	{
+	// 		create_redirect(token, &token_tmp, &tmp, &(shell_h->pipes));
+	// 		if ((shell_h->pipes) == NULL)
+	// 			return (NULL);
+	// 	}
+	// 	else if ((token_tmp)->type == SINGLE_QUOTES
+	// 		|| (token_tmp)->type == DOUBLE_QUOTES
+	// 		|| (token_tmp)->type == WORD)
+	// 	{
+	// 		if (! (token_tmp->info))
+	// 		{
+	// 			token_tmp = token_tmp->next;
+	// 			continue ;
+	// 		}
+	// 		tmp->argv[count_words] = ft_strdup(token_tmp->info);
+	// 		if (!first)
+	// 		{
+	// 			tmp->cmd = tmp->argv[count_words];
+	// 			first = 1;
+	// 		}
+	// 		count_words++;
+	// 		token_tmp = token_tmp->next;
+	// 	}
+	// 	else if (token_tmp->type == PIPE)
+	// 	{
+	// 		if (!first)
+	// 		{
+	// 			throw_error("minishell: syntax error near unexpected token\n");
+	// 			return (NULL);
+	// 		}
+	// 		tmp->argv[count_words] = NULL;
+	// 		count_words = 0;
+	// 		first = tmp->pipe_index;
+	// 		token_tmp = token_tmp->next;
+	// 		tmp->next = init_pipe(first + 1);
+	// 		tmp = tmp->next;
+	// 		first = 0;
+	// 	}
+	// 	else
+	// 		token_tmp = token_tmp->next;
+	// }
 	if (!first)
 	{
 		throw_error("minishell: syntax error near unexpected token\n");
