@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:33:14 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/24 17:42:13 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:29:27 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,14 @@ int	b_exit(char **av)
 	else if (ac == 1)
 		exit_status = 0;
 	if (av[1])
+	{
+		if (!(ft_isdigit(av[1][0])))
+		{
+			ft_putstr_fd("exit\nminishell: argument is not a numebr\n", 2);
+			return (1);
+		}
 		exit_status = ft_atoi(av[1]);
+	}
 	free_shell_h();
 	exit(exit_status % 256);
 	return (0);
