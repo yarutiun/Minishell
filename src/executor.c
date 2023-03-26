@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/25 17:54:59 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:53:36 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	child_proccess_managing_outfds(int out_fd, int pipe_fd[])
 {
-
 	if (out_fd == -1 || out_fd == -2)
 	{
 		dup2(pipe_fd[1], STDOUT_FILENO);

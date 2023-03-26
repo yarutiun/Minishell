@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 16:40:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 19:13:50 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:51:46 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	sig_handle(int sig)
 {
 	if (sig == SIGINT)
 	{
-		// rl_on_new_line();
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		ft_putstr_fd("minishell > ", STDIN_FILENO);
-		// rl_redisplay();
 	}
 }
 

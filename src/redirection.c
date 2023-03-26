@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 18:58:19 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:52:59 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ int	here_doc(t_token **token_tmp, t_pipe_group **tmp)
 	limiter = here_doc_init(&file_name, token_tmp, tmp, &file);
 	if (file < 0)
 	{
-		throw_error("minishell: couldn't open HEREDOC\n");
-		return (1);
+		return (throw_error("minishell: couldn't open HEREDOC\n"));
 	}
 	while (1)
 	{
@@ -66,7 +65,6 @@ int	here_doc(t_token **token_tmp, t_pipe_group **tmp)
 	}
 	close(file);
 	free(buf);
-	// free(limiter);
 	here_doc_finish(token_tmp, tmp, &file_name);
 	return (0);
 }
