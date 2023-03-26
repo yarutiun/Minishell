@@ -4,7 +4,7 @@ LIB = libft.a
 SRC = src
 OBJ = obj
 INC = inc
-CFLAGS = -g -I $(INC) #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -I $(INC)
 DEBUG_SEG_FAULTS = -fsanitize=address #for segfault checking
 RM = rm -rf
 CC = gcc

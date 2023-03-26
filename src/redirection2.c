@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:55:20 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 17:02:07 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 17:57:02 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	open_output(t_pipe_group **tmp, t_token **token_tmp, int type)
 	return (0);
 }
 
-int	create_red(t_token **token, t_token **token_tmp,
-					t_pipe_group **tmp, t_pipe_group **pipes)
+int	create_red(t_token **token_tmp,
+					t_pipe_group **tmp)
 {
 	int	type;
 

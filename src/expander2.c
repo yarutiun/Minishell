@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:52:06 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 17:50:50 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:04:39 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	change_quotes(t_token *temp)
 	ret = NULL;
 	info = temp->info;
 	i = 0;
+	if (!info)
+		return ;
 	while (info[i])
 	{
 		if (info[i] == '$' && (info[i + 1] != ' ' && info[i + 1] != '\0'))
@@ -41,9 +43,6 @@ void	change_quotes(t_token *temp)
 void	expander(t_token **token)
 {
 	t_token	*temp;
-	int		index;
-	char	*key;
-	char	*ret;
 
 	temp = *token;
 	while (temp)

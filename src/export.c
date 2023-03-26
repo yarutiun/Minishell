@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:27:46 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 17:51:02 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:45:34 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	set_new(char *arg)
 	}
 	else
 		g_shell_h->envp[(g_shell_h->current_env)++] = arg;
+	free(st);
 }
 
 void	print_export(void)

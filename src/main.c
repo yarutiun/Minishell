@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 17:52:40 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 19:06:20 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,25 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		if(!(readed = readline("minishell > ")))
-			return (0);			
+			return (0);	
+		// readed = "echo \"\"lwjfoij3iwjoi3fwerw\"\"";
+		if(!(ft_strcmp(readed, "\0")))
+			continue;
 		splited = ft_split_minishell(readed);
 		add_history(readed);
 		if ((init_list(&(g_shell_h->head), readed, splited) == 1))
-			return (0);
+			continue;
 		put_type_tok(&(g_shell_h->head));
 		split_words(&(g_shell_h->head));
 		expander(&(g_shell_h->head));
 		g_shell_h->pipes = redirection(&(g_shell_h->head));
 		if (g_shell_h->pipes == NULL)
-			return (1);
+			continue;
 		count_last(g_shell_h->pipes);
 		executor(g_shell_h->pipes);
 		free_t_token(&(g_shell_h->head));
 		free_t_pipe(&(g_shell_h->pipes));
+		free(readed);
 	}
 	free_shell_h();
 	return (0);

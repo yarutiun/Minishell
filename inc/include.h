@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 17:49:40 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:57:13 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ int	quote_if(t_pipe_group **tmp, t_token **token_tmp,
 int	pipe_if(t_pipe_group **tmp, t_token **token_tmp,
 			int *first, int *count_words);
 t_pipe_group	*init_pipe(int index);
-int	create_red(t_token **token, t_token **token_tmp,
-					t_pipe_group **tmp, t_pipe_group **pipes);
+int	create_red(t_token **token_tmp,
+					t_pipe_group **tmp);
 
 
 

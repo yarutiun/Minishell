@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
+/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 17:08:35 by dsas             ###   ########.fr       */
+/*   Updated: 2023/03/25 21:22:55 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	check_for_closed_brackets(char **splited)
 	{
 		if (quote)
 		{
-			if (quote == 1 && (strcmp(splited[i], "\'") == 0))
+			if (quote == 1 && (ft_strcmp(splited[i], "\'") == 0))
 				quote = 0;
-			else if (quote == 2 && (strcmp(splited[i], "\"") == 0))
+			else if (quote == 2 && (ft_strcmp(splited[i], "\"") == 0))
 				quote = 0;
 		}
 		else if ((strcmp(splited[i], "\'") == 0))

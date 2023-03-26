@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 17:01:56 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 17:52:01 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:57:20 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	redirection_loop(t_pipe_group **tmp, t_token **tok,
 		if ((*tok)->type == APPEND || (*tok)->type == HEREDOC
 			|| (*tok)->type == GREATER_THAN || (*tok)->type == LESS_THAN)
 		{
-			create_red(&(g_shell_h->head), tok, tmp, &(g_shell_h->pipes));
+			create_red(tok, tmp);
 			if ((g_shell_h->pipes) == NULL)
 				return (1);
 		}
