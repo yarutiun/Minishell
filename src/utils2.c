@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:56:07 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 18:44:46 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:35:44 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,13 @@ void	put_lvl(void)
 	int		i;
 	int		lvl;
 	char	*last;
-	char	**uns;
 	char	*num;
 
-	uns = malloc(sizeof(char *) * 2);
-	uns[1] = NULL;
 	i = find_path_env(g_shell_h->envp, "SHLVL=");
 	last = ft_strchr(g_shell_h->envp[i], '=') + 1;
 	lvl = ft_atoi(last);
-	uns[0] = ft_strdup("SHLVL");
-	b_unset(uns);
 	num = ft_itoa(lvl + 1);
 	last = ft_strjoin("SHLVL=", num);
 	set_new(last);
-	free(uns[0]);
-	free(uns);
 	free(num);
 }

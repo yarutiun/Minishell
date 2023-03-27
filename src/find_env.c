@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:25:52 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/25 17:51:13 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:01:52 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	find_path_env(char **env, char *key)
 	int	i;
 
 	i = 0;
-	while (i < g_shell_h->current_env)
+	while (i < 1000)
 	{
 		if (env[i] && ft_strnstr(env[i], key, ft_strlen(key)))
 			return (i);
@@ -68,11 +68,15 @@ char	*get_working_path(char *cmd, char **env)
 	if (!access(cmd, F_OK))
 		return (ft_strdup(cmd));
 	j = find_path_env(env, "PWD=");
+	if(j == -1)
+		return(NULL);
 	one_command_path = ft_strjoin(env[j], cmd);
 	if (!access(one_command_path, F_OK))
 		return (one_command_path);
 	free(one_command_path);
 	i = find_path_env(env, "PATH=");
+	if(i == -1)
+		return(NULL);
 	binary_paths = ft_split(env[i] + 5, ':');
 	return (get_working_path_loop(&binary_paths,
 			&one_path, &one_command_path, cmd));

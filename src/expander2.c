@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:52:06 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 19:04:39 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:27:11 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	sub_dollar(char **ret, char *info, int *i)
 
 	key = NULL;
 	(*i)++;
-	if (info[*i] == '?' && (!(info[*i]) || info[*i + 1] == ' '))
+	if (info[*i] == '?' && (!(info[*i + 1]) || info[*i + 1] == ' '))
 	{
 		strjoin_free(ret, ft_itoa(g_shell_h->error));
 	}

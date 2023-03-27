@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/26 17:53:36 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:07:38 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	child_process_prep(t_pipe_group *data, int in_fd,
 	int		out;
 	char	*x_p;
 
-	child_sig();
 	if (in_fd != STDIN_FILENO)
 		dup2(in_fd, STDIN_FILENO);
 	out = child_proccess_managing_outfds(out_fd, pipe_fd);
@@ -84,10 +83,12 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd)
 	int	pid;
 
 	pipe(pipe_fd);
+	child_sig();
 	pid = fork();
 	if (pid == 0)
 		child_process_prep(data, in_fd, out_fd, pipe_fd);
 	waitpid(pid, &(g_shell_h->error), 0);
+	signals();
 	if ((g_shell_h->error) > 255)
 		(g_shell_h->error) /= 256;
 	close(pipe_fd[1]);
