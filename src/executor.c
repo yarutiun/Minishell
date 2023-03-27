@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/27 15:07:38 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:35:42 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	exec_builtin_child(t_pipe_group *pipes)
 {
 	int	err;
 
-	if (ft_strcmp(pipes->argv[0], "pwd") == 0)
+	if (ft_strcmp(pipes->argv[0], "pwd") == 0 && !(pipes->argv[1]))
 		err = (ft_pwd());
-	else if (ft_strcmp(pipes->argv[0], "env") == 0)
+	else if (ft_strcmp(pipes->argv[0], "env") == 0 && !(pipes->argv[1]))
 		err = (ft_env());
 	else if (ft_strcmp(pipes->argv[0], "echo") == 0)
 		err = (b_echo(pipes->argv));
