@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:22:39 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 17:49:15 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:45:46 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,21 @@ int	change_dir(char *arg)
 {
 	char	*sub;
 	char	*temp;
-	int		i;
 	char	*str1;
 	char	*str2;
 
 	sub = getcwd(0, 256);
 	if (chdir(arg) == -1)
+	{
+		free(sub);
 		return (-1);
+	}
+
 	temp = getcwd(0, 256);
 	str1 = ft_strjoin("OLDPWD=", sub);
 	str2 = ft_strjoin("PWD=", temp);
-	i = find_path_env(g_shell_h->envp, "OLDPWD");
-	if (i != -1)
-		g_shell_h->envp[i] = ft_strdup(str1);
-	else
-		set_new(str1);
-	i = find_path_env(g_shell_h->envp, "PWD");
-	if (i != -1)
-		g_shell_h->envp[i] = ft_strdup(str2);
-	else
-		set_new(str2);
+	set_new(str1);
+	set_new(str2);
 	free(sub);
 	free(temp);
 	return (1);
@@ -43,11 +38,14 @@ int	change_dir(char *arg)
 
 int	b_cd(char *arg)
 {
+	char *key;
 	if (!arg)
 	{
-		if (change_dir(cut_key(g_shell_h->envp,
-					find_path_env(g_shell_h->envp, "HOME"), "HOME")) == -1)
+		key = cut_key(g_shell_h->envp,
+					find_path_env(g_shell_h->envp, "HOME"), "HOME");
+		if (change_dir(key) == -1)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		free(key);
 	}
 	else
 	{
@@ -59,5 +57,6 @@ int	b_cd(char *arg)
 			return (1);
 		}
 	}
+
 	return (0);
 }

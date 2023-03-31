@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:27:46 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 18:45:34 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:48:55 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ void	set_new(char *arg)
 {
 	char	*st;
 	int		j;
-
+	
 	st = ft_substr(arg, 0, find_index_of_char(arg, '=') + 1);
+	
 	j = find_path_env(g_shell_h->envp, st);
 	if (j != -1)
 	{

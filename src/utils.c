@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 15:58:17 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:59:57 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	fill_words(char **array, char *str)
 			array[word_index][1] = '\0';
 			str++;
 			word_index++;
+			// printf("Go here");
 			continue ;
 		}
 		fill_word_end(array, &str, &word_index);

@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/25 21:22:55 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 18:13:45 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	cat_quote(char **splited, int *words, t_token **head)
 	(*words)--;
 	while (*words >= 0 && splited[*words][0] != quote)
 	{
-		temp->info = ft_strjoin(splited[*words], temp->info);
+		strjoin_free(&(temp->info), splited[*words]);
 		(*words)--;
 	}
 	free(splited[*words]);
@@ -67,7 +67,7 @@ int	check_for_closed_brackets(char **splited)
 void	temp_assign(t_token **temp, t_token **head, char **splited, int *words)
 {
 	*temp = malloc(sizeof(t_token));
-	(*temp)->info = splited[*words];
+	(*temp)->info = ft_strdup(splited[*words]);
 	(*temp)->len = ft_strlen(splited[*words]);
 	(*temp)->type = -1;
 	(*temp)->next = *head;
@@ -96,6 +96,6 @@ int	init_list(t_token **head, char *split, char **splited)
 		}
 		temp_assign(&temp, head, splited, &words);
 	}
-	free(splited);
+	// free(splited);
 	return (0);
 }
