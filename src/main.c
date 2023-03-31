@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/31 18:59:40 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:24:57 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*readed;
 	char	**splited;
-	int i = -1;
+	int i = 0;
 
 	init_main(argc, argv, envp);
 	while (1)
@@ -72,8 +72,10 @@ int	main(int argc, char **argv, char **envp)
 		count_last(g_shell_h->pipes);
 		while(splited[i])
 		{
-			i++;
+			printf("Freeing");
 			free(splited[i]);
+			i++;
+			
 		}
 		free(splited);
 		executor(g_shell_h->pipes);

@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/31 18:13:45 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:25:44 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	cat_quote(char **splited, int *words, t_token **head)
 		strjoin_free(&(temp->info), splited[*words]);
 		(*words)--;
 	}
-	free(splited[*words]);
 	temp->len = ft_strlen(temp->info);
 	if (quote == '\'')
 		temp->type = SINGLE_QUOTES;

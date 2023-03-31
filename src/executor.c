@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 19:07:07 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/31 18:42:26 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:11:53 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	exec_builtin_parent(t_pipe_group *pipes)
 		err = b_exit(pipes->argv);
 	else
 		return (-1);
+	
 	g_shell_h->error = err;
 	return (0);
 }

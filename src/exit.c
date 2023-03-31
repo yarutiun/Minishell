@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:33:14 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/31 19:04:55 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:05:41 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,5 @@ int	b_exit(char **av)
 	}
 	free_shell_h();
 	exit(exit_status % 256);
-	exit(1);
 	return (0);
 }

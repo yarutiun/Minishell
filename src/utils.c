@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/31 18:59:57 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:26:21 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	fill_word_end(char **array, char **str, int *word_index)
 void	fill_words(char **array, char *str)
 {
 	int	word_index;
-
+	
 	word_index = 0;
 	while (*str == ' ' || *str == '\t' || *str == '\n')
 		++str;
@@ -86,7 +86,6 @@ void	fill_words(char **array, char *str)
 			array[word_index][1] = '\0';
 			str++;
 			word_index++;
-			// printf("Go here");
 			continue ;
 		}
 		fill_word_end(array, &str, &word_index);

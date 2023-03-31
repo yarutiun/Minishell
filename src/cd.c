@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:22:39 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/31 18:45:46 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:07:36 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	change_dir(char *arg)
 int	b_cd(char *arg)
 {
 	char *key;
+	
 	if (!arg)
 	{
 		key = cut_key(g_shell_h->envp,
