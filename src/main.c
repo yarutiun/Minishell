@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/04/03 00:23:01 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 00:25:57 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void	ft_lexer(void)
 	expander(&(g_shell_h->head));
 }
 
-void	free_all(char *readed)
+void	free_all(char *readed, char **splited)
 {
 	free_t_token(&(g_shell_h->head));
 	free_t_pipe(&(g_shell_h->pipes));
 	free(readed);
+	free_splited(splited);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -80,9 +81,8 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		count_last(g_shell_h->pipes);
-		free_splited(splited);
 		executor(g_shell_h->pipes);
-		free_all(readed);
+		free_all(readed, splited);
 	}
 	free_shell_h();
 	return (0);
