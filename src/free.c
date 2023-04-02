@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:24:25 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 17:51:29 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 00:22:57 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,16 @@ void	free_shell_h(void)
 	free(g_shell_h->envp);
 	free(g_shell_h);
 	clear_history();
+}
+
+void free_splited(char **splited)
+{
+	int i;
+	i = 0;
+	while(splited[i])
+	{
+		free(splited[i]);
+		i++;	
+	}
+	free(splited);
 }

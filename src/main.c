@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/04/02 23:47:42 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 00:23:01 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	init_main(int argc, char **argv, char **envp)
 {
 	(void) argc;
 	(void) argv;
+	signals();
 	assign_env(envp);
 	put_lvl();
-	signals();
 }
 
 void	ft_lexer(void)
@@ -55,7 +55,6 @@ int	main(int argc, char **argv, char **envp)
 	init_main(argc, argv, envp);
 	while (1)
 	{
-		int i = 0;
 		readed = readline("minishell > ");
 		if (!readed)
 			return (0);
@@ -67,19 +66,21 @@ int	main(int argc, char **argv, char **envp)
 		splited = ft_split_minishell(readed);
 		add_history(readed);
 		if ((init_list(&(g_shell_h->head), readed, splited) == 1))
+		{
+			free_splited(splited);
+			free(readed);
 			continue ;
+		}
 		ft_lexer();
 		g_shell_h->pipes = redirection(&(g_shell_h->head));
 		if (g_shell_h->pipes == NULL)
-			continue ;
-		count_last(g_shell_h->pipes);
-		while(splited[i])
 		{
-			free(splited[i]);
-			i++;
-			
+			free_splited(splited);
+			free(readed);
+			continue ;
 		}
-		free(splited);
+		count_last(g_shell_h->pipes);
+		free_splited(splited);
 		executor(g_shell_h->pipes);
 		free_all(readed);
 	}

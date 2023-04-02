@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/04/02 23:52:43 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/02 23:56:27 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int	here_doc(t_token **token_tmp, t_pipe_group **tmp)
 		buf = readline("> ");
 		charjoin_free(&buf, '\n');
 		if (!buf)
+		{
+			free(buf);
 			return (1);
+		}
 		if (!ft_strncmp(limiter, buf, ft_strlen(buf) - 1))
 			break ;
 		write(file, buf, ft_strlen(buf));
