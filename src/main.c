@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:52:37 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/31 21:09:07 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/02 23:47:42 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	main(int argc, char **argv, char **envp)
 		if (!readed)
 			return (0);
 		if (!(ft_strcmp(readed, "\0")))
+		{
+			free(readed);	
 			continue ;
+		}
 		splited = ft_split_minishell(readed);
 		add_history(readed);
 		if ((init_list(&(g_shell_h->head), readed, splited) == 1))
