@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:46:14 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/31 19:25:44 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:35:10 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ int	init_list(t_token **head, char *split, char **splited)
 		}
 		temp_assign(&temp, head, splited, &words);
 	}
-	// free(splited);
 	return (0);
 }

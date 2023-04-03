@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:33:14 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/31 19:05:41 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:29:50 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	b_exit(char **av)
 	int	exit_status;
 
 	ac = get_str_arr_len(av);
-
 	exit_status = 1;
 	if (ac > 2)
 	{

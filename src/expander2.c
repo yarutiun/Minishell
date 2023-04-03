@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:52:06 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/31 18:11:30 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:38:08 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ void	expander(t_token **token)
 	}
 }
 
+void	free_in_sub(char *ret1, char *key)
+{
+	free(key);
+	free(ret1);
+}
+
 void	sub_dollar(char **ret, char *info, int *i)
 {
 	char	*key;
@@ -64,11 +70,11 @@ void	sub_dollar(char **ret, char *info, int *i)
 
 	key = NULL;
 	(*i)++;
-	if (info[*i] == '?' && (!(info[*i + 1]) || info[*i + 1] == ' ' || info[*i + 1] == '\'' || info[*i + 1] == '\"'))
-	{
+	if (info[*i] == '?' && (!(info[*i + 1]) || info[*i + 1] == ' ' \
+	|| info[*i + 1] == '\'' || info[*i + 1] == '\"'))
 		strjoin_free(ret, ft_itoa(g_shell_h->error));
-	}
-	while (info[*i] != ' ' && info[*i] != '\0' && info[*i] != '\'' && info[*i] != '\"')
+	while (info[*i] != ' ' && info[*i] != '\0' \
+	&& info[*i] != '\'' && info[*i] != '\"')
 	{
 		charjoin_free(&key, info[*i]);
 		(*i)++;
@@ -81,7 +87,6 @@ void	sub_dollar(char **ret, char *info, int *i)
 		return ;
 	}
 	ret1 = cut_key(g_shell_h->envp, index, key);
-	free(key);
 	strjoin_free(ret, ret1);
-	free(ret1);
+	free_in_sub(ret1, key);
 }

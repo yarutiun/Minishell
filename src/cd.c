@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:22:39 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/31 19:07:36 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:29:37 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	change_dir(char *arg)
 		free(sub);
 		return (-1);
 	}
-
 	temp = getcwd(0, 256);
 	str1 = ft_strjoin("OLDPWD=", sub);
 	str2 = ft_strjoin("PWD=", temp);
@@ -38,12 +37,12 @@ int	change_dir(char *arg)
 
 int	b_cd(char *arg)
 {
-	char *key;
-	
+	char	*key;
+
 	if (!arg)
 	{
 		key = cut_key(g_shell_h->envp,
-					find_path_env(g_shell_h->envp, "HOME"), "HOME");
+				find_path_env(g_shell_h->envp, "HOME"), "HOME");
 		if (change_dir(key) == -1)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		free(key);
@@ -58,6 +57,5 @@ int	b_cd(char *arg)
 			return (1);
 		}
 	}
-
 	return (0);
 }
