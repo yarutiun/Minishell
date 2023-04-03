@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:19:38 by dsas              #+#    #+#             */
-/*   Updated: 2023/04/02 23:56:27 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:32:31 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ char	*here_doc_init(char **file_name, t_token **token_tmp,
 }
 
 void	here_doc_finish(t_token **token_tmp,
-						t_pipe_group **tmp, char **file_name)
+						t_pipe_group **tmp, char **file_name, char **buf)
 {
+	free(*buf);
 	(*tmp)->input = open(*file_name, O_RDONLY);
 	(*tmp)->heredoc = *file_name;
 	*token_tmp = (*token_tmp)->next;
@@ -49,9 +50,7 @@ int	here_doc(t_token **token_tmp, t_pipe_group **tmp)
 
 	limiter = here_doc_init(&file_name, token_tmp, tmp, &file);
 	if (file < 0)
-	{
 		return (throw_error("minishell: couldn't open HEREDOC\n"));
-	}
 	while (1)
 	{
 		buf = readline("> ");
@@ -67,7 +66,6 @@ int	here_doc(t_token **token_tmp, t_pipe_group **tmp)
 		free(buf);
 	}
 	close(file);
-	free(buf);
-	here_doc_finish(token_tmp, tmp, &file_name);
+	here_doc_finish(token_tmp, tmp, &file_name, &buf);
 	return (0);
 }

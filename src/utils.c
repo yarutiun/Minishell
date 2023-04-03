@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dsas <dsas@student.42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 10:49:52 by nrenz             #+#    #+#             */
-/*   Updated: 2023/03/31 19:26:21 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:27:10 by dsas             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	fill_word_end(char **array, char **str, int *word_index)
 void	fill_words(char **array, char *str)
 {
 	int	word_index;
-	
+
 	word_index = 0;
 	while (*str == ' ' || *str == '\t' || *str == '\n')
 		++str;
