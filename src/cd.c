@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 17:22:39 by dsas              #+#    #+#             */
-/*   Updated: 2023/04/03 10:29:37 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:47:41 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ int	change_dir(char *arg)
 int	b_cd(char *arg)
 {
 	char	*key;
+	int		i;
 
 	if (!arg)
 	{
-		key = cut_key(g_shell_h->envp,
-				find_path_env(g_shell_h->envp, "HOME"), "HOME");
+		i = find_path_env(g_shell_h->envp, "HOME");
+		if (i == -1)
+		{
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+			return (1);
+		}
+		key = cut_key(g_shell_h->envp, i , "HOME");
 		if (change_dir(key) == -1)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		free(key);

@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:56:50 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/25 17:49:54 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:28:33 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	throw_error(char *error)
 void	throw_error_exec(char *error)
 {
 	ft_putstr_fd(error, 2);
+	g_shell_h->error = 127;
 }
 
 void	free_env(char **env)

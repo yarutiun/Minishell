@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:17:10 by yarutiun          #+#    #+#             */
-/*   Updated: 2023/03/27 15:23:42 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:24:29 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	assign_env(char **envp)
 	g_shell_h->current_env = counter;
 	g_shell_h->head = NULL;
 	g_shell_h->pipes = NULL;
+	g_shell_h->error = 0;
 	return (1);
 }
 
