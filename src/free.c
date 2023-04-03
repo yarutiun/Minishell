@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:24:25 by dsas              #+#    #+#             */
-/*   Updated: 2023/04/03 10:35:33 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:41:34 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,10 @@ void	free_splited(char **splited)
 		i++;
 	}
 	free(splited);
+}
+
+void	free_readed_and_splited(char *readed, char **splited)
+{
+	free_splited(splited);
+	free(readed);
 }

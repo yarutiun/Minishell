@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:08:12 by nrenz             #+#    #+#             */
-/*   Updated: 2023/04/03 00:22:44 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:46:56 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,10 @@ int				pipe_if(t_pipe_group **tmp, t_token **token_tmp,
 					int *first, int *count_words);
 t_pipe_group	*init_pipe(int index);
 int				create_red(t_token **token_tmp, t_pipe_group **tmp);
-void			free_splited(char **splited);		
+void			free_splited(char **splited);
+void			free_readed_and_splited(char *readed, char **splited);
+int				main_split(char **splited, char *readed);
+void			ft_lexer(void);
 
 //signals
 void			signals(void);

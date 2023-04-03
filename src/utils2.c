@@ -6,7 +6,7 @@
 /*   By: yarutiun <yarutiun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 19:56:07 by dsas              #+#    #+#             */
-/*   Updated: 2023/03/31 19:26:47 by yarutiun         ###   ########.fr       */
+/*   Updated: 2023/04/03 10:45:52 by yarutiun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,22 @@ void	put_lvl(void)
 	last = ft_strjoin("SHLVL=", num);
 	set_new(last);
 	free(num);
+}
+
+int	main_split(char **splited, char *readed)
+{
+	add_history(readed);
+	if ((init_list(&(g_shell_h->head), readed, splited) == 1))
+	{
+		free_readed_and_splited(readed, splited);
+		return (1);
+	}
+	ft_lexer();
+	g_shell_h->pipes = redirection(&(g_shell_h->head));
+	if (g_shell_h->pipes == NULL)
+	{
+		free_readed_and_splited(readed, splited);
+		return (1);
+	}
+	return (0);
 }
