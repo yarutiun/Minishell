@@ -12,5 +12,5 @@ Make
 ```
 
 ## Contributors
-[Danil Sas]
+Danil Sas:
 (https://github.com/Daneality)
