@@ -13,4 +13,4 @@ Make
 
 ## Contributors
 Danil Sas:
-(https://github.com/Daneality)
+https://github.com/Daneality
