@@ -8,6 +8,5 @@ The main goal of this project is to simulate bash shell.
 
 ```bash
 Make
-
 ./minishell
 ```
