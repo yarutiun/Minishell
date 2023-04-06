@@ -10,3 +10,6 @@ The main goal of this project is to simulate bash shell.
 Make
 ./minishell
 ```
+
+## Contributors
+[Danil Sas] (https://github.com/Daneality)
