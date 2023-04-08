@@ -1,6 +1,7 @@
 <p align="center">
   <img src = "https://user-images.githubusercontent.com/91738456/215802454-136c717c-c15a-4b3a-98db-44d4852b5ca8.png" />
 </p>
+
 # Minishell (As beautiful as shell ☺️)
 
 Minishell is a 42 school project. 
