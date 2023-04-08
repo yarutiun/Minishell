@@ -1,3 +1,6 @@
+<p align="center">
+  <img src = "https://user-images.githubusercontent.com/91738456/215802454-136c717c-c15a-4b3a-98db-44d4852b5ca8.png" />
+</p>
 # Minishell (As beautiful as shell ☺️)
 
 Minishell is a 42 school project. 
@@ -12,15 +15,15 @@ Make
 ```
 
 ## But what is implemented?
-Minishell can be used to run bash commands (with or without pipe '|')
+Minishell can be used to run bash commands (with or without pipe ```|```)
 
-It can handle redirections such as '<'  '>'  '<<'  '>>'
+It can handle redirections such as ```<```  ```>```  ```<<```  ```>>```
 
 It can also handle ctrl+c and ctrl+d keyboard input to interrupt and exit processes
 
-It also has expansion feature such as echo "$USER" that will print /yarutiun or anything that can be expanded from env
+It also has expansion feature such as echo ```$USER``` that will print ```/yarutiun``` or anything that can be expanded from env
 
-It can expand echo "$?" and print the last exit code.
+It can expand echo ```$?``` and print the last exit code.
 
 
 ## Contributors
