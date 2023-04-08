@@ -1,4 +1,4 @@
-# Minishell ## As beautiful as shell
+# Minishell (As beautiful as shell ☺️)
 
 Minishell is a 42 school project. 
 
