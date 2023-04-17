@@ -20,6 +20,8 @@ Minishell can be used to run bash commands (with or without pipe ```|```)
 
 It can handle redirections such as ```<```  ```>```  ```<<```  ```>>```
 
+Some commands are implemented by us: ```cd, pwd, echo (with -n flag), env, export, unset```
+
 It can also handle ctrl+c and ctrl+d keyboard input to interrupt and exit processes
 
 It also has expansion feature such as echo ```$USER``` that will print ```/yarutiun``` or anything that can be expanded from env
