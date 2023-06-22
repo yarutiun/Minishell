@@ -36,3 +36,6 @@ https://github.com/Daneality
 
 Ilya Bellash:
 https://github.com/shokunin48
+
+Danylo Demydov
+https://github.com/danildem97
